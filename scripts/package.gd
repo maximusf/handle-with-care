@@ -14,19 +14,16 @@ signal kicked(kicked_package) # Used to let other Game Objects know that the pac
 signal landed(kicked_package) # Used to let other Game Objects know that the package is on the ground
 signal destroy(destroyed_package) # Used to let other Game Objects know that the package has no more HP
 
-var package_hp = 1
+var package_hp = 5
 var is_destroyed = false
 var is_in_air = false # To know when to put the camera on the package
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	is_in_air = true
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if ((not whoosh_sfx.playing) and is_in_air) :
-		whoosh_sfx.play()
 	pass
 
 func get_kicked(direction: Vector2, power: float):
@@ -50,7 +47,6 @@ func _on_sleeping_state_changed() -> void:
 		whoosh_sfx.stop()
 		plop_solid_sfx.play()
 		landed.emit(self)
-		hp_check()
 		
 
 func hp_check() -> bool:
