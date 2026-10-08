@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://fm6sfu2josjb"]
 
 [ext_resource type="Texture2D" uid="uid://bwj8aihrhu0qh" path="res://assets/sprites/player/player_head.png" id="1_g2els"]
+[ext_resource type="Script" uid="uid://7uvj4n5mjmox" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://vvbve7mjxwk4" path="res://assets/sprites/player/player_body.png" id="2_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
@@ -265,274 +266,16 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="Animation" id="Animation_g2els"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Body:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Body_Idle"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(32, 64)
 
-[sub_resource type="Animation" id="Animation_qhqgy"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Body:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Body_Idle"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Head:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Head_Idle"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/Head:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
+radius = 16.27882
 
-[sub_resource type="Animation" id="Animation_dqkch"]
-resource_name = "jump"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Body:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Body_Jumping"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Head:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Head_Idle"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/Head:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[node name="Player" type="CharacterBody2D" unique_id=106568176]
+script = ExtResource("1_qhqgy")
 
-[sub_resource type="Animation" id="Animation_qlg0r"]
-resource_name = "kick"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Body:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Body_Kicking"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Head:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Head_Idle"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/Head:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_tuyoq"]
-resource_name = "walk"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Body:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Body_Walking"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Body:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Head:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Head_Idle"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/Head:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hax0n"]
-_data = {
-&"RESET": SubResource("Animation_g2els"),
-&"idle": SubResource("Animation_qhqgy"),
-&"jump": SubResource("Animation_dqkch"),
-&"kick": SubResource("Animation_qlg0r"),
-&"walk": SubResource("Animation_tuyoq")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fjrip"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_smehm"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ur7pv"]
-animation = &"kick"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y4r1p"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e1os3"]
-states/Start/position = Vector2(181, 93)
-states/idle/node = SubResource("AnimationNodeAnimation_fjrip")
-states/idle/position = Vector2(294, 92)
-states/jump/node = SubResource("AnimationNodeAnimation_smehm")
-states/jump/position = Vector2(405, 89)
-states/kick/node = SubResource("AnimationNodeAnimation_ur7pv")
-states/kick/position = Vector2(526, 95)
-states/walk/node = SubResource("AnimationNodeAnimation_y4r1p")
-states/walk/position = Vector2(598, 94)
-graph_offset = Vector2(-181, 25)
-
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=106568176]
-
-[node name="Visuals" type="Node" parent="." unique_id=733254473]
+[node name="Visuals" type="Node2D" parent="." unique_id=1658725949]
 
 [node name="Head" type="AnimatedSprite2D" parent="Visuals" unique_id=2083738392]
 texture_filter = 1
@@ -548,17 +291,14 @@ position = Vector2(2, 3)
 sprite_frames = SubResource("SpriteFrames_r71vu")
 animation = &"Body_Idle"
 autoplay = "Body_Idle"
-frame = 1
+frame_progress = 0.76903486
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359937352]
+position = Vector2(2, 3)
+shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Kickrange" type="Area2D" parent="." unique_id=1841115984]
 
 [node name="KickCollider" type="CollisionShape2D" parent="Kickrange" unique_id=1440492440]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359937352]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=272929489]
-libraries/ = SubResource("AnimationLibrary_hax0n")
-
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1873231276]
-tree_root = SubResource("AnimationNodeStateMachine_e1os3")
-anim_player = NodePath("../AnimationPlayer")
+position = Vector2(23, 21)
+shape = SubResource("CircleShape2D_tuyoq")

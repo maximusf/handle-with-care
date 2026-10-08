@@ -24,6 +24,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if (package_hp == 5):
+			get_kicked(Vector2(0,-50), 50)
 	pass
 
 func get_kicked(direction: Vector2, power: float):

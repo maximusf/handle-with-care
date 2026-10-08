@@ -2,14 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://cu0k6ye3u76c6" path="res://scenes/package.tscn" id="1_06fa7"]
 [ext_resource type="PackedScene" uid="uid://cuv3ao3kor8bo" path="res://scenes/groundPlaceholder.tscn" id="2_5eglo"]
+[ext_resource type="PackedScene" uid="uid://fm6sfu2josjb" path="res://scenes/player.tscn" id="3_lbe5n"]
 
 [node name="Level_Manager" type="Node" unique_id=1278203149]
 
 [node name="Package" parent="." unique_id=1601116120 instance=ExtResource("1_06fa7")]
-position = Vector2(-3, -1807)
+position = Vector2(-63, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Package" unique_id=1646516915 groups=["packages"]]
-zoom = Vector2(3, 3)
 
 [node name="Area2D" parent="." unique_id=1190871047 instance=ExtResource("2_5eglo")]
 position = Vector2(-7.9999995, 366.99997)
+
+[node name="Player" parent="." unique_id=106568176 instance=ExtResource("3_lbe5n")]
