@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://q1mrf4tt5yp6"]
+
+[ext_resource type="Script" uid="uid://beul7iipu45nl" path="res://hazard.gd" id="1_0qld2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scxj1"]
+size = Vector2(195, 98)
+
+[node name="Hazard" type="Area2D" unique_id=2094070779]
+script = ExtResource("1_0qld2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=321583025]
+position = Vector2(87.5, 39)
+shape = SubResource("RectangleShape2D_scxj1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=605907726]
