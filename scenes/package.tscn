@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1os3"]
 size = Vector2(27, 27)
 
-[node name="Package" type="RigidBody2D" unique_id=1601116120]
+[node name="Package" type="RigidBody2D" unique_id=1601116120 groups=["packages"]]
 script = ExtResource("1_bfkic")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1988289831]

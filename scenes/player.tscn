@@ -270,7 +270,7 @@ animations = [{
 size = Vector2(32, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
-radius = 16.27882
+radius = 23.086792
 
 [node name="Player" type="CharacterBody2D" unique_id=106568176]
 script = ExtResource("1_qhqgy")
@@ -291,14 +291,17 @@ position = Vector2(2, 3)
 sprite_frames = SubResource("SpriteFrames_r71vu")
 animation = &"Body_Idle"
 autoplay = "Body_Idle"
-frame_progress = 0.76903486
+frame_progress = 0.92019
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359937352]
 position = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Kickrange" type="Area2D" parent="." unique_id=1841115984]
+position = Vector2(5, -1)
 
 [node name="KickCollider" type="CollisionShape2D" parent="Kickrange" unique_id=1440492440]
-position = Vector2(23, 21)
+position = Vector2(30, 26)
 shape = SubResource("CircleShape2D_tuyoq")
+
+[connection signal="body_entered" from="Kickrange" to="." method="_on_kickrange_body_entered"]
