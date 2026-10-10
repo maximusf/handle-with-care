@@ -1,0 +1,78 @@
+{ "frames": [
+   {
+    "filename": "photo_timer 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 32, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 24 },
+    "sourceSize": { "w": 32, "h": 24 },
+    "duration": 1000
+   },
+   {
+    "filename": "photo_timer 1.aseprite",
+    "frame": { "x": 32, "y": 0, "w": 32, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 24 },
+    "sourceSize": { "w": 32, "h": 24 },
+    "duration": 1000
+   },
+   {
+    "filename": "photo_timer 2.aseprite",
+    "frame": { "x": 64, "y": 0, "w": 32, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 24 },
+    "sourceSize": { "w": 32, "h": 24 },
+    "duration": 1000
+   },
+   {
+    "filename": "photo_timer 3.aseprite",
+    "frame": { "x": 96, "y": 0, "w": 32, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 24 },
+    "sourceSize": { "w": 32, "h": 24 },
+    "duration": 1000
+   },
+   {
+    "filename": "photo_timer 4.aseprite",
+    "frame": { "x": 128, "y": 0, "w": 32, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 24 },
+    "sourceSize": { "w": 32, "h": 24 },
+    "duration": 1000
+   },
+   {
+    "filename": "photo_timer 5.aseprite",
+    "frame": { "x": 160, "y": 0, "w": 32, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 24 },
+    "sourceSize": { "w": 32, "h": 24 },
+    "duration": 600
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.6-x64",
+  "image": "photo_timer.png",
+  "format": "RGBA8888",
+  "size": { "w": 192, "h": 24 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "count_5", "from": 0, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "count_4", "from": 1, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "count_3", "from": 2, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "count_2", "from": 3, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "count_1", "from": 4, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "done", "from": 5, "to": 5, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Art", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

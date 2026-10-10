@@ -1,0 +1,42 @@
+{ "frames": [
+   {
+    "filename": "hud_objective_bullet 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 100
+   },
+   {
+    "filename": "hud_objective_bullet 1.aseprite",
+    "frame": { "x": 8, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 100
+   },
+   {
+    "filename": "hud_objective_bullet 2.aseprite",
+    "frame": { "x": 16, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "image": "hud_objective_bullet.png",
+  "format": "RGBA8888",
+  "size": { "w": 24, "h": 8 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "pending", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
+   { "name": "done", "from": 1, "to": 1, "direction": "forward", "color": "#000000ff" },
+   { "name": "failed", "from": 2, "to": 2, "direction": "forward", "color": "#000000ff" }
+  ]
+ }
+}

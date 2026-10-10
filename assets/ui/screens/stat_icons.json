@@ -1,0 +1,52 @@
+{ "frames": [
+   {
+    "filename": "stat_icons 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "sourceSize": { "w": 12, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "stat_icons 1.aseprite",
+    "frame": { "x": 12, "y": 0, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "sourceSize": { "w": 12, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "stat_icons 2.aseprite",
+    "frame": { "x": 24, "y": 0, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "sourceSize": { "w": 12, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "stat_icons 3.aseprite",
+    "frame": { "x": 36, "y": 0, "w": 12, "h": 12 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 12, "h": 12 },
+    "sourceSize": { "w": 12, "h": 12 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "image": "stat_icons.png",
+  "format": "RGBA8888",
+  "size": { "w": 48, "h": 12 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "delivered", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
+   { "name": "destroyed", "from": 1, "to": 1, "direction": "forward", "color": "#000000ff" },
+   { "name": "kicks", "from": 2, "to": 2, "direction": "forward", "color": "#000000ff" },
+   { "name": "time", "from": 3, "to": 3, "direction": "forward", "color": "#000000ff" }
+  ]
+ }
+}

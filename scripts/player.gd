@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	var kick_direction = (get_global_mouse_position() - global_position).normalized()
 	var kick_percentage = (kick_power / MAX_KICK_POWER) * 100
 	power_arrow.rotation = kick_direction.angle()
+	power_arrow.position = get_local_mouse_position()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -57,6 +58,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle Kicking ------------------------------------------------------
 	if Input.is_action_just_pressed("kick"):
+		arrow_sfx_counter = 0
 		power_arrow.play("20")
 		power_arrow.scale = Vector2(0.09, 0.07)
 		power_arrow.visible = true
@@ -78,7 +80,6 @@ func _physics_process(delta: float) -> void:
 		if kickable_package != null:
 			kickable_package.get_kicked(kick_direction, kick_power)
 		kick_animation_playing = false
-		arrow_sfx_counter = 0
 		kick_power = 100
 	#-----------------------------------------------------------------------
 	
@@ -105,29 +106,28 @@ func _physics_process(delta: float) -> void:
 		power_arrow.scale = Vector2(0.16, 0.13)
 		if (arrow_sfx_counter == 3):
 			arrow_sfx_counter = 4
-			arrow_sfx.pitch_scale = 3.0
+			arrow_sfx.pitch_scale = 3.5
 			arrow_sfx.play()
 	elif kick_percentage >= 60:
 		power_arrow.play("60")
 		power_arrow.scale = Vector2(0.12, 0.09)
 		if (arrow_sfx_counter == 2):
 			arrow_sfx_counter = 3
-			arrow_sfx.pitch_scale = 2.5
+			arrow_sfx.pitch_scale = 3.0
 			arrow_sfx.play()
 	elif kick_percentage >= 40:
 		power_arrow.play("40")
 		power_arrow.scale = Vector2(0.1, 0.08)
 		if (arrow_sfx_counter == 1):
 			arrow_sfx_counter = 2
-			arrow_sfx.pitch_scale = 2.0
+			arrow_sfx.pitch_scale = 2.5
 			arrow_sfx.play()
 	else:
 		power_arrow.play("20")
-		power_arrow.position = get_local_mouse_position()
 		power_arrow.scale = Vector2(0.09, 0.07)
 		if (arrow_sfx_counter == 0):
 			arrow_sfx_counter = 1
-			arrow_sfx.pitch_scale = 1.0
+			arrow_sfx.pitch_scale = 2.0
 			arrow_sfx.play()
 	
 func set_animation_state(new_state: animation_states) -> void:
