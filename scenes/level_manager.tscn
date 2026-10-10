@@ -9,9 +9,10 @@
 [node name="Package" parent="." unique_id=1601116120 instance=ExtResource("1_06fa7")]
 position = Vector2(-63, 0)
 
-[node name="Camera2D" type="Camera2D" parent="Package" unique_id=1646516915 groups=["packages"]]
-
 [node name="Area2D" parent="." unique_id=1190871047 instance=ExtResource("2_5eglo")]
 position = Vector2(-7.9999995, 366.99997)
 
 [node name="Player" parent="." unique_id=106568176 instance=ExtResource("3_lbe5n")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1646516915 groups=["packages"]]
+position = Vector2(-63, 0)

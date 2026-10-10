@@ -3,6 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://bwj8aihrhu0qh" path="res://assets/sprites/player/player_head.png" id="1_g2els"]
 [ext_resource type="Script" uid="uid://7uvj4n5mjmox" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://vvbve7mjxwk4" path="res://assets/sprites/player/player_body.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cphvxg6a308gi" path="res://assets/sprites/powerArrow/PowerArrow-Sheet.png" id="4_dqkch"]
+[ext_resource type="AudioStream" uid="uid://dvtgvy3cm4eon" path="res://assets/sfx/PlayerSFX/WalkPlaceHolderSFX.mp3" id="5_smehm"]
+[ext_resource type="AudioStream" uid="uid://bf7osogbwruqq" path="res://assets/sfx/PlayerSFX/JumpPlaceholderSFX.mp3" id="6_ur7pv"]
+[ext_resource type="AudioStream" uid="uid://b3dn3fv7thla7" path="res://assets/sfx/PlayerSFX/KickPlaceholderSFX.mp3" id="7_y4r1p"]
+[ext_resource type="AudioStream" uid="uid://dffl8vk3ul36u" path="res://assets/sfx/PlayerSFX/ArrowPlaceholderSFX.mp3" id="8_d2wvv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("1_g2els")
@@ -138,18 +143,6 @@ region = Rect2(768, 0, 48, 64)
 atlas = ExtResource("2_qhqgy")
 region = Rect2(816, 0, 48, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pf23h"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(864, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(912, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
-atlas = ExtResource("2_qhqgy")
-region = Rect2(960, 0, 48, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnwbv"]
 atlas = ExtResource("2_qhqgy")
 region = Rect2(192, 0, 48, 64)
@@ -228,19 +221,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_31cv2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pf23h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dt7fs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wqfne")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Body_Kicking",
-"speed": 12.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -266,6 +250,93 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf23h"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(512, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(4096, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(1024, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hax0n"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(1536, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4otl"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(2560, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(3072, 0, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs1tg"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(3584, 0, 512, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1gbwc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf23h")
+}],
+"loop": 1,
+"name": &"10",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt7fs")
+}],
+"loop": 1,
+"name": &"100",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfne")
+}],
+"loop": 1,
+"name": &"20",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hax0n")
+}],
+"loop": 1,
+"name": &"40",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4otl")
+}],
+"loop": 1,
+"name": &"60",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2b1d")
+}],
+"loop": 1,
+"name": &"80",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cs1tg")
+}],
+"loop": 1,
+"name": &"90",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
 size = Vector2(32, 64)
 
@@ -289,9 +360,18 @@ z_index = -1
 texture_filter = 1
 position = Vector2(2, 3)
 sprite_frames = SubResource("SpriteFrames_r71vu")
-animation = &"Body_Idle"
+animation = &"Body_Kicking"
 autoplay = "Body_Idle"
-frame_progress = 0.92019
+frame = 5
+frame_progress = 1.0
+
+[node name="PowerArrow" type="AnimatedSprite2D" parent="Visuals" unique_id=1596827502]
+z_index = -1
+position = Vector2(67, -21)
+scale = Vector2(0.09, 0.073)
+sprite_frames = SubResource("SpriteFrames_1gbwc")
+animation = &"20"
+autoplay = "20"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359937352]
 position = Vector2(2, 3)
@@ -304,4 +384,20 @@ position = Vector2(5, -1)
 position = Vector2(30, 26)
 shape = SubResource("CircleShape2D_tuyoq")
 
+[node name="SFX" type="Node2D" parent="." unique_id=2030220188]
+
+[node name="WalkingSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=949605887]
+stream = ExtResource("5_smehm")
+volume_db = 2.916
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1331507237]
+stream = ExtResource("6_ur7pv")
+
+[node name="KickSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=937269465]
+stream = ExtResource("7_y4r1p")
+
+[node name="ArrowSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1333498656]
+stream = ExtResource("8_d2wvv")
+
 [connection signal="body_entered" from="Kickrange" to="." method="_on_kickrange_body_entered"]
+[connection signal="body_exited" from="Kickrange" to="." method="_on_kickrange_body_exited"]
