@@ -23,6 +23,7 @@ window/stretch/aspect="expand"
 [global_group]
 
 packages="Everything in this group are packages"
+player="Player Identification"
 
 [input]
 

@@ -140,6 +140,7 @@ animations = [{
 }]
 
 [node name="delivery_zone" type="Area2D" unique_id=1136476718]
+texture_filter = 1
 script = ExtResource("1_ngybl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=851369941]
