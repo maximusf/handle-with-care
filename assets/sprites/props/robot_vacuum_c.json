@@ -1,0 +1,88 @@
+{ "frames": [
+   {
+    "filename": "robot_vacuum_c 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 120
+   },
+   {
+    "filename": "robot_vacuum_c 1.aseprite",
+    "frame": { "x": 40, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 120
+   },
+   {
+    "filename": "robot_vacuum_c 2.aseprite",
+    "frame": { "x": 80, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 120
+   },
+   {
+    "filename": "robot_vacuum_c 3.aseprite",
+    "frame": { "x": 120, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 120
+   },
+   {
+    "filename": "robot_vacuum_c 4.aseprite",
+    "frame": { "x": 160, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 100
+   },
+   {
+    "filename": "robot_vacuum_c 5.aseprite",
+    "frame": { "x": 200, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 250
+   },
+   {
+    "filename": "robot_vacuum_c 6.aseprite",
+    "frame": { "x": 240, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 300
+   },
+   {
+    "filename": "robot_vacuum_c 7.aseprite",
+    "frame": { "x": 280, "y": 0, "w": 40, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 24 },
+    "sourceSize": { "w": 40, "h": 24 },
+    "duration": 300
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.6-x64",
+  "image": "robot_vacuum_c.png",
+  "format": "RGBA8888",
+  "size": { "w": 320, "h": 24 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "patrol", "from": 0, "to": 3, "direction": "forward", "color": "#000000ff" },
+   { "name": "bump", "from": 4, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "stuck", "from": 6, "to": 7, "direction": "forward", "color": "#000000ff" }
+  ]
+ }
+}
