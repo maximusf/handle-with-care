@@ -3,13 +3,15 @@
 [ext_resource type="Script" uid="uid://cw8onnms78b5s" path="res://scripts/package.gd" id="1_bfkic"]
 [ext_resource type="Texture2D" uid="uid://rpby3qrdo155" path="res://assets/sprites/package/package_intact.png" id="2_bitfr"]
 [ext_resource type="AudioStream" uid="uid://b3s4tl3s6t44e" path="res://assets/sfx/PackageSFX/fallingPlaceholder.mp3" id="3_pdb4y"]
-[ext_resource type="AudioStream" uid="uid://1dt7mhlfkryo" path="res://assets/sfx/PackageSFX/plop_solid_Placeholder.mp3" id="4_rfqn4"]
+[ext_resource type="AudioStream" uid="uid://b77rv7xk0l6np" path="res://assets/sfx/PackageSFX/PlopPlaceholderSFX.mp3" id="4_pdb4y"]
 [ext_resource type="AudioStream" uid="uid://bgifuimaqibx4" path="res://assets/sfx/PackageSFX/DestroyedPlaceholder.mp3" id="5_ayykv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1os3"]
 size = Vector2(27, 27)
 
 [node name="Package" type="RigidBody2D" unique_id=1601116120 groups=["packages"]]
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_bfkic")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1988289831]
@@ -24,9 +26,10 @@ shape = SubResource("RectangleShape2D_e1os3")
 stream = ExtResource("3_pdb4y")
 
 [node name="PlopSolidSFX" type="AudioStreamPlayer2D" parent="." unique_id=1842303857]
-stream = ExtResource("4_rfqn4")
+stream = ExtResource("4_pdb4y")
 
 [node name="PackageDestroyedSFX" type="AudioStreamPlayer2D" parent="." unique_id=908485412]
 stream = ExtResource("5_ayykv")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]

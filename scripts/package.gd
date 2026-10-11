@@ -45,9 +45,13 @@ func _on_sleeping_state_changed() -> void:
 	if sleeping and is_in_air:
 		is_in_air = false
 		whoosh_sfx.stop()
-		plop_solid_sfx.play()
 		landed.emit(self)
-		
+	
+func _on_body_entered(body: Node) -> void:
+	if linear_velocity.length() > 70.0 and not plop_solid_sfx.playing:
+		plop_solid_sfx.play()
+	pass # Replace with function body.
+
 
 func hp_check() -> bool:
 	package_hp -= 1

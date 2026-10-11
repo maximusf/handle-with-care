@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle Kicking ------------------------------------------------------
 	if Input.is_action_just_pressed("kick"):
-		arrow_sfx_counter = 0
+		arrow_sfx_counter = -1
 		power_arrow.play("20")
 		power_arrow.scale = Vector2(0.09, 0.07)
 		power_arrow.visible = true
@@ -122,12 +122,19 @@ func _physics_process(delta: float) -> void:
 			arrow_sfx_counter = 2
 			arrow_sfx.pitch_scale = 2.5
 			arrow_sfx.play()
-	else:
+	elif kick_percentage >= 20:
 		power_arrow.play("20")
 		power_arrow.scale = Vector2(0.09, 0.07)
 		if (arrow_sfx_counter == 0):
 			arrow_sfx_counter = 1
 			arrow_sfx.pitch_scale = 2.0
+			arrow_sfx.play()
+	else:
+		power_arrow.play("10")
+		power_arrow.scale = Vector2(0.04, 0.04)
+		if (arrow_sfx_counter == -1):
+			arrow_sfx_counter = 0
+			arrow_sfx.pitch_scale = 1.5
 			arrow_sfx.play()
 	
 func set_animation_state(new_state: animation_states) -> void:

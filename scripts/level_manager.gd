@@ -3,6 +3,7 @@ extends Node
 @export var player: CharacterBody2D
 @onready var camera_2d: Camera2D = $Camera2D
 var camera_target: Node2D = null
+var camera_offset_direction: int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,8 +15,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("move_left"):
+		camera_offset_direction = -1
+	if Input.is_action_just_pressed("move_right"):
+		camera_offset_direction = 1
 	if is_instance_valid(camera_target):
-		camera_2d.global_position = Vector2(camera_target.global_position.x + 80, camera_target.global_position.y)
+		camera_2d.global_position = Vector2(camera_target.global_position.x + (camera_offset_direction * 80), camera_target.global_position.y)
 	else:
 		print("huhuhuh")
 	pass
