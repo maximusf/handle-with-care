@@ -199,7 +199,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i4ail")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Body_Jumping",
 "speed": 5.0
 }, {
@@ -344,6 +344,7 @@ size = Vector2(32, 64)
 radius = 23.086792
 
 [node name="Player" type="CharacterBody2D" unique_id=106568176]
+z_index = 1
 script = ExtResource("1_qhqgy")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1658725949]
@@ -360,10 +361,8 @@ z_index = -1
 texture_filter = 1
 position = Vector2(2, 3)
 sprite_frames = SubResource("SpriteFrames_r71vu")
-animation = &"Body_Kicking"
+animation = &"Body_Walking"
 autoplay = "Body_Idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="PowerArrow" type="AnimatedSprite2D" parent="Visuals" unique_id=1596827502]
 visible = false
