@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://u8f7j0418vwl"]
+
+[ext_resource type="Script" uid="uid://dmmc32j7f68et" path="res://scripts/main_menu.gd" id="1_0bfng"]
+[ext_resource type="Texture2D" uid="uid://dll82vdka6ovt" path="res://assets/ui/title_logo.png" id="2_yb5uv"]
+[ext_resource type="SpriteFrames" uid="uid://sgupshe0e4tq" path="res://assets/ui/button.tres" id="3_h8c6n"]
+
+[node name="Main_Menu" type="Control" unique_id=1645713669]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0bfng")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1345702899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20511743, 0.20511743, 0.20511743, 1)
+
+[node name="title" type="TextureRect" parent="." unique_id=1736020671]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -284.0
+offset_top = 26.0
+offset_right = 307.0
+offset_bottom = 277.0
+grow_horizontal = 2
+texture = ExtResource("2_yb5uv")
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1372734991]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -400.0
+offset_right = 250.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=313630729]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="start_button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=923882619]
+layout_mode = 2
+text = "START"
+icon_alignment = 1
+expand_icon = true
+
+[node name="start_button_animation" type="AnimatedSprite2D" parent="CenterContainer/VBoxContainer/start_button" unique_id=446585698]
+visible = false
+position = Vector2(37.00003, 10)
+scale = Vector2(2.0833344, 1.75)
+sprite_frames = ExtResource("3_h8c6n")
+animation = &"disabled"
+
+[node name="settings_button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1373508595]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="exit_button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1892081902]
+layout_mode = 2
+text = "EXIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=726333987]
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/exit_button" to="." method="_on_exit_button_pressed"]
