@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ct6xy5pxvy847" path="res://scripts/user_interface.gd" id="1_2rp2v"]
 [ext_resource type="PackedScene" uid="uid://u8f7j0418vwl" path="res://scenes/Main_Menu.tscn" id="2_cua1d"]
 [ext_resource type="PackedScene" uid="uid://bln5s8i3sof1e" path="res://scenes/Settings_Menu.tscn" id="3_6d8kr"]
+[ext_resource type="PackedScene" uid="uid://bbnigmbfxe02o" path="res://scenes/Result_Menu.tscn" id="4_81xfv"]
+[ext_resource type="PackedScene" uid="uid://d3kack6x0mogq" path="res://scenes/hud.tscn" id="5_vf7gk"]
 
 [node name="User_Interface" type="CanvasLayer" unique_id=1313764124]
 script = ExtResource("1_2rp2v")
@@ -10,3 +12,9 @@ script = ExtResource("1_2rp2v")
 [node name="Main_Menu" parent="." unique_id=1645713669 instance=ExtResource("2_cua1d")]
 
 [node name="Settings_Menu" parent="." unique_id=1741268751 instance=ExtResource("3_6d8kr")]
+
+[node name="Result_Menu" parent="." unique_id=41921220 instance=ExtResource("4_81xfv")]
+visible = false
+
+[node name="HUD" parent="." unique_id=1639658977 instance=ExtResource("5_vf7gk")]
+visible = false
