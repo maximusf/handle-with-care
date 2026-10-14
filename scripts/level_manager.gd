@@ -10,6 +10,7 @@ signal level_loaded(level: Node2D)
 func _ready() -> void:
 	user_interface.start_game_requested.connect(_on_start_game_requested)
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
+	level_loaded.connect(user_interface.hud.bind_level)
 	
 func _on_start_game_requested() -> void:
 	load_level(first_level)
@@ -24,6 +25,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("main_menu") and current_level_scene != null:
 		user_interface.show_main_menu()
 		get_tree().paused = true
+	
+	if event.is_action_pressed("restart") and current_level_scene != null:
+		reload_level()
 		
 
 func load_level(level_scene: PackedScene) -> void:

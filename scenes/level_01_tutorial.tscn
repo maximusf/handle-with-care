@@ -551,5 +551,3 @@ position = Vector2(389, -203)
 
 [node name="Package3" parent="." unique_id=409927986 instance=ExtResource("4_hxl72")]
 position = Vector2(723, -146)
-
-[node name="delivery_zone2" parent="." unique_id=1648573008 instance=ExtResource("3_2n7al")]
