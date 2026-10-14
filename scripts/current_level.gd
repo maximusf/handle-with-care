@@ -11,11 +11,8 @@ func _ready() -> void:
 
 func _on_delivery_zone_completed(zone: Area2D) -> void:
 	completed_zones.append(true)
-	print(delivery_zones)
-	print(completed_zones)
 	if completed_zones.size() == delivery_zones.size():
 		level_completed.emit()
-		print("Success")
 
 func _on_level_manager_level_loaded(level: Node2D) -> void:
 	delivery_zones.clear()
