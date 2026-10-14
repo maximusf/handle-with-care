@@ -24,6 +24,7 @@ window/stretch/aspect="expand"
 
 packages="Everything in this group are packages"
 player="Player Identification"
+delivery_zone="Group consisting only of delivery_zones"
 
 [input]
 

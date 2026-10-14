@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(camera_target):
 		camera_2d.global_position = Vector2(camera_target.global_position.x + (camera_offset_direction * 80), camera_target.global_position.y)
 	else:
-		print("huhuhuh")
+		pass # Means we're in the menu
 	pass
 
 func set_camera_target(new_target: Node2D) -> void:

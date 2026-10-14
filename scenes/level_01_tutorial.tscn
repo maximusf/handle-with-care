@@ -538,17 +538,18 @@ tile_map_data = PackedByteArray("AABLAPr/AAAMAAgAAABLAPv/AAAMAAkAAABLAPz/AAAMAAo
 tile_set = SubResource("TileSet_r71vu")
 
 [node name="Player" parent="." unique_id=106568176 instance=ExtResource("2_2n7al")]
-z_index = 1
 position = Vector2(82, -59)
 
 [node name="delivery_zone" parent="." unique_id=1136476718 instance=ExtResource("3_2n7al")]
 position = Vector2(964, -21)
 
-[node name="Package" parent="." unique_id=1601116120 instance=ExtResource("4_hxl72")]
-position = Vector2(220, -125)
+[node name="Package" parent="." unique_id=1030985816 instance=ExtResource("4_hxl72")]
+position = Vector2(282, -131)
 
 [node name="Package2" parent="." unique_id=1388366563 instance=ExtResource("4_hxl72")]
-position = Vector2(476, -195)
+position = Vector2(389, -203)
 
 [node name="Package3" parent="." unique_id=409927986 instance=ExtResource("4_hxl72")]
-position = Vector2(731, -192)
+position = Vector2(723, -146)
+
+[node name="delivery_zone2" parent="." unique_id=1648573008 instance=ExtResource("3_2n7al")]
