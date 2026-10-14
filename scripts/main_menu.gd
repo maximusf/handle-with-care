@@ -14,7 +14,7 @@ func _ready() -> void:
 func _on_start_button_pressed() -> void:
 	print('start pressed')
 	# This works for now (but the emit approach might be better to work with in level manager
-	# get_tree().change_scene_to_file("res://scenes/level_manager.tscn")
+	#get_tree().change_scene_to_file("res://scenes/level_manager.tscn")
 	start_pressed.emit()
 	# May need to add some more code to make animated sprites to work for all of these
 	

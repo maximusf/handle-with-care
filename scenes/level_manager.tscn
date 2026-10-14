@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://chxwtj777tqov" path="res://scripts/level_manager.gd" id="1_5eglo"]
 [ext_resource type="PackedScene" uid="uid://3voc4krq6q61" path="res://scenes/level_01_tutorial.tscn" id="2_lbe5n"]
+[ext_resource type="PackedScene" uid="uid://bwttur5fpw6bj" path="res://scenes/User_Interface.tscn" id="3_2yrkd"]
 [ext_resource type="Script" uid="uid://c5526lmqhsl8p" path="res://scripts/camera_2d.gd" id="3_lbe5n"]
 
 [node name="Level_Manager" type="Node" unique_id=1278203149]
 script = ExtResource("1_5eglo")
+first_level = ExtResource("2_lbe5n")
 
-[node name="Level01_Tutorial" parent="." unique_id=1967683342 instance=ExtResource("2_lbe5n")]
+[node name="CurrentLevel" type="Node2D" parent="." unique_id=1954569347]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1562498216 node_paths=PackedStringArray("player")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1562498216]
 zoom = Vector2(2.5, 2.5)
 rotation_smoothing_enabled = true
 script = ExtResource("3_lbe5n")
-player = NodePath("../Level01_Tutorial/Player")
 
-[connection signal="kicked" from="Level01_Tutorial/Package" to="." method="_on_package_kicked"]
-[connection signal="landed" from="Level01_Tutorial/Package" to="." method="_on_package_landed"]
+[node name="User_Interface" parent="." unique_id=1313764124 instance=ExtResource("3_2yrkd")]
 
-[editable path="Level01_Tutorial"]
+[editable path="User_Interface"]

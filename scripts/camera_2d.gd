@@ -7,12 +7,16 @@ var camera_offset_direction: int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	set_camera_target(player)
-	for package in get_tree().get_nodes_in_group("packages"):
+	get_parent().connect("level_loaded", _on_level_loaded)
+	
+
+func _on_level_loaded(level: Node2D) -> void:
+	player = level.get_node_or_null("Player")
+	for package in level.get_tree().get_nodes_in_group("packages"):
 		register_package(package)
-	pass # Replace with function body.
-
-
+	if player != null:
+		set_camera_target(player)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("move_left"):
