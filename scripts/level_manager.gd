@@ -23,9 +23,9 @@ func _quit_to_menu_requested() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("main_menu") and current_level_scene != null:
-		user_interface.hud.hide()
+		user_interface.show_main_menu()
 		get_tree().paused = true
-		user_interface.main_menu.show()
+		
 
 
 func load_level(level_scene: PackedScene) -> void:
