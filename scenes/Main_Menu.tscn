@@ -23,6 +23,7 @@ grow_vertical = 2
 color = Color(0.20511743, 0.20511743, 0.20511743, 1)
 
 [node name="title" type="TextureRect" parent="." unique_id=1736020671]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
