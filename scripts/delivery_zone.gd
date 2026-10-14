@@ -5,6 +5,7 @@ extends Area2D
 @onready var countdown_timer: Timer = $CountdownTimer
 
 var num_packages = 0
+var packages_inside: Array[Node2D] = [] # Read by the HUD to know which packages a completed delivery contains
 const REQUIRED_PACKAGES = 2
 
 signal complete(completed_delivery)
@@ -20,6 +21,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("packages"):
 		num_packages += 1
+		packages_inside.append(body)
 		check_delivery_status() 
 		label.text = str(num_packages) + " / " + str(REQUIRED_PACKAGES)
 		print("Package Has entered zone")
@@ -27,6 +29,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("packages"):
 		num_packages -= 1
+		packages_inside.erase(body)
 		check_delivery_status() 
 		label.text = str(num_packages)  + " / " + str(REQUIRED_PACKAGES)
 		print("Package Has left zone")
