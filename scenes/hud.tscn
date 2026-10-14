@@ -1,9 +1,191 @@
 [gd_scene format=3 uid="uid://d3kack6x0mogq"]
 
-[node name="HUD" type="Control" unique_id=1639658977]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://assets/ui/screens/hud_panel.png" id="2_panel"]
+[ext_resource type="SpriteFrames" path="res://assets/ui/screens/hud_objective_bullet.tres" id="3_bullet"]
+[ext_resource type="Texture2D" path="res://assets/ui/screens/hud_key_r.png" id="4_key"]
+[ext_resource type="FontFile" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="5_font"]
+
+[sub_resource type="Theme" id="Theme_hud"]
+Label/colors/font_color = Color(0.98039216, 0.98039216, 0.98039216, 1)
+Label/constants/line_spacing = 0
+Label/fonts/font = ExtResource("5_font")
+Label/font_sizes/font_size = 8
+
+[node name="HUD" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_hud")
+script = ExtResource("1_hud")
+
+[node name="Objectives" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 162.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Panel" type="NinePatchRect" parent="Objectives"]
+layout_mode = 0
+offset_right = 162.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("2_panel")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="MainRow" type="Control" parent="Objectives"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 5.0
+offset_right = 162.0
+offset_bottom = 13.0
+mouse_filter = 2
+
+[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/MainRow"]
+position = Vector2(5, 0)
+sprite_frames = ExtResource("3_bullet")
+animation = &"pending"
+centered = false
+
+[node name="Text" type="Label" parent="Objectives/MainRow"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -2.0
+offset_right = 127.0
+offset_bottom = 9.0
+mouse_filter = 2
+text = "DELIVER PACKAGES"
+
+[node name="Count" type="Label" parent="Objectives/MainRow"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = -2.0
+offset_right = 156.0
+offset_bottom = 9.0
+mouse_filter = 2
+text = "0/0"
+horizontal_alignment = 2
+
+[node name="TimeRow" type="Control" parent="Objectives"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 15.0
+offset_right = 162.0
+offset_bottom = 23.0
+mouse_filter = 2
+
+[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/TimeRow"]
+position = Vector2(5, 0)
+sprite_frames = ExtResource("3_bullet")
+animation = &"pending"
+centered = false
+
+[node name="Text" type="Label" parent="Objectives/TimeRow"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -2.0
+offset_right = 127.0
+offset_bottom = 9.0
+mouse_filter = 2
+text = "UNDER 5 MINUTES"
+
+[node name="Count" type="Label" parent="Objectives/TimeRow"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = -2.0
+offset_right = 156.0
+offset_bottom = 9.0
+mouse_filter = 2
+text = "5:00"
+horizontal_alignment = 2
+
+[node name="CleanRow" type="Control" parent="Objectives"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 25.0
+offset_right = 162.0
+offset_bottom = 33.0
+mouse_filter = 2
+
+[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/CleanRow"]
+position = Vector2(5, 0)
+sprite_frames = ExtResource("3_bullet")
+animation = &"pending"
+centered = false
+
+[node name="Text" type="Label" parent="Objectives/CleanRow"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -2.0
+offset_right = 127.0
+offset_bottom = 9.0
+mouse_filter = 2
+text = "NO PACKAGE DESTROYED"
+
+[node name="PackageTray" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 96.0
+offset_bottom = 26.0
+mouse_filter = 2
+
+[node name="Panel" type="NinePatchRect" parent="PackageTray"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 26.0
+mouse_filter = 2
+texture = ExtResource("2_panel")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Slots" type="Control" parent="PackageTray"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="RestartHint" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 78.0
+offset_bottom = 16.0
+mouse_filter = 2
+
+[node name="Panel" type="NinePatchRect" parent="RestartHint"]
+layout_mode = 0
+offset_right = 78.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource("2_panel")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Key" type="TextureRect" parent="RestartHint"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 31.0
+offset_bottom = 14.0
+mouse_filter = 2
+texture = ExtResource("4_key")
+
+[node name="Label" type="Label" parent="RestartHint"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 2.0
+offset_right = 76.0
+offset_bottom = 13.0
+mouse_filter = 2
+text = "RESTART"

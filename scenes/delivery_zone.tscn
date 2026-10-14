@@ -139,7 +139,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="delivery_zone" type="Area2D" unique_id=1136476718]
+[node name="delivery_zone" type="Area2D" unique_id=1136476718 groups=["delivery_zones"]]
 texture_filter = 1
 script = ExtResource("1_ngybl")
 
