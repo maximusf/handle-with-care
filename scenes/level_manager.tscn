@@ -15,7 +15,6 @@ script = ExtResource("3_kfnik")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1562498216]
 zoom = Vector2(2.5, 2.5)
-rotation_smoothing_enabled = true
 script = ExtResource("3_lbe5n")
 
 [node name="User_Interface" parent="." unique_id=1313764124 instance=ExtResource("3_2yrkd")]
