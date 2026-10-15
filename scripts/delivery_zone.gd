@@ -36,7 +36,7 @@ func _on_body_exited(body: Node2D) -> void:
 	pass # Replace with function bod
 	
 func check_delivery_status() -> void:
-	if num_packages == REQUIRED_PACKAGES:
+	if num_packages >= REQUIRED_PACKAGES:
 		if countdown_timer.is_stopped():
 			completion.show()
 			completion.play("Timer")
@@ -48,10 +48,9 @@ func check_delivery_status() -> void:
 		completion.hide()
 
 func _on_countdown_timer_timeout() -> void:
-	if num_packages == REQUIRED_PACKAGES:
+	if num_packages >= REQUIRED_PACKAGES:
 		completion.play("Completion")
 		complete.emit(self)
-		print("Done")
 	else:
 		completion.play("Failed")
 	pass # Replace with function body.

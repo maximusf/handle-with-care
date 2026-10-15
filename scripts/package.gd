@@ -56,6 +56,7 @@ func _on_body_entered(body: Node) -> void:
 func hp_check() -> bool:
 	package_hp -= 1
 	if (package_hp <= 0):
+		self.rotation = 0.0
 		sprite_2d.texture = PACKAGE_DESTROYED
 		return false
 	elif (package_hp <= 3):

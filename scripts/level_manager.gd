@@ -29,7 +29,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart") and current_level_scene != null:
 		reload_level()
 
-
 func load_level(level_scene: PackedScene) -> void:
 	current_level_scene = level_scene
 	# Remove the old level.
