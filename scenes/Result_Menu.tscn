@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cb8tramdaelw5" path="res://scripts/result_menu.gd" id="1_phtqf"]
 [ext_resource type="Texture2D" uid="uid://b80lasy7m3m77" path="res://assets/ui/panel_alt.png" id="2_8vms2"]
 [ext_resource type="Texture2D" uid="uid://bps6rsqn1rxn7" path="res://assets/ui/screens/banner_success_ribbon.png" id="2_oco06"]
+[ext_resource type="Texture2D" uid="uid://v44eqim5nfuc" path="res://assets/ui/screens/banner_failed_ribbon.png" id="3_6p8sr"]
 [ext_resource type="Texture2D" uid="uid://x44r1cbl5xbx" path="res://assets/ui/screens/star.png" id="4_xx0i6"]
 [ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="5_6p8sr"]
 
@@ -10,6 +11,7 @@
 texture = ExtResource("2_8vms2")
 
 [node name="Result_Menu" type="Control" unique_id=41921220]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +19,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_phtqf")
+success_texture = ExtResource("2_oco06")
+fail_texture = ExtResource("3_6p8sr")
 
 [node name="dim_background" type="ColorRect" parent="." unique_id=723864022]
 layout_mode = 1
@@ -46,7 +50,6 @@ layout_mode = 2
 
 [node name="ribbon_texture" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1250128494]
 layout_mode = 2
-texture = ExtResource("2_oco06")
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=778917353]
 layout_mode = 2
