@@ -47,6 +47,7 @@ var _time_failed := false
 var _package_destroyed := false
 var _won := false
 var _shown_seconds := -1
+var _kicks := 0
 
 
 func _ready() -> void:
@@ -119,6 +120,7 @@ func _reset() -> void:
 	_build_slots()
 	_refresh_goals()
 	_refresh_time()
+	_kicks = 0
 
 
 # Layout -------------------------------------------------------------------
@@ -149,6 +151,7 @@ func _build_slots() -> void:
 # Packages -----------------------------------------------------------------
 
 func _on_package_kicked(package: Node) -> void:
+	_kicks += 1
 	var index := _packages.find(package)
 	if index != -1 and _slot_states[index] == Slot.WAITING:
 		_active = index
@@ -233,3 +236,11 @@ func _refresh_time() -> void:
 func _set_row(row: Control, goal: Goal, color: Color) -> void:
 	(row.get_node("Bullet") as AnimatedSprite2D).play(GOAL_ANIMS[goal])
 	row.get_node("Text").add_theme_color_override("font_color", COLOR_FAILED if goal == Goal.FAILED else color)
+
+func get_stats() -> Dictionary:
+	return {
+		"delivered" : _slot_states.count(Slot.DELIVERED),
+		"destroyed" : _slot_states.count(Slot.LOST),
+		"kicks" : _kicks,
+		"time_left" : maxf( time_limit - _elapsed, 0.0)
+	}

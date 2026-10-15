@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://bbnigmbfxe02o"]
 
 [ext_resource type="Script" uid="uid://cb8tramdaelw5" path="res://scripts/result_menu.gd" id="1_phtqf"]
+[ext_resource type="Texture2D" uid="uid://b80lasy7m3m77" path="res://assets/ui/panel_alt.png" id="2_8vms2"]
+[ext_resource type="Texture2D" uid="uid://bps6rsqn1rxn7" path="res://assets/ui/screens/banner_success_ribbon.png" id="2_oco06"]
+[ext_resource type="Texture2D" uid="uid://x44r1cbl5xbx" path="res://assets/ui/screens/star.png" id="4_xx0i6"]
+[ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="5_6p8sr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3uw58"]
+texture = ExtResource("2_8vms2")
 
 [node name="Result_Menu" type="Control" unique_id=41921220]
 layout_mode = 3
@@ -20,10 +27,58 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.19607843)
 
-[node name="back_button" type="Button" parent="." unique_id=63258474]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1761403329]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=718191402]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_3uw58")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=1731565104]
+texture_filter = 1
+layout_mode = 2
+
+[node name="ribbon_texture" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1250128494]
+layout_mode = 2
+texture = ExtResource("2_oco06")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=778917353]
+layout_mode = 2
+texture = ExtResource("4_xx0i6")
+stretch_mode = 5
+
+[node name="delivered_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1119090220]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
+theme_override_fonts/font = ExtResource("5_6p8sr")
+text = "Delivered"
+
+[node name="destroyed_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1964203614]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
+theme_override_fonts/font = ExtResource("5_6p8sr")
+text = "Destroyed"
+
+[node name="kicks_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1608222462]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
+theme_override_fonts/font = ExtResource("5_6p8sr")
+text = "Kicks"
+
+[node name="time_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1050940933]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
+theme_override_fonts/font = ExtResource("5_6p8sr")
+text = "Time"
+
+[node name="back_button" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=63258474]
+layout_mode = 2
 text = "Back"
 
-[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]

@@ -5,7 +5,6 @@ extends Node
 @onready var user_interface: CanvasLayer = $User_Interface
 var current_level_scene: PackedScene
 
-
 signal level_loaded(level: Node2D)
 
 func _ready() -> void:
@@ -29,7 +28,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("restart") and current_level_scene != null:
 		reload_level()
-		
 
 
 func load_level(level_scene: PackedScene) -> void:

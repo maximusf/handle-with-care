@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://d3kack6x0mogq"]
 
-[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
-[ext_resource type="Texture2D" path="res://assets/ui/screens/hud_panel.png" id="2_panel"]
-[ext_resource type="SpriteFrames" path="res://assets/ui/screens/hud_objective_bullet.tres" id="3_bullet"]
-[ext_resource type="Texture2D" path="res://assets/ui/screens/hud_key_r.png" id="4_key"]
-[ext_resource type="FontFile" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="5_font"]
+[ext_resource type="Script" uid="uid://bx3hxn8y2qj82" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" uid="uid://d3in3uieybtqf" path="res://assets/ui/screens/hud_panel.png" id="2_panel"]
+[ext_resource type="SpriteFrames" uid="uid://dgbxa2hk61iuj" path="res://assets/ui/screens/hud_objective_bullet.tres" id="3_bullet"]
+[ext_resource type="Texture2D" uid="uid://c70vl167khyac" path="res://assets/ui/screens/hud_key_r.png" id="4_key"]
+[ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="5_font"]
 
 [sub_resource type="Theme" id="Theme_hud"]
 Label/colors/font_color = Color(0.98039216, 0.98039216, 0.98039216, 1)
 Label/constants/line_spacing = 0
-Label/fonts/font = ExtResource("5_font")
 Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("5_font")
 
-[node name="HUD" type="Control"]
+[node name="HUD" type="Control" unique_id=859351205]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -24,155 +24,140 @@ mouse_filter = 2
 theme = SubResource("Theme_hud")
 script = ExtResource("1_hud")
 
-[node name="Objectives" type="Control" parent="."]
-layout_mode = 3
+[node name="Objectives" type="Control" parent="." unique_id=1785192977]
 anchors_preset = 0
 offset_right = 162.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="Panel" type="NinePatchRect" parent="Objectives"]
+[node name="Panel" type="NinePatchRect" parent="Objectives" unique_id=1104796961]
 layout_mode = 0
 offset_right = 162.0
 offset_bottom = 40.0
-mouse_filter = 2
 texture = ExtResource("2_panel")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="MainRow" type="Control" parent="Objectives"]
-layout_mode = 3
+[node name="MainRow" type="Control" parent="Objectives" unique_id=467174178]
 anchors_preset = 0
 offset_top = 5.0
 offset_right = 162.0
 offset_bottom = 13.0
 mouse_filter = 2
 
-[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/MainRow"]
+[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/MainRow" unique_id=824082121]
 position = Vector2(5, 0)
 sprite_frames = ExtResource("3_bullet")
 animation = &"pending"
 centered = false
 
-[node name="Text" type="Label" parent="Objectives/MainRow"]
+[node name="Text" type="Label" parent="Objectives/MainRow" unique_id=278964503]
 layout_mode = 0
 offset_left = 17.0
 offset_top = -2.0
 offset_right = 127.0
 offset_bottom = 9.0
-mouse_filter = 2
 text = "DELIVER PACKAGES"
 
-[node name="Count" type="Label" parent="Objectives/MainRow"]
+[node name="Count" type="Label" parent="Objectives/MainRow" unique_id=70827107]
 layout_mode = 0
 offset_left = 106.0
 offset_top = -2.0
 offset_right = 156.0
 offset_bottom = 9.0
-mouse_filter = 2
 text = "0/0"
 horizontal_alignment = 2
 
-[node name="TimeRow" type="Control" parent="Objectives"]
-layout_mode = 3
+[node name="TimeRow" type="Control" parent="Objectives" unique_id=967778521]
 anchors_preset = 0
 offset_top = 15.0
 offset_right = 162.0
 offset_bottom = 23.0
 mouse_filter = 2
 
-[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/TimeRow"]
+[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/TimeRow" unique_id=451785977]
 position = Vector2(5, 0)
 sprite_frames = ExtResource("3_bullet")
 animation = &"pending"
 centered = false
 
-[node name="Text" type="Label" parent="Objectives/TimeRow"]
+[node name="Text" type="Label" parent="Objectives/TimeRow" unique_id=1069508271]
 layout_mode = 0
 offset_left = 17.0
 offset_top = -2.0
 offset_right = 127.0
 offset_bottom = 9.0
-mouse_filter = 2
 text = "UNDER 5 MINUTES"
 
-[node name="Count" type="Label" parent="Objectives/TimeRow"]
+[node name="Count" type="Label" parent="Objectives/TimeRow" unique_id=1033717955]
 layout_mode = 0
 offset_left = 106.0
 offset_top = -2.0
 offset_right = 156.0
 offset_bottom = 9.0
-mouse_filter = 2
 text = "5:00"
 horizontal_alignment = 2
 
-[node name="CleanRow" type="Control" parent="Objectives"]
-layout_mode = 3
+[node name="CleanRow" type="Control" parent="Objectives" unique_id=941193233]
 anchors_preset = 0
 offset_top = 25.0
 offset_right = 162.0
 offset_bottom = 33.0
 mouse_filter = 2
 
-[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/CleanRow"]
+[node name="Bullet" type="AnimatedSprite2D" parent="Objectives/CleanRow" unique_id=974955612]
 position = Vector2(5, 0)
 sprite_frames = ExtResource("3_bullet")
 animation = &"pending"
 centered = false
 
-[node name="Text" type="Label" parent="Objectives/CleanRow"]
+[node name="Text" type="Label" parent="Objectives/CleanRow" unique_id=1302437054]
 layout_mode = 0
 offset_left = 17.0
 offset_top = -2.0
 offset_right = 127.0
 offset_bottom = 9.0
-mouse_filter = 2
 text = "NO PACKAGE DESTROYED"
 
-[node name="PackageTray" type="Control" parent="."]
-layout_mode = 3
+[node name="PackageTray" type="Control" parent="." unique_id=1487081264]
 anchors_preset = 0
 offset_right = 96.0
 offset_bottom = 26.0
 mouse_filter = 2
 
-[node name="Panel" type="NinePatchRect" parent="PackageTray"]
+[node name="Panel" type="NinePatchRect" parent="PackageTray" unique_id=499539839]
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 26.0
-mouse_filter = 2
 texture = ExtResource("2_panel")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="Slots" type="Control" parent="PackageTray"]
-layout_mode = 3
+[node name="Slots" type="Control" parent="PackageTray" unique_id=576464763]
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="RestartHint" type="Control" parent="."]
-layout_mode = 3
+[node name="RestartHint" type="Control" parent="." unique_id=2007333239]
 anchors_preset = 0
 offset_right = 78.0
 offset_bottom = 16.0
 mouse_filter = 2
 
-[node name="Panel" type="NinePatchRect" parent="RestartHint"]
+[node name="Panel" type="NinePatchRect" parent="RestartHint" unique_id=680380994]
 layout_mode = 0
 offset_right = 78.0
 offset_bottom = 16.0
-mouse_filter = 2
 texture = ExtResource("2_panel")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="Key" type="TextureRect" parent="RestartHint"]
+[node name="Key" type="TextureRect" parent="RestartHint" unique_id=961461493]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 2.0
@@ -181,11 +166,10 @@ offset_bottom = 14.0
 mouse_filter = 2
 texture = ExtResource("4_key")
 
-[node name="Label" type="Label" parent="RestartHint"]
+[node name="Label" type="Label" parent="RestartHint" unique_id=364656607]
 layout_mode = 0
 offset_left = 33.0
 offset_top = 2.0
 offset_right = 76.0
 offset_bottom = 13.0
-mouse_filter = 2
 text = "RESTART"

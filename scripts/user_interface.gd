@@ -14,6 +14,7 @@ func _ready() -> void:
 	
 	main_menu.start_pressed.connect(start_game_requested.emit)
 	result_menu.back_pressed.connect(quit_to_menu_requested.emit)
+	result_menu.hud = hud
 	close_settings()
 
 func _hide_all() -> void:
