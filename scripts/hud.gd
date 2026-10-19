@@ -161,6 +161,8 @@ func _on_package_kicked(package: Node) -> void:
 
 
 func _on_package_destroyed(package: Node) -> void:
+	# The kick that destroys a package sends "destroy" instead of "kicked", so count it here.
+	_kicks += 1
 	var index := _packages.find(package)
 	if index != -1:
 		_slot_states[index] = Slot.LOST
