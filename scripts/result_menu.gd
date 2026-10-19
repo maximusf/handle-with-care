@@ -5,10 +5,12 @@ extends Control
 signal back_pressed
 
 const BASE_SIZE := Vector2(480, 270)
+const CONFETTI_SIZE := Vector2(240, 135) # One frame of assets/ui/confetti.png
 const DOTS_GAP := 4.0 # Space between the leader dots and the text on either side
 
 const COLOR_BACKDROP_WIN := Color("080808b3") # 70 percent
 const COLOR_BACKDROP_LOSE := Color("3a0a10a8") # 66 percent
+const LOSE_DESATURATION := 0.7 # How much colour is drained from the level on a lose
 const COLOR_CAPTION_WIN := Color("a96b32")
 const COLOR_CAPTION_LOSE := Color("bc292c")
 const COLOR_DELIVERED_WIN := Color("1a8a28")
@@ -20,6 +22,7 @@ const COLOR_TEXT := Color("080808")
 @export var fail_texture: Texture2D
 
 @onready var backdrop: ColorRect = $Backdrop
+@onready var confetti: AnimatedSprite2D = $Confetti
 @onready var screen: Control = $Screen
 @onready var ribbon: TextureRect = %ribbon
 @onready var star_1: AnimatedSprite2D = %star_1
@@ -46,6 +49,11 @@ func _layout() -> void:
 	screen.scale = Vector2.ONE * fit
 	screen.position = (size - BASE_SIZE * fit) / 2.0
 
+	# Confetti covers the whole window, even when it's wider than the 480x270 design.
+	var cover := maxf(size.x / CONFETTI_SIZE.x, size.y / CONFETTI_SIZE.y)
+	confetti.scale = Vector2.ONE * cover
+	confetti.position = (size - CONFETTI_SIZE * cover) / 2.0
+
 func _on_back_button_pressed() -> void:
 	back_pressed.emit()
 
@@ -54,12 +62,16 @@ func show_result(success: bool) -> void:
 
 	if success:
 		ribbon.texture = success_texture
-		backdrop.color = COLOR_BACKDROP_WIN
+		_set_backdrop(COLOR_BACKDROP_WIN, 0.0)
+		confetti.show()
+		confetti.play(&"fall")
 		caption_label.text = "CUSTOMER SATISFACTION"
 		caption_label.add_theme_color_override("font_color", COLOR_CAPTION_WIN)
 	else:
 		ribbon.texture = fail_texture
-		backdrop.color = COLOR_BACKDROP_LOSE
+		_set_backdrop(COLOR_BACKDROP_LOSE, LOSE_DESATURATION)
+		confetti.stop()
+		confetti.hide()
 		caption_label.text = "CUSTOMER NOT SATISFIED"
 		caption_label.add_theme_color_override("font_color", COLOR_CAPTION_LOSE)
 
@@ -81,6 +93,11 @@ func show_result(success: bool) -> void:
 
 	show()
 	back_button.grab_focus()
+
+func _set_backdrop(tint: Color, desaturation: float) -> void:
+	var backdrop_material := backdrop.material as ShaderMaterial
+	backdrop_material.set_shader_parameter("tint_color", tint)
+	backdrop_material.set_shader_parameter("desaturation", desaturation)
 
 func _set_star(star: AnimatedSprite2D, earned: bool) -> void:
 	if earned:

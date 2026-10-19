@@ -9,6 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://bof1vq68outof" path="res://assets/ui/button.png" id="8_button"]
 [ext_resource type="SpriteFrames" path="res://assets/ui/screens/star.tres" id="9_star"]
 [ext_resource type="SpriteFrames" path="res://assets/ui/screens/stat_icons.tres" id="10_icons"]
+[ext_resource type="Shader" path="res://shaders/result_backdrop.gdshader" id="11_backdrop"]
+[ext_resource type="SpriteFrames" path="res://assets/ui/confetti.tres" id="12_confetti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_backdrop"]
+shader = ExtResource("11_backdrop")
+shader_parameter/desaturation = 0.0
+shader_parameter/tint_color = Color(0.03137255, 0.03137255, 0.03137255, 0.7)
 
 [sub_resource type="Theme" id="Theme_result"]
 Label/colors/font_color = Color(0.03137255, 0.03137255, 0.03137255, 1)
@@ -68,13 +75,19 @@ success_texture = ExtResource("2_oco06")
 fail_texture = ExtResource("3_6p8sr")
 
 [node name="Backdrop" type="ColorRect" parent="." unique_id=723864022]
+material = SubResource("ShaderMaterial_backdrop")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.03137255, 0.03137255, 0.03137255, 0.7)
+
+[node name="Confetti" type="AnimatedSprite2D" parent="." unique_id=1592048371]
+visible = false
+sprite_frames = ExtResource("12_confetti")
+animation = &"fall"
+centered = false
 
 [node name="Screen" type="Control" parent="." unique_id=1761403329]
 layout_mode = 0
