@@ -21,23 +21,35 @@ enum animation_states {
 
 var animation_state: animation_states = animation_states.IDLE
 
-var kickable_package: RigidBody2D = null
 var kick_power: float = 100.0
 var is_kicking: bool = false
 var kick_animation_playing: bool = false
 var arrow_sfx_counter: int = 0
 const MAX_KICK_POWER: float = 2200.0
 const CHARGE_SPEED = 300.0
+const AIM_RADIUS = 40.0 # The arrow's tail sits on a ring this far from the player, pointing at the cursor
+# How see-through the aim arrow is when not charging a kick (stronger when a kick would hit a package)
+const AIM_OUT_OF_RANGE_ALPHA = 0.2
+const AIM_IN_RANGE_ALPHA = 0.35
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+# Tallest step the player walks up on their own. Lower than a package (27px) so they can't walk onto one.
+const STEP_HEIGHT = 17.0
+# Only show the jump animation when clearly moving up or down, so small drops (like settling onto a step) don't flash it.
+const AIR_ANIMATION_MIN_SPEED = 50.0
+
+
+func _ready() -> void:
+	# Stick to the ground when walking down steps, instead of falling off each one.
+	floor_snap_length = STEP_HEIGHT
 
 
 func _physics_process(delta: float) -> void:
 	var kick_direction = (get_global_mouse_position() - global_position).normalized()
 	var kick_percentage = (kick_power / MAX_KICK_POWER) * 100
 	power_arrow.rotation = kick_direction.angle()
-	power_arrow.position = get_local_mouse_position()
+	power_arrow.position = kick_direction * AIM_RADIUS
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -54,29 +66,33 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	step_up_if_blocked(delta)
 	move_and_slide()
 	
 	# Handle Kicking ------------------------------------------------------
-	if Input.is_action_just_pressed("kick"):
+	# Ignore new kicks until the current kick animation is done, otherwise both kicks land at once.
+	if Input.is_action_just_pressed("kick") and not kick_animation_playing:
 		arrow_sfx_counter = -1
 		power_arrow.play("20")
 		power_arrow.scale = Vector2(0.09, 0.07)
-		power_arrow.visible = true
 		is_kicking = true
 		
 	if is_kicking and Input.is_action_just_pressed("cancel_kick"):
-		power_arrow.visible = false
 		is_kicking = false
 		kick_power = 100
-	elif Input.is_action_pressed("kick"):
+	elif is_kicking and Input.is_action_pressed("kick"): # Only charge if the kick wasn't cancelled
 		kick_power += CHARGE_SPEED * delta
 		kick_power = min(kick_power, MAX_KICK_POWER)
+	
+	update_power_arrow_visibility()
 		
 	if Input.is_action_just_released("kick") and is_kicking:
+		is_kicking = false
 		kick_animation_playing = true
 		power_arrow.visible = false
 		set_animation_state(animation_states.KICK)
 		await body.animation_finished
+		var kickable_package := get_kickable_package()
 		if kickable_package != null:
 			kickable_package.get_kicked(kick_direction, kick_power)
 		kick_animation_playing = false
@@ -84,12 +100,14 @@ func _physics_process(delta: float) -> void:
 	#-----------------------------------------------------------------------
 	
 	# Player Animations
-	if not is_on_floor():
+	# Let the kick animation finish first. If walking or jumping replaced it,
+	# "animation_finished" would never fire and the kick would get stuck.
+	if kick_animation_playing:
+		return
+	elif not is_on_floor() and absf(velocity.y) > AIR_ANIMATION_MIN_SPEED:
 		set_animation_state(animation_states.JUMP)
 	elif velocity.x != 0:
 		set_animation_state(animation_states.MOVE)
-	elif kick_animation_playing:
-		return
 	else:
 		set_animation_state(animation_states.IDLE)
 		
@@ -160,13 +178,52 @@ func set_animation_state(new_state: animation_states) -> void:
 			head.play("Head_Idle")
 
 
-func _on_kickrange_body_entered(body: Node2D) -> void:
-	if body.is_in_group("packages"):
-		kickable_package = body
-		print("Package can be kicked")
-		
-func _on_kickrange_body_exited(body: Node2D) -> void:
-	if body.is_in_group("packages"):
-		kickable_package = null
-		print("Package out of range")
-	pass # Replace with function body.
+# Walking into a step: if the way is clear one step higher, lift the player onto it.
+func step_up_if_blocked(delta: float) -> void:
+	if not is_on_floor() or velocity.x == 0:
+		return
+
+	var move_forward := Vector2(velocity.x * delta, 0)
+	var move_up := Vector2(0, -STEP_HEIGHT)
+	var raised_transform := global_transform.translated(move_up)
+
+	var blocked_ahead := test_move(global_transform, move_forward)
+	var room_above := not test_move(global_transform, move_up)
+	var clear_when_raised := not test_move(raised_transform, move_forward)
+
+	if blocked_ahead and room_above and clear_when_raised:
+		global_position += move_up
+
+# Solid arrow while charging a kick, see-through arrow while just aiming, hidden during the kick itself.
+func update_power_arrow_visibility() -> void:
+	if is_kicking:
+		power_arrow.visible = true
+		power_arrow.modulate.a = 1.0
+	elif kick_animation_playing:
+		power_arrow.visible = false
+	elif get_kickable_package() != null:
+		power_arrow.visible = true
+		power_arrow.modulate.a = AIM_IN_RANGE_ALPHA
+	else:
+		power_arrow.visible = true
+		power_arrow.modulate.a = AIM_OUT_OF_RANGE_ALPHA
+
+# Returns the closest package in kick range (in front of the player or under their feet), or null.
+func get_kickable_package() -> RigidBody2D:
+	var closest_package: RigidBody2D = null
+	var closest_distance := INF
+	for body in kickrange.get_overlapping_bodies():
+		if not body.is_in_group("packages") or body.is_destroyed:
+			continue
+		var distance := global_position.distance_to(body.global_position)
+		if distance < closest_distance:
+			closest_package = body
+			closest_distance = distance
+	return closest_package
+
+func _notification(what: int) -> void:
+	# Drop a half-charged kick when the game pauses, so it doesn't carry over after resuming.
+	if what == NOTIFICATION_PAUSED:
+		is_kicking = false
+		kick_power = 100
+		power_arrow.visible = false

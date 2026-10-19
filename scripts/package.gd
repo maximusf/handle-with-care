@@ -16,6 +16,7 @@ signal destroy(destroyed_package) # Used to let other Game Objects know that the
 
 var package_hp = 5
 var is_destroyed = false
+var is_delivered = false # Set by the delivery zone that accepted this package, so it can't count twice
 var is_in_air = false # To know when to put the camera on the package
 
 # Called when the node enters the scene tree for the first time.

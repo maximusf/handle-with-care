@@ -5,19 +5,34 @@ extends Control
 @onready var exit_button = $CenterContainer/VBoxContainer/exit_button
 
 signal start_pressed
+signal resume_pressed
 signal settings_pressed
+
+var can_resume := false # True when opened from inside a level (the pause menu)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
+	# The menu is already visible when the game boots, so focus it now as well.
+	_on_visibility_changed()
 
 func _on_start_button_pressed() -> void:
 	print('start pressed')
 	# This works for now (but the emit approach might be better to work with in level manager
 	#get_tree().change_scene_to_file("res://scenes/level_manager.tscn")
-	start_pressed.emit()
+	if can_resume:
+		resume_pressed.emit()
+	else:
+		start_pressed.emit()
 	# May need to add some more code to make animated sprites to work for all of these
 	
+
+func set_can_resume(value: bool) -> void:
+	can_resume = value
+	if can_resume:
+		start_button.text = "RESUME"
+	else:
+		start_button.text = "START"
 
 func _on_settings_button_pressed() -> void:
 	print('settings pressed')

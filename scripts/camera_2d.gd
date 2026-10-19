@@ -3,16 +3,18 @@ extends Camera2D
 @export var player: CharacterBody2D
 @onready var camera_2d: Camera2D = $"."
 var camera_target: Node2D = null
-var camera_offset_direction: int = 1
 
 @export var free_cam_speed := 1500.0
 @export var free_cam_dead_zone := 20.0
 @export var main_tilemap : TileMapLayer
 
+@export var lean_distance := 60.0 # How far (in world pixels) the camera leans toward the cursor
+@export var lean_speed := 5.0 # How quickly the lean catches up to the cursor
+
 const ZOOM_STEP := 0.1
 const MIN_ZOOM := 1.5
 const MAX_ZOOM := 4.0
-const REGULAR_ZOOM: Vector2 = Vector2(2.5, 2.5)
+var regular_zoom := Vector2(2.5, 2.5) # Zoom while following the player, set from the settings menu
 
 var is_free_cam := false
 var target: Node2D
@@ -23,6 +25,10 @@ func _ready() -> void:
 	
 
 func _on_level_loaded(level: Node2D) -> void:
+	# Every level starts on the regular camera, even if free cam was on before.
+	is_free_cam = false
+	zoom = regular_zoom
+	offset = Vector2.ZERO
 	player = level.get_node_or_null("Player")
 	
 	main_tilemap = level.get_node_or_null("MainTileMap") as TileMapLayer
@@ -37,23 +43,35 @@ func _on_level_loaded(level: Node2D) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_free_cam:
+		offset = Vector2.ZERO
 		move_free_camera(delta)
 	else:
-		if Input.is_action_just_pressed("move_left"):
-			camera_offset_direction = -1
-		if Input.is_action_just_pressed("move_right"):
-			camera_offset_direction = 1
 		if is_instance_valid(camera_target):
-			camera_2d.global_position = Vector2(camera_target.global_position.x + (camera_offset_direction * 80), camera_target.global_position.y)
+			camera_2d.global_position = camera_target.global_position
 		else:
 			pass # Means we're in the menu
+		# Ease toward the lean instead of snapping, so it feels smooth.
+		offset = offset.lerp(get_cursor_lean(), clampf(lean_speed * delta, 0.0, 1.0))
+
+# Leans the camera a little toward the cursor while following the player.
+func get_cursor_lean() -> Vector2:
+	# No lean while following a kicked package, so the camera doesn't swing around.
+	if camera_target != player:
+		return Vector2.ZERO
+	var screen_center := get_viewport_rect().size / 2.0
+	var cursor_from_center := get_viewport().get_mouse_position() - screen_center
+	# Goes from -1 at one screen edge to 1 at the other.
+	var edge_amount := (cursor_from_center / screen_center).clamp(-Vector2.ONE, Vector2.ONE)
+	return edge_amount * lean_distance
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toogle_free_cam"):
 		is_free_cam = not is_free_cam
+		# Leaving free cam goes back to the player's zoom.
+		if not is_free_cam:
+			zoom = regular_zoom
 	
 	if not is_free_cam:
-		zoom = REGULAR_ZOOM
 		return
 	
 	if event.is_action_pressed("zoom_in"):
@@ -96,6 +114,12 @@ func set_limits_from_tilemap(tilemap: TileMapLayer) -> void:
 	limit_right = ceili(bottom_right.x)
 	limit_bottom = ceili(bottom_right.y)
 		
+func set_regular_zoom(zoom_level: float) -> void:
+	regular_zoom = Vector2(zoom_level, zoom_level)
+	# Free cam keeps its own zoom until the player leaves it.
+	if not is_free_cam:
+		zoom = regular_zoom
+
 func set_camera_target(new_target: Node2D) -> void:
 	camera_target = new_target
 	

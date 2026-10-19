@@ -25,6 +25,8 @@ const SLOT_ANIMS: Array[StringName] = [&"waiting", &"active", &"delivered", &"lo
 enum Goal { PENDING, DONE, FAILED }
 const GOAL_ANIMS: Array[StringName] = [&"pending", &"done", &"failed"]
 
+signal level_finished(won: bool) # Emitted once per level, when the main goal is done or can no longer be done
+
 @export var time_limit: float = 300.0 # Seconds for the optional "under N minutes" objective
 
 @onready var objectives: Control = $Objectives
@@ -48,6 +50,7 @@ var _package_destroyed := false
 var _won := false
 var _shown_seconds := -1
 var _kicks := 0
+var _destroyed := 0 # Every destroyed package, including ones destroyed after being delivered
 
 
 func _ready() -> void:
@@ -61,11 +64,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# This node keeps processing while the tree is paused, so check for that here.
-	if not _running or _time_failed or get_tree().paused or not is_visible_in_tree():
+	if not _running or get_tree().paused or not is_visible_in_tree():
 		return
+	# Keep counting after the time limit, the result screen shows the real time taken.
 	_elapsed += delta
-	if _elapsed >= time_limit:
-		_elapsed = time_limit
+	if _elapsed >= time_limit and not _time_failed:
 		_time_failed = true
 		_refresh_goals()
 	_refresh_time()
@@ -121,6 +124,7 @@ func _reset() -> void:
 	_refresh_goals()
 	_refresh_time()
 	_kicks = 0
+	_destroyed = 0
 
 
 # Layout -------------------------------------------------------------------
@@ -159,8 +163,12 @@ func _on_package_kicked(package: Node) -> void:
 
 
 func _on_package_destroyed(package: Node) -> void:
+	# The kick that destroys a package sends "destroy" instead of "kicked", so count it here.
+	_kicks += 1
+	_destroyed += 1
+	# A package that was already delivered stays delivered, it only costs the "no package destroyed" goal.
 	var index := _packages.find(package)
-	if index != -1:
+	if index != -1 and _slot_states[index] != Slot.DELIVERED:
 		_slot_states[index] = Slot.LOST
 	_package_destroyed = true
 	_refresh_slots()
@@ -168,7 +176,7 @@ func _on_package_destroyed(package: Node) -> void:
 
 
 func _on_zone_complete(zone: Node) -> void:
-	for package in zone.packages_inside:
+	for package in zone.delivered_packages:
 		var index := _packages.find(package)
 		if index != -1 and _slot_states[index] == Slot.WAITING:
 			_slot_states[index] = Slot.DELIVERED
@@ -196,13 +204,17 @@ func _refresh_goals() -> void:
 	var waiting := _slot_states.count(Slot.WAITING)
 
 	var main_goal := Goal.PENDING
-	if _required > 0 and delivered >= _required:
+	if _all_zones_complete():
 		main_goal = Goal.DONE
-	elif delivered + waiting < _required:
+	elif waiting < _packages_still_needed():
 		main_goal = Goal.FAILED
 	_won = main_goal == Goal.DONE
-	if main_goal != Goal.PENDING:
+
+	# Stop the clock and report the result only once.
+	var level_just_ended := _running and main_goal != Goal.PENDING
+	if level_just_ended:
 		_running = false
+		level_finished.emit(_won)
 
 	_set_row(main_row, main_goal, COLOR_MAIN)
 	main_row.get_node("Count").text = "%d/%d" % [delivered, _required]
@@ -223,8 +235,25 @@ func _refresh_goals() -> void:
 	_set_row(clean_row, clean_goal, COLOR_OPTIONAL)
 
 
+func _all_zones_complete() -> bool:
+	if _zones.is_empty():
+		return false
+	for zone in _zones:
+		if not zone.is_complete:
+			return false
+	return true
+
+
+func _packages_still_needed() -> int:
+	var needed := 0
+	for zone in _zones:
+		if not zone.is_complete:
+			needed += zone.REQUIRED_PACKAGES
+	return needed
+
+
 func _refresh_time() -> void:
-	var seconds := ceili(time_limit - _elapsed)
+	var seconds := ceili(maxf(time_limit - _elapsed, 0.0)) # Stays at 0:00 once time is up
 	if seconds == _shown_seconds:
 		return
 	_shown_seconds = seconds
@@ -240,7 +269,11 @@ func _set_row(row: Control, goal: Goal, color: Color) -> void:
 func get_stats() -> Dictionary:
 	return {
 		"delivered" : _slot_states.count(Slot.DELIVERED),
-		"destroyed" : _slot_states.count(Slot.LOST),
+		"destroyed" : _destroyed,
 		"kicks" : _kicks,
-		"time_left" : maxf( time_limit - _elapsed, 0.0)
+		"required" : _required,
+		"time_taken" : _elapsed,
+		# Optional objectives only count as done when the level was won.
+		"under_time_limit" : _won and not _time_failed,
+		"no_package_destroyed" : _won and not _package_destroyed,
 	}

@@ -1,14 +1,66 @@
 [gd_scene format=3 uid="uid://bbnigmbfxe02o"]
 
 [ext_resource type="Script" uid="uid://cb8tramdaelw5" path="res://scripts/result_menu.gd" id="1_phtqf"]
-[ext_resource type="Texture2D" uid="uid://b80lasy7m3m77" path="res://assets/ui/panel_alt.png" id="2_8vms2"]
 [ext_resource type="Texture2D" uid="uid://bps6rsqn1rxn7" path="res://assets/ui/screens/banner_success_ribbon.png" id="2_oco06"]
 [ext_resource type="Texture2D" uid="uid://v44eqim5nfuc" path="res://assets/ui/screens/banner_failed_ribbon.png" id="3_6p8sr"]
-[ext_resource type="Texture2D" uid="uid://x44r1cbl5xbx" path="res://assets/ui/screens/star.png" id="4_xx0i6"]
 [ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="5_6p8sr"]
+[ext_resource type="Texture2D" uid="uid://druedec2l1aah" path="res://assets/ui/screens/paper_panel.png" id="6_paper"]
+[ext_resource type="Texture2D" uid="uid://s22xswsememn" path="res://assets/ui/screens/leader_dots.png" id="7_dots"]
+[ext_resource type="Texture2D" uid="uid://bof1vq68outof" path="res://assets/ui/button.png" id="8_button"]
+[ext_resource type="SpriteFrames" path="res://assets/ui/screens/star.tres" id="9_star"]
+[ext_resource type="SpriteFrames" path="res://assets/ui/screens/stat_icons.tres" id="10_icons"]
+[ext_resource type="Shader" path="res://shaders/result_backdrop.gdshader" id="11_backdrop"]
+[ext_resource type="SpriteFrames" path="res://assets/ui/confetti.tres" id="12_confetti"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3uw58"]
-texture = ExtResource("2_8vms2")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_backdrop"]
+shader = ExtResource("11_backdrop")
+shader_parameter/desaturation = 0.0
+shader_parameter/tint_color = Color(0.03137255, 0.03137255, 0.03137255, 0.7)
+
+[sub_resource type="Theme" id="Theme_result"]
+Label/colors/font_color = Color(0.03137255, 0.03137255, 0.03137255, 1)
+Label/constants/line_spacing = 0
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("5_6p8sr")
+Button/colors/font_color = Color(0.09019608, 0.050980393, 0.02745098, 1)
+Button/colors/font_focus_color = Color(0.09019608, 0.050980393, 0.02745098, 1)
+Button/colors/font_hover_color = Color(0.09019608, 0.050980393, 0.02745098, 1)
+Button/colors/font_pressed_color = Color(0.09019608, 0.050980393, 0.02745098, 1)
+Button/font_sizes/font_size = 8
+Button/fonts/font = ExtResource("5_6p8sr")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_button_normal"]
+atlas = ExtResource("8_button")
+region = Rect2(0, 0, 48, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_button_hover"]
+atlas = ExtResource("8_button")
+region = Rect2(48, 0, 48, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_button_pressed"]
+atlas = ExtResource("8_button")
+region = Rect2(96, 0, 48, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_button_normal"]
+texture = SubResource("AtlasTexture_button_normal")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_button_hover"]
+texture = SubResource("AtlasTexture_button_hover")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_button_pressed"]
+texture = SubResource("AtlasTexture_button_pressed")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [node name="Result_Menu" type="Control" unique_id=41921220]
 texture_filter = 1
@@ -22,16 +74,8 @@ script = ExtResource("1_phtqf")
 success_texture = ExtResource("2_oco06")
 fail_texture = ExtResource("3_6p8sr")
 
-[node name="dim_background" type="ColorRect" parent="." unique_id=723864022]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.19607843)
-
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1761403329]
+[node name="Backdrop" type="ColorRect" parent="." unique_id=723864022]
+material = SubResource("ShaderMaterial_backdrop")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,49 +83,245 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=718191402]
-texture_filter = 1
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_3uw58")
+[node name="Confetti" type="AnimatedSprite2D" parent="." unique_id=1592048371]
+visible = false
+sprite_frames = ExtResource("12_confetti")
+animation = &"fall"
+centered = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=1731565104]
-texture_filter = 1
-layout_mode = 2
+[node name="Screen" type="Control" parent="." unique_id=1761403329]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
+theme = SubResource("Theme_result")
 
-[node name="ribbon_texture" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1250128494]
-layout_mode = 2
+[node name="Panel" type="NinePatchRect" parent="Screen" unique_id=718191402]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 50.0
+offset_right = 351.0
+offset_bottom = 235.0
+texture = ExtResource("6_paper")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 6
+patch_margin_bottom = 6
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=778917353]
-layout_mode = 2
-texture = ExtResource("4_xx0i6")
-stretch_mode = 5
+[node name="ribbon" type="TextureRect" parent="Screen" unique_id=1250128494]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 107.0
+offset_top = 36.0
+offset_right = 373.0
+offset_bottom = 76.0
+texture = ExtResource("2_oco06")
 
-[node name="delivered_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1119090220]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
-theme_override_fonts/font = ExtResource("5_6p8sr")
-text = "Delivered"
+[node name="star_1" type="AnimatedSprite2D" parent="Screen" unique_id=778917353]
+unique_name_in_owner = true
+position = Vector2(185, 82)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("9_star")
+animation = &"empty"
+centered = false
 
-[node name="destroyed_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1964203614]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
-theme_override_fonts/font = ExtResource("5_6p8sr")
-text = "Destroyed"
+[node name="star_2" type="AnimatedSprite2D" parent="Screen" unique_id=1325561048]
+unique_name_in_owner = true
+position = Vector2(224, 82)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("9_star")
+animation = &"empty"
+centered = false
 
-[node name="kicks_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1608222462]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
-theme_override_fonts/font = ExtResource("5_6p8sr")
-text = "Kicks"
+[node name="star_3" type="AnimatedSprite2D" parent="Screen" unique_id=1630458174]
+unique_name_in_owner = true
+position = Vector2(263, 82)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("9_star")
+animation = &"empty"
+centered = false
 
-[node name="time_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1050940933]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
-theme_override_fonts/font = ExtResource("5_6p8sr")
-text = "Time"
+[node name="caption_label" type="Label" parent="Screen" unique_id=1119090220]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 132.0
+offset_top = 118.0
+offset_right = 348.0
+offset_bottom = 128.0
+text = "CUSTOMER SATISFACTION"
+horizontal_alignment = 1
 
-[node name="back_button" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=63258474]
-layout_mode = 2
-text = "Back"
+[node name="Rule" type="ColorRect" parent="Screen" unique_id=1964203614]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 132.0
+offset_right = 336.0
+offset_bottom = 133.0
+color = Color(0.8509804, 0.827451, 0.76862746, 1)
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]
+[node name="delivered_row" type="Control" parent="Screen" unique_id=1608222462]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 141.0
+offset_right = 480.0
+offset_bottom = 151.0
+mouse_filter = 2
+
+[node name="Icon" type="AnimatedSprite2D" parent="Screen/delivered_row" unique_id=1050940933]
+position = Vector2(148, -3)
+sprite_frames = ExtResource("10_icons")
+animation = &"delivered"
+centered = false
+
+[node name="Name" type="Label" parent="Screen/delivered_row" unique_id=1218749360]
+layout_mode = 0
+offset_left = 164.0
+offset_top = -2.0
+offset_right = 232.0
+offset_bottom = 8.0
+text = "DELIVERED"
+
+[node name="Dots" type="TextureRect" parent="Screen/delivered_row" unique_id=1473640512]
+layout_mode = 0
+offset_top = 6.0
+offset_bottom = 7.0
+texture = ExtResource("7_dots")
+stretch_mode = 1
+
+[node name="Value" type="Label" parent="Screen/delivered_row" unique_id=1092376154]
+layout_mode = 0
+offset_left = 252.0
+offset_top = -2.0
+offset_right = 332.0
+offset_bottom = 8.0
+text = "0/0"
+horizontal_alignment = 2
+
+[node name="destroyed_row" type="Control" parent="Screen" unique_id=1964019382]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 155.0
+offset_right = 480.0
+offset_bottom = 165.0
+mouse_filter = 2
+
+[node name="Icon" type="AnimatedSprite2D" parent="Screen/destroyed_row" unique_id=1781249066]
+position = Vector2(148, -3)
+sprite_frames = ExtResource("10_icons")
+animation = &"destroyed"
+centered = false
+
+[node name="Name" type="Label" parent="Screen/destroyed_row" unique_id=1349817205]
+layout_mode = 0
+offset_left = 164.0
+offset_top = -2.0
+offset_right = 252.0
+offset_bottom = 8.0
+text = "DESTROYED / LOST"
+
+[node name="Dots" type="TextureRect" parent="Screen/destroyed_row" unique_id=1170283946]
+layout_mode = 0
+offset_top = 6.0
+offset_bottom = 7.0
+texture = ExtResource("7_dots")
+stretch_mode = 1
+
+[node name="Value" type="Label" parent="Screen/destroyed_row" unique_id=1592837104]
+layout_mode = 0
+offset_left = 252.0
+offset_top = -2.0
+offset_right = 332.0
+offset_bottom = 8.0
+text = "0"
+horizontal_alignment = 2
+
+[node name="kicks_row" type="Control" parent="Screen" unique_id=1283746501]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 169.0
+offset_right = 480.0
+offset_bottom = 179.0
+mouse_filter = 2
+
+[node name="Icon" type="AnimatedSprite2D" parent="Screen/kicks_row" unique_id=1504938271]
+position = Vector2(148, -3)
+sprite_frames = ExtResource("10_icons")
+animation = &"kicks"
+centered = false
+
+[node name="Name" type="Label" parent="Screen/kicks_row" unique_id=1938475620]
+layout_mode = 0
+offset_left = 164.0
+offset_top = -2.0
+offset_right = 200.0
+offset_bottom = 8.0
+text = "KICKS"
+
+[node name="Dots" type="TextureRect" parent="Screen/kicks_row" unique_id=1647382910]
+layout_mode = 0
+offset_top = 6.0
+offset_bottom = 7.0
+texture = ExtResource("7_dots")
+stretch_mode = 1
+
+[node name="Value" type="Label" parent="Screen/kicks_row" unique_id=1102938475]
+layout_mode = 0
+offset_left = 252.0
+offset_top = -2.0
+offset_right = 332.0
+offset_bottom = 8.0
+text = "0"
+horizontal_alignment = 2
+
+[node name="time_row" type="Control" parent="Screen" unique_id=1376482910]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 183.0
+offset_right = 480.0
+offset_bottom = 193.0
+mouse_filter = 2
+
+[node name="Icon" type="AnimatedSprite2D" parent="Screen/time_row" unique_id=1829304756]
+position = Vector2(148, -3)
+sprite_frames = ExtResource("10_icons")
+animation = &"time"
+centered = false
+
+[node name="Name" type="Label" parent="Screen/time_row" unique_id=1456273819]
+layout_mode = 0
+offset_left = 164.0
+offset_top = -2.0
+offset_right = 200.0
+offset_bottom = 8.0
+text = "TIME"
+
+[node name="Dots" type="TextureRect" parent="Screen/time_row" unique_id=1203948576]
+layout_mode = 0
+offset_top = 6.0
+offset_bottom = 7.0
+texture = ExtResource("7_dots")
+stretch_mode = 1
+
+[node name="Value" type="Label" parent="Screen/time_row" unique_id=1938274651]
+layout_mode = 0
+offset_left = 252.0
+offset_top = -2.0
+offset_right = 332.0
+offset_bottom = 8.0
+text = "0:00"
+horizontal_alignment = 2
+
+[node name="back_button" type="Button" parent="Screen" unique_id=63258474]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 192.0
+offset_top = 202.0
+offset_right = 288.0
+offset_bottom = 222.0
+theme_override_styles/normal = SubResource("StyleBox_button_normal")
+theme_override_styles/hover = SubResource("StyleBox_button_hover")
+theme_override_styles/pressed = SubResource("StyleBox_button_pressed")
+theme_override_styles/focus = SubResource("StyleBox_button_hover")
+text = "BACK"
+
+[connection signal="pressed" from="Screen/back_button" to="." method="_on_back_button_pressed"]

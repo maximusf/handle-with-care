@@ -342,8 +342,12 @@ size = Vector2(32, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feet"]
+size = Vector2(28, 8)
+
 [node name="Player" type="CharacterBody2D" unique_id=106568176]
 z_index = 1
+collision_layer = 2
 script = ExtResource("1_qhqgy")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1658725949]
@@ -371,32 +375,41 @@ scale = Vector2(0.09, 0.073)
 sprite_frames = SubResource("SpriteFrames_1gbwc")
 animation = &"20"
 autoplay = "20"
+offset = Vector2(256, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359937352]
 position = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Kickrange" type="Area2D" parent="." unique_id=1841115984]
-position = Vector2(5, -1)
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 4
 
 [node name="KickCollider" type="CollisionShape2D" parent="Kickrange" unique_id=1440492440]
-position = Vector2(19, 26)
+position = Vector2(24, 26)
 shape = SubResource("CircleShape2D_tuyoq")
+
+[node name="FeetKickCollider" type="CollisionShape2D" parent="Kickrange" unique_id=1874512093]
+position = Vector2(0, 37)
+shape = SubResource("RectangleShape2D_feet")
 
 [node name="SFX" type="Node2D" parent="." unique_id=2030220188]
 
 [node name="WalkingSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=949605887]
+bus = &"SFX"
 stream = ExtResource("5_smehm")
 volume_db = 2.916
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1331507237]
+bus = &"SFX"
 stream = ExtResource("6_ur7pv")
 
 [node name="KickSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=937269465]
+bus = &"SFX"
 stream = ExtResource("7_y4r1p")
 
 [node name="ArrowSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1333498656]
+bus = &"SFX"
 stream = ExtResource("8_d2wvv")
 
-[connection signal="body_entered" from="Kickrange" to="." method="_on_kickrange_body_entered"]
-[connection signal="body_exited" from="Kickrange" to="." method="_on_kickrange_body_exited"]

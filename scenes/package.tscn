@@ -10,6 +10,8 @@
 size = Vector2(27, 27)
 
 [node name="Package" type="RigidBody2D" unique_id=1601116120 groups=["packages"]]
+collision_layer = 4
+collision_mask = 5
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_bfkic")
@@ -23,12 +25,15 @@ position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_e1os3")
 
 [node name="WhooshSFX" type="AudioStreamPlayer2D" parent="." unique_id=853506024]
+bus = &"SFX"
 stream = ExtResource("3_pdb4y")
 
 [node name="PlopSolidSFX" type="AudioStreamPlayer2D" parent="." unique_id=1842303857]
+bus = &"SFX"
 stream = ExtResource("4_pdb4y")
 
 [node name="PackageDestroyedSFX" type="AudioStreamPlayer2D" parent="." unique_id=908485412]
+bus = &"SFX"
 stream = ExtResource("5_ayykv")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
