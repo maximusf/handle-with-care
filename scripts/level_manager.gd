@@ -14,8 +14,7 @@ func _ready() -> void:
 	
 func _on_start_game_requested() -> void:
 	load_level(first_level)
-	user_interface.hud.show()
-	user_interface.main_menu.hide()
+	user_interface.show_hud()
 	get_tree().paused = false
 	
 func _quit_to_menu_requested() -> void:
@@ -23,10 +22,6 @@ func _quit_to_menu_requested() -> void:
 	user_interface.show_main_menu()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("main_menu") and current_level_scene != null:
-		user_interface.show_main_menu()
-		get_tree().paused = true
-	
 	if event.is_action_pressed("restart") and current_level_scene != null:
 		reload_level()
 

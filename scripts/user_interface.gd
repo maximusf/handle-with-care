@@ -13,6 +13,7 @@ func _ready() -> void:
 	settings_menu.back_pressed.connect(close_settings)
 	
 	main_menu.start_pressed.connect(start_game_requested.emit)
+	main_menu.resume_pressed.connect(resume_game)
 	result_menu.back_pressed.connect(quit_to_menu_requested.emit)
 	result_menu.hud = hud
 	hud.level_finished.connect(show_result)
@@ -24,9 +25,35 @@ func _hide_all() -> void:
 	result_menu.hide()
 	hud.hide()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("main_menu"):
+		return
+
+	if settings_menu.visible:
+		close_settings()
+	elif hud.visible:
+		# The HUD is only visible while playing a level.
+		show_pause_menu()
+	elif main_menu.visible and main_menu.can_resume:
+		resume_game()
+	else:
+		return
+	get_viewport().set_input_as_handled()
+
 func show_main_menu() -> void:
 	_hide_all()
+	main_menu.set_can_resume(false)
 	main_menu.show()
+
+func show_pause_menu() -> void:
+	get_tree().paused = true
+	_hide_all()
+	main_menu.set_can_resume(true)
+	main_menu.show()
+
+func resume_game() -> void:
+	show_hud()
+	get_tree().paused = false
 
 func show_settings() -> void: 
 	settings_menu.show()
