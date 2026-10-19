@@ -158,6 +158,7 @@ animation = &"Completion"
 autoplay = "Empty"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=212767333]
+bus = &"SFX"
 scale = Vector2(2, 2)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1965016770]

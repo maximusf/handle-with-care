@@ -2,6 +2,10 @@ extends Control
 
 @onready var music_slider = $VBoxContainer/split_container/vbox_left/hbox_music/music_slider
 @onready var sfx_slider = $VBoxContainer/split_container/vbox_left/hbox_sfx/sfx_slider
+@onready var zoom_slider = $VBoxContainer/split_container/vbox_left/hbox_zoom/zoom_slider
+@onready var music_value_label = $VBoxContainer/split_container/vbox_left/hbox_music/music_value_label
+@onready var sfx_value_label = $VBoxContainer/split_container/vbox_left/hbox_sfx/sfx_value_label
+@onready var zoom_value_label = $VBoxContainer/split_container/vbox_left/hbox_zoom/zoom_value_label
 @onready var back_button = $VBoxContainer/back_button
 
 signal back_pressed
@@ -9,6 +13,10 @@ signal zoom_changed(zoom_level: float) # Higher zoom_level means the camera is c
 
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
+	# Fill in the value labels with the sliders' starting values.
+	_on_music_slider_value_changed(music_slider.value)
+	_on_sfx_slider_value_changed(sfx_slider.value)
+	zoom_value_label.text = "%.1fx" % zoom_slider.value
 
 func _on_visibility_changed() -> void:
 	if visible:
@@ -22,11 +30,20 @@ func _on_back_button_pressed() -> void:
 	print("back button pressed")
 	back_pressed.emit()
 
-func _on_music_slider_drag_ended(value_changed: bool) -> void:
-	print(music_slider.value)
+func _on_music_slider_value_changed(value: float) -> void:
+	set_bus_volume("Music", value)
+	music_value_label.text = "%d%%" % value
 
-func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
-	print(sfx_slider.value)
+func _on_sfx_slider_value_changed(value: float) -> void:
+	set_bus_volume("SFX", value)
+	sfx_value_label.text = "%d%%" % value
 
 func _on_zoom_slider_value_changed(value: float) -> void:
+	zoom_value_label.text = "%.1fx" % value
 	zoom_changed.emit(value)
+
+# percent goes from 0 (silent) to 100 (full volume).
+func set_bus_volume(bus_name: String, percent: float) -> void:
+	var bus_index := AudioServer.get_bus_index(bus_name)
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(percent / 100.0))
+	AudioServer.set_bus_mute(bus_index, percent == 0)

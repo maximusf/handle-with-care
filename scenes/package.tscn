@@ -23,12 +23,15 @@ position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_e1os3")
 
 [node name="WhooshSFX" type="AudioStreamPlayer2D" parent="." unique_id=853506024]
+bus = &"SFX"
 stream = ExtResource("3_pdb4y")
 
 [node name="PlopSolidSFX" type="AudioStreamPlayer2D" parent="." unique_id=1842303857]
+bus = &"SFX"
 stream = ExtResource("4_pdb4y")
 
 [node name="PackageDestroyedSFX" type="AudioStreamPlayer2D" parent="." unique_id=908485412]
+bus = &"SFX"
 stream = ExtResource("5_ayykv")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
