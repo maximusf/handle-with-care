@@ -15,7 +15,7 @@ func _ready() -> void:
 	main_menu.start_pressed.connect(start_game_requested.emit)
 	result_menu.back_pressed.connect(quit_to_menu_requested.emit)
 	result_menu.hud = hud
-	hud.level_finished.connect(result_menu.show_result)
+	hud.level_finished.connect(show_result)
 	close_settings()
 
 func _hide_all() -> void:
@@ -37,3 +37,10 @@ func close_settings() -> void:
 func show_hud() -> void:
 	_hide_all()
 	hud.show()
+
+func show_result(won: bool) -> void:
+	# Pause the level so the player can't keep moving or kicking behind the result screen.
+	get_tree().paused = true
+	result_menu.show_result(won)
+	# The HUD is drawn above the result screen, so hide it.
+	hud.hide()
