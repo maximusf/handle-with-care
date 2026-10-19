@@ -10,6 +10,8 @@ signal back_pressed
 @onready var destroyed_label = $CenterContainer/PanelContainer/VBoxContainer/destroyed_label
 @onready var kicks_label = $CenterContainer/PanelContainer/VBoxContainer/kicks_label
 @onready var time_label = $CenterContainer/PanelContainer/VBoxContainer/time_label
+@onready var time_goal_label = $CenterContainer/PanelContainer/VBoxContainer/time_goal_label
+@onready var clean_goal_label = $CenterContainer/PanelContainer/VBoxContainer/clean_goal_label
 @onready var back_button = $CenterContainer/PanelContainer/VBoxContainer/back_button
 
 # User_Interface gets HUD for us
@@ -31,6 +33,15 @@ func show_result(success: bool) -> void:
 	
 	var seconds := ceili(stats.get("time_left", 0.0))
 	time_label.text = "Time left: %d:%02d" % [floori(seconds / 60.0), seconds % 60]
+
+	var minutes : int = stats.get("time_limit_minutes", 0)
+	time_goal_label.text = "Under %d minutes: %s" % [minutes, _goal_text(stats.get("under_time_limit", false))]
+	clean_goal_label.text = "No package destroyed: %s" % _goal_text(stats.get("no_package_destroyed", false))
 	
 	show()
 	back_button.grab_focus()
+
+func _goal_text(goal_done: bool) -> String:
+	if goal_done:
+		return "Done"
+	return "Failed"

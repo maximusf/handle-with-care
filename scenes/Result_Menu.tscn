@@ -80,6 +80,18 @@ theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
 theme_override_fonts/font = ExtResource("5_6p8sr")
 text = "Time"
 
+[node name="time_goal_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1212717026]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
+theme_override_fonts/font = ExtResource("5_6p8sr")
+text = "Time goal"
+
+[node name="clean_goal_label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1690178253]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2966023, 0.2966023, 0.2966023, 1)
+theme_override_fonts/font = ExtResource("5_6p8sr")
+text = "Clean goal"
+
 [node name="back_button" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=63258474]
 layout_mode = 2
 text = "Back"
