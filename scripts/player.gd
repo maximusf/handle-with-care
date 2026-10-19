@@ -34,6 +34,15 @@ const AIM_IN_RANGE_ALPHA = 0.35
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+# Tallest step the player walks up on their own. Lower than a package (27px) so they can't walk onto one.
+const STEP_HEIGHT = 17.0
+# Only show the jump animation when clearly moving up or down, so small drops (like settling onto a step) don't flash it.
+const AIR_ANIMATION_MIN_SPEED = 50.0
+
+
+func _ready() -> void:
+	# Stick to the ground when walking down steps, instead of falling off each one.
+	floor_snap_length = STEP_HEIGHT
 
 
 func _physics_process(delta: float) -> void:
@@ -57,6 +66,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	step_up_if_blocked(delta)
 	move_and_slide()
 	
 	# Handle Kicking ------------------------------------------------------
@@ -94,7 +104,7 @@ func _physics_process(delta: float) -> void:
 	# "animation_finished" would never fire and the kick would get stuck.
 	if kick_animation_playing:
 		return
-	elif not is_on_floor():
+	elif not is_on_floor() and absf(velocity.y) > AIR_ANIMATION_MIN_SPEED:
 		set_animation_state(animation_states.JUMP)
 	elif velocity.x != 0:
 		set_animation_state(animation_states.MOVE)
@@ -167,6 +177,22 @@ func set_animation_state(new_state: animation_states) -> void:
 			kick_sfx.play()
 			head.play("Head_Idle")
 
+
+# Walking into a step: if the way is clear one step higher, lift the player onto it.
+func step_up_if_blocked(delta: float) -> void:
+	if not is_on_floor() or velocity.x == 0:
+		return
+
+	var move_forward := Vector2(velocity.x * delta, 0)
+	var move_up := Vector2(0, -STEP_HEIGHT)
+	var raised_transform := global_transform.translated(move_up)
+
+	var blocked_ahead := test_move(global_transform, move_forward)
+	var room_above := not test_move(global_transform, move_up)
+	var clear_when_raised := not test_move(raised_transform, move_forward)
+
+	if blocked_ahead and room_above and clear_when_raised:
+		global_position += move_up
 
 # Solid arrow while charging a kick, see-through arrow while just aiming, hidden during the kick itself.
 func update_power_arrow_visibility() -> void:
