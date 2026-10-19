@@ -63,11 +63,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# This node keeps processing while the tree is paused, so check for that here.
-	if not _running or _time_failed or get_tree().paused or not is_visible_in_tree():
+	if not _running or get_tree().paused or not is_visible_in_tree():
 		return
+	# Keep counting after the time limit, the result screen shows the real time taken.
 	_elapsed += delta
-	if _elapsed >= time_limit:
-		_elapsed = time_limit
+	if _elapsed >= time_limit and not _time_failed:
 		_time_failed = true
 		_refresh_goals()
 	_refresh_time()
@@ -249,7 +249,7 @@ func _packages_still_needed() -> int:
 
 
 func _refresh_time() -> void:
-	var seconds := ceili(time_limit - _elapsed)
+	var seconds := ceili(maxf(time_limit - _elapsed, 0.0)) # Stays at 0:00 once time is up
 	if seconds == _shown_seconds:
 		return
 	_shown_seconds = seconds
