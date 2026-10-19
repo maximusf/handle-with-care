@@ -267,8 +267,8 @@ func get_stats() -> Dictionary:
 		"delivered" : _slot_states.count(Slot.DELIVERED),
 		"destroyed" : _slot_states.count(Slot.LOST),
 		"kicks" : _kicks,
-		"time_left" : maxf( time_limit - _elapsed, 0.0),
-		"time_limit_minutes" : roundi(time_limit / 60.0),
+		"required" : _required,
+		"time_taken" : _elapsed,
 		# Optional objectives only count as done when the level was won.
 		"under_time_limit" : _won and not _time_failed,
 		"no_package_destroyed" : _won and not _package_destroyed,
