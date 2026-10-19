@@ -3,6 +3,7 @@ extends Node
 @export var first_level: PackedScene
 @onready var current_level_holder: Node2D = $CurrentLevel
 @onready var user_interface: CanvasLayer = $User_Interface
+@onready var camera: Camera2D = $Camera2D
 var current_level_scene: PackedScene
 
 signal level_loaded(level: Node2D)
@@ -11,6 +12,7 @@ func _ready() -> void:
 	user_interface.start_game_requested.connect(_on_start_game_requested)
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
 	level_loaded.connect(user_interface.hud.bind_level)
+	user_interface.settings_menu.zoom_changed.connect(camera.set_regular_zoom)
 	
 func _on_start_game_requested() -> void:
 	load_level(first_level)

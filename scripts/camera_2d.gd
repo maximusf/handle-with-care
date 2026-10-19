@@ -14,7 +14,7 @@ var camera_target: Node2D = null
 const ZOOM_STEP := 0.1
 const MIN_ZOOM := 1.5
 const MAX_ZOOM := 4.0
-const REGULAR_ZOOM: Vector2 = Vector2(2.5, 2.5)
+var regular_zoom := Vector2(2.5, 2.5) # Zoom while following the player, set from the settings menu
 
 var is_free_cam := false
 var target: Node2D
@@ -27,7 +27,7 @@ func _ready() -> void:
 func _on_level_loaded(level: Node2D) -> void:
 	# Every level starts on the regular camera, even if free cam was on before.
 	is_free_cam = false
-	zoom = REGULAR_ZOOM
+	zoom = regular_zoom
 	offset = Vector2.ZERO
 	player = level.get_node_or_null("Player")
 	
@@ -67,9 +67,11 @@ func get_cursor_lean() -> Vector2:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toogle_free_cam"):
 		is_free_cam = not is_free_cam
+		# Leaving free cam goes back to the player's zoom.
+		if not is_free_cam:
+			zoom = regular_zoom
 	
 	if not is_free_cam:
-		zoom = REGULAR_ZOOM
 		return
 	
 	if event.is_action_pressed("zoom_in"):
@@ -112,6 +114,12 @@ func set_limits_from_tilemap(tilemap: TileMapLayer) -> void:
 	limit_right = ceili(bottom_right.x)
 	limit_bottom = ceili(bottom_right.y)
 		
+func set_regular_zoom(zoom_level: float) -> void:
+	regular_zoom = Vector2(zoom_level, zoom_level)
+	# Free cam keeps its own zoom until the player leaves it.
+	if not is_free_cam:
+		zoom = regular_zoom
+
 func set_camera_target(new_target: Node2D) -> void:
 	camera_target = new_target
 	

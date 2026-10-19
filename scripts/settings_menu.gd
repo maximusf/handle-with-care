@@ -5,6 +5,7 @@ extends Control
 @onready var back_button = $VBoxContainer/back_button
 
 signal back_pressed
+signal zoom_changed(zoom_level: float) # Higher zoom_level means the camera is closer
 
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
@@ -26,3 +27,6 @@ func _on_music_slider_drag_ended(value_changed: bool) -> void:
 
 func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
 	print(sfx_slider.value)
+
+func _on_zoom_slider_value_changed(value: float) -> void:
+	zoom_changed.emit(value)

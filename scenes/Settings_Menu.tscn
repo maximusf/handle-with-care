@@ -92,6 +92,22 @@ text = "Audio"
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
+[node name="hbox_zoom" type="HBoxContainer" parent="VBoxContainer/split_container/vbox_left" unique_id=459268514]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="zoom_label" type="Label" parent="VBoxContainer/split_container/vbox_left/hbox_zoom" unique_id=565809604]
+layout_mode = 2
+text = "Zoom"
+
+[node name="zoom_slider" type="HSlider" parent="VBoxContainer/split_container/vbox_left/hbox_zoom" unique_id=1183134794]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+min_value = 1.5
+max_value = 3.5
+step = 0.1
+value = 2.5
+
 [node name="credits_label" type="Label" parent="VBoxContainer/split_container/vbox_left" unique_id=1678672603]
 layout_mode = 2
 text = "Credits:
@@ -137,4 +153,5 @@ text = "Back"
 
 [connection signal="drag_ended" from="VBoxContainer/split_container/vbox_left/hbox_music/music_slider" to="." method="_on_music_slider_drag_ended"]
 [connection signal="drag_ended" from="VBoxContainer/split_container/vbox_left/hbox_sfx/sfx_slider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/split_container/vbox_left/hbox_zoom/zoom_slider" to="." method="_on_zoom_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/back_button" to="." method="_on_back_button_pressed"]
