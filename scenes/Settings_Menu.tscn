@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b0tgnt7k41wqa" path="res://scripts/settings_menu.gd" id="1_o44fh"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.26666668, 0.26666668, 0.5176471, 1)
+content_margin_left = 32.0
+content_margin_top = 24.0
+content_margin_right = 32.0
+content_margin_bottom = 24.0
+
 [node name="Settings_Menu" type="Control" unique_id=1741268751]
 layout_mode = 3
 anchors_preset = 15
@@ -11,19 +18,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o44fh")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1119852849]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 153.0
-offset_top = 99.0
-offset_right = -173.0
-offset_bottom = -97.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.26666668, 0.26666668, 0.5176471, 1)
-
 [node name="Dim" type="ColorRect" parent="." unique_id=967773106]
 layout_mode = 1
 anchors_preset = 15
@@ -31,145 +25,181 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.34901962)
+color = Color(0, 0, 0, 0.6)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1243171636]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1119852849]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -393.0
-offset_top = -217.0
-offset_right = 393.0
-offset_bottom = 217.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=566977835]
+[node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=1243171636]
 layout_mode = 2
-text = "Settings
-"
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel" unique_id=1406671930]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="title_label" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=566977835]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Settings"
 horizontal_alignment = 1
 
-[node name="split_container" type="HSplitContainer" parent="VBoxContainer" unique_id=447159666]
+[node name="columns" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer" unique_id=447159666]
 layout_mode = 2
-theme_override_constants/separation = 20
-split_offsets = PackedInt32Array(8)
-split_offset = 8
+theme_override_constants/separation = 64
 
-[node name="vbox_left" type="VBoxContainer" parent="VBoxContainer/split_container" unique_id=264771678]
-custom_minimum_size = Vector2(300, 0)
+[node name="vbox_left" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns" unique_id=264771678]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="VBoxContainer/split_container/vbox_left" unique_id=1903276063]
+[node name="audio_section" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left" unique_id=1530286447]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="audio_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section" unique_id=1903276063]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Audio"
 
-[node name="hbox_music" type="HBoxContainer" parent="VBoxContainer/split_container/vbox_left" unique_id=209788082]
+[node name="hbox_music" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section" unique_id=209788082]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
-[node name="music_label" type="Label" parent="VBoxContainer/split_container/vbox_left/hbox_music" unique_id=241120884]
+[node name="music_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_music" unique_id=241120884]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Music"
 
-[node name="music_slider" type="HSlider" parent="VBoxContainer/split_container/vbox_left/hbox_music" unique_id=791524284]
-custom_minimum_size = Vector2(300, 0)
+[node name="music_slider" type="HSlider" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_music" unique_id=791524284]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
+size_flags_vertical = 4
 value = 100.0
 
-[node name="music_value_label" type="Label" parent="VBoxContainer/split_container/vbox_left/hbox_music" unique_id=377221467]
-custom_minimum_size = Vector2(60, 0)
+[node name="music_value_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_music" unique_id=1192837465]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
+horizontal_alignment = 2
 
-[node name="hbox_sfx" type="HBoxContainer" parent="VBoxContainer/split_container/vbox_left" unique_id=963669065]
+[node name="hbox_sfx" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section" unique_id=963669065]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
-[node name="sfx_label" type="Label" parent="VBoxContainer/split_container/vbox_left/hbox_sfx" unique_id=2036515650]
+[node name="sfx_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_sfx" unique_id=2036515650]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Sound effects"
 
-[node name="sfx_slider" type="HSlider" parent="VBoxContainer/split_container/vbox_left/hbox_sfx" unique_id=1960438278]
-custom_minimum_size = Vector2(300, 0)
+[node name="sfx_slider" type="HSlider" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_sfx" unique_id=1960438278]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
+size_flags_vertical = 4
 value = 100.0
 
-[node name="sfx_value_label" type="Label" parent="VBoxContainer/split_container/vbox_left/hbox_sfx" unique_id=870247111]
-custom_minimum_size = Vector2(60, 0)
+[node name="sfx_value_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_sfx" unique_id=1739204816]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
+horizontal_alignment = 2
 
-[node name="camera_label" type="Label" parent="VBoxContainer/split_container/vbox_left" unique_id=398894036]
+[node name="camera_section" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left" unique_id=1288476301]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="camera_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/camera_section" unique_id=1657204983]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Camera"
 
-[node name="hbox_zoom" type="HBoxContainer" parent="VBoxContainer/split_container/vbox_left" unique_id=459268514]
+[node name="hbox_zoom" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/camera_section" unique_id=459268514]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
-[node name="zoom_label" type="Label" parent="VBoxContainer/split_container/vbox_left/hbox_zoom" unique_id=565809604]
+[node name="zoom_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/camera_section/hbox_zoom" unique_id=565809604]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Zoom"
 
-[node name="zoom_slider" type="HSlider" parent="VBoxContainer/split_container/vbox_left/hbox_zoom" unique_id=1183134794]
-custom_minimum_size = Vector2(300, 0)
+[node name="zoom_slider" type="HSlider" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/camera_section/hbox_zoom" unique_id=1460187232]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
+size_flags_vertical = 4
 min_value = 1.5
 max_value = 3.5
 step = 0.1
 value = 2.5
 
-[node name="zoom_value_label" type="Label" parent="VBoxContainer/split_container/vbox_left/hbox_zoom" unique_id=130381011]
-custom_minimum_size = Vector2(60, 0)
+[node name="zoom_value_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/camera_section/hbox_zoom" unique_id=1820365107]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
+horizontal_alignment = 2
 
-[node name="credits_label" type="Label" parent="VBoxContainer/split_container/vbox_left" unique_id=1678672603]
+[node name="credits_section" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left" unique_id=1394820571]
 layout_mode = 2
-text = "Credits:
-The Muckslinger gang
+theme_override_constants/separation = 8
+
+[node name="credits_title_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/credits_section" unique_id=1078245519]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Credits"
+
+[node name="credits_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_left/credits_section" unique_id=1678672603]
+layout_mode = 2
+text = "The Muckslinger gang
 Raven Jaime
 Carlos Mendoza
 Maximus Fernandez"
 
-[node name="vbox_right" type="VBoxContainer" parent="VBoxContainer/split_container" unique_id=408865897]
-custom_minimum_size = Vector2(300, 0)
+[node name="vbox_right" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns" unique_id=408865897]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 8
 
-[node name="controls_label" type="Label" parent="VBoxContainer/split_container/vbox_right" unique_id=1195627104]
+[node name="controls_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_right" unique_id=1195627104]
 layout_mode = 2
-text = "Controls:"
+theme_override_font_sizes/font_size = 20
+text = "Controls"
 
-[node name="hbox_controls" type="HBoxContainer" parent="VBoxContainer/split_container/vbox_right" unique_id=1705378537]
+[node name="hbox_controls" type="HBoxContainer" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_right" unique_id=1705378537]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 24
 
-[node name="buttons_label" type="Label" parent="VBoxContainer/split_container/vbox_right/hbox_controls" unique_id=350721338]
+[node name="buttons_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_right/hbox_controls" unique_id=350721338]
 layout_mode = 2
 text = "A / D
 SPACE
 HOLD LMB
 RELEASE LMB
 RMB
-R"
+R
+ESC"
 
-[node name="actions_label" type="Label" parent="VBoxContainer/split_container/vbox_right/hbox_controls" unique_id=860969221]
+[node name="actions_label" type="Label" parent="CenterContainer/Panel/VBoxContainer/columns/vbox_right/hbox_controls" unique_id=860969221]
 layout_mode = 2
 text = "Move
 Jump
 Aim + Charge
 Kick
 Cancel Kick
-Restart"
+Restart
+Pause"
 
-[node name="back_button" type="Button" parent="VBoxContainer" unique_id=920015444]
+[node name="back_button" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=920015444]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Back"
 
-[connection signal="value_changed" from="VBoxContainer/split_container/vbox_left/hbox_music/music_slider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/split_container/vbox_left/hbox_sfx/sfx_slider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/split_container/vbox_left/hbox_zoom/zoom_slider" to="." method="_on_zoom_slider_value_changed"]
-[connection signal="pressed" from="VBoxContainer/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_music/music_slider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/Panel/VBoxContainer/columns/vbox_left/audio_section/hbox_sfx/sfx_slider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/Panel/VBoxContainer/columns/vbox_left/camera_section/hbox_zoom/zoom_slider" to="." method="_on_zoom_slider_value_changed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/back_button" to="." method="_on_back_button_pressed"]

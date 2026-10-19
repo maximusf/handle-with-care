@@ -1,12 +1,13 @@
 extends Control
 
-@onready var music_slider = $VBoxContainer/split_container/vbox_left/hbox_music/music_slider
-@onready var sfx_slider = $VBoxContainer/split_container/vbox_left/hbox_sfx/sfx_slider
-@onready var zoom_slider = $VBoxContainer/split_container/vbox_left/hbox_zoom/zoom_slider
-@onready var music_value_label = $VBoxContainer/split_container/vbox_left/hbox_music/music_value_label
-@onready var sfx_value_label = $VBoxContainer/split_container/vbox_left/hbox_sfx/sfx_value_label
-@onready var zoom_value_label = $VBoxContainer/split_container/vbox_left/hbox_zoom/zoom_value_label
-@onready var back_button = $VBoxContainer/back_button
+# These use % (unique names) so moving them around in the layout doesn't break the script.
+@onready var music_slider = %music_slider
+@onready var sfx_slider = %sfx_slider
+@onready var zoom_slider = %zoom_slider
+@onready var music_value_label = %music_value_label
+@onready var sfx_value_label = %sfx_value_label
+@onready var zoom_value_label = %zoom_value_label
+@onready var back_button = %back_button
 
 signal back_pressed
 signal zoom_changed(zoom_level: float) # Higher zoom_level means the camera is closer
