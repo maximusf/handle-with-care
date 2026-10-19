@@ -7,6 +7,7 @@ extends Control
 @onready var music_value_label = %music_value_label
 @onready var sfx_value_label = %sfx_value_label
 @onready var zoom_value_label = %zoom_value_label
+@onready var fullscreen_checkbox = %fullscreen_checkbox
 @onready var back_button = %back_button
 
 signal back_pressed
@@ -18,6 +19,7 @@ func _ready() -> void:
 	_on_music_slider_value_changed(music_slider.value)
 	_on_sfx_slider_value_changed(sfx_slider.value)
 	zoom_value_label.text = "%.1fx" % zoom_slider.value
+	fullscreen_checkbox.set_pressed_no_signal(is_fullscreen())
 
 func _on_visibility_changed() -> void:
 	if visible:
@@ -48,3 +50,20 @@ func set_bus_volume(bus_name: String, percent: float) -> void:
 	var bus_index := AudioServer.get_bus_index(bus_name)
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(percent / 100.0))
 	AudioServer.set_bus_mute(bus_index, percent == 0)
+
+func _on_fullscreen_checkbox_toggled(enabled: bool) -> void:
+	set_fullscreen(enabled)
+
+func is_fullscreen() -> bool:
+	return DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+
+func set_fullscreen(enabled: bool) -> void:
+	if enabled:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	# Keep the checkbox right when fullscreen is changed with F11.
+	fullscreen_checkbox.set_pressed_no_signal(enabled)
+
+func toggle_fullscreen() -> void:
+	set_fullscreen(not is_fullscreen())

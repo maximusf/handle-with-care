@@ -26,6 +26,12 @@ func _hide_all() -> void:
 	hud.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
+	# F11 works everywhere: menus, paused, or in a level.
+	if event.is_action_pressed("toggle_fullscreen"):
+		settings_menu.toggle_fullscreen()
+		get_viewport().set_input_as_handled()
+		return
+
 	if not event.is_action_pressed("main_menu"):
 		return
 
