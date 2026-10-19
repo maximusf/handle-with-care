@@ -1125,6 +1125,7 @@ position = Vector2(4185, -308)
 position = Vector2(4040, -308)
 
 [node name="TutorialLabels" type="Node2D" parent="." unique_id=1446549794]
+z_index = -1
 texture_filter = 1
 position = Vector2(-710, 8)
 
