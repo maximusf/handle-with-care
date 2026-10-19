@@ -27,6 +27,7 @@ var kick_animation_playing: bool = false
 var arrow_sfx_counter: int = 0
 const MAX_KICK_POWER: float = 2200.0
 const CHARGE_SPEED = 300.0
+const AIM_PREVIEW_ALPHA = 0.35 # How see-through the arrow is when a package is in range but not being kicked
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -60,18 +61,19 @@ func _physics_process(delta: float) -> void:
 		arrow_sfx_counter = -1
 		power_arrow.play("20")
 		power_arrow.scale = Vector2(0.09, 0.07)
-		power_arrow.visible = true
 		is_kicking = true
 		
 	if is_kicking and Input.is_action_just_pressed("cancel_kick"):
-		power_arrow.visible = false
 		is_kicking = false
 		kick_power = 100
 	elif is_kicking and Input.is_action_pressed("kick"): # Only charge if the kick wasn't cancelled
 		kick_power += CHARGE_SPEED * delta
 		kick_power = min(kick_power, MAX_KICK_POWER)
+	
+	update_power_arrow_visibility()
 		
 	if Input.is_action_just_released("kick") and is_kicking:
+		is_kicking = false
 		kick_animation_playing = true
 		power_arrow.visible = false
 		set_animation_state(animation_states.KICK)
@@ -159,6 +161,19 @@ func set_animation_state(new_state: animation_states) -> void:
 			kick_sfx.play()
 			head.play("Head_Idle")
 
+
+# Solid arrow while charging a kick, faint arrow when a package is in range, hidden otherwise.
+func update_power_arrow_visibility() -> void:
+	if is_kicking:
+		power_arrow.visible = true
+		power_arrow.modulate.a = 1.0
+	elif kick_animation_playing:
+		power_arrow.visible = false
+	elif get_kickable_package() != null:
+		power_arrow.visible = true
+		power_arrow.modulate.a = AIM_PREVIEW_ALPHA
+	else:
+		power_arrow.visible = false
 
 # Returns the closest package in kick range (in front of the player or under their feet), or null.
 func get_kickable_package() -> RigidBody2D:
