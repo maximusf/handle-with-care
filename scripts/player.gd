@@ -58,7 +58,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Handle Kicking ------------------------------------------------------
-	if Input.is_action_just_pressed("kick"):
+	# Ignore new kicks until the current kick animation is done, otherwise both kicks land at once.
+	if Input.is_action_just_pressed("kick") and not kick_animation_playing:
 		arrow_sfx_counter = -1
 		power_arrow.play("20")
 		power_arrow.scale = Vector2(0.09, 0.07)
@@ -188,3 +189,10 @@ func get_kickable_package() -> RigidBody2D:
 			closest_package = body
 			closest_distance = distance
 	return closest_package
+
+func _notification(what: int) -> void:
+	# Drop a half-charged kick when the game pauses, so it doesn't carry over after resuming.
+	if what == NOTIFICATION_PAUSED:
+		is_kicking = false
+		kick_power = 100
+		power_arrow.visible = false
