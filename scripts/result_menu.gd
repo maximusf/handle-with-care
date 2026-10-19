@@ -10,6 +10,7 @@ signal back_pressed
 @onready var destroyed_label = $CenterContainer/PanelContainer/VBoxContainer/destroyed_label
 @onready var kicks_label = $CenterContainer/PanelContainer/VBoxContainer/kicks_label
 @onready var time_label = $CenterContainer/PanelContainer/VBoxContainer/time_label
+@onready var back_button = $CenterContainer/PanelContainer/VBoxContainer/back_button
 
 # User_Interface gets HUD for us
 var hud : Node
@@ -32,3 +33,4 @@ func show_result(success: bool) -> void:
 	time_label.text = "Time left: %d:%02d" % [floori(seconds / 60.0), seconds % 60]
 	
 	show()
+	back_button.grab_focus()

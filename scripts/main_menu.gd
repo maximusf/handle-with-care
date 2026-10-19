@@ -13,6 +13,8 @@ var can_resume := false # True when opened from inside a level (the pause menu)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
+	# The menu is already visible when the game boots, so focus it now as well.
+	_on_visibility_changed()
 
 func _on_start_button_pressed() -> void:
 	print('start pressed')

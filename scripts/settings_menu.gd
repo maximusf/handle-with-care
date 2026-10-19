@@ -2,11 +2,16 @@ extends Control
 
 @onready var music_slider = $VBoxContainer/split_container/vbox_left/hbox_music/music_slider
 @onready var sfx_slider = $VBoxContainer/split_container/vbox_left/hbox_sfx/sfx_slider
+@onready var back_button = $VBoxContainer/back_button
 
 signal back_pressed
 
 func _ready() -> void:
-	pass # Replace with function body.
+	visibility_changed.connect(_on_visibility_changed)
+
+func _on_visibility_changed() -> void:
+	if visible:
+		back_button.grab_focus()
 
 func _process(delta: float) -> void:
 	pass

@@ -60,6 +60,9 @@ func show_settings() -> void:
 
 func close_settings() -> void:
 	settings_menu.hide()
+	# Give keyboard focus back to the menu underneath.
+	if main_menu.visible:
+		main_menu.start_button.grab_focus()
 
 func show_hud() -> void:
 	_hide_all()
