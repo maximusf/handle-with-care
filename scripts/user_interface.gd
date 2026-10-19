@@ -15,6 +15,7 @@ func _ready() -> void:
 	main_menu.start_pressed.connect(start_game_requested.emit)
 	result_menu.back_pressed.connect(quit_to_menu_requested.emit)
 	result_menu.hud = hud
+	hud.level_finished.connect(result_menu.show_result)
 	close_settings()
 
 func _hide_all() -> void:
@@ -36,6 +37,3 @@ func close_settings() -> void:
 func show_hud() -> void:
 	_hide_all()
 	hud.show()
-
-func show_result(won: bool, stats: Dictionary):
-	pass

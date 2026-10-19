@@ -21,10 +21,6 @@ func _on_back_button_pressed() -> void:
 	back_pressed.emit()
 
 func show_result(success: bool) -> void:
-	# a pause so other processes finishes first
-	_present.call_deferred(success)
-
-func _present(success: bool) -> void:
 	ribbon.texture = success_texture if success else fail_texture
 	
 	var stats : Dictionary = hud.get_stats() if hud else {}

@@ -25,6 +25,8 @@ const SLOT_ANIMS: Array[StringName] = [&"waiting", &"active", &"delivered", &"lo
 enum Goal { PENDING, DONE, FAILED }
 const GOAL_ANIMS: Array[StringName] = [&"pending", &"done", &"failed"]
 
+signal level_finished(won: bool) # Emitted once per level, when the main goal is done or can no longer be done
+
 @export var time_limit: float = 300.0 # Seconds for the optional "under N minutes" objective
 
 @onready var objectives: Control = $Objectives
@@ -168,7 +170,7 @@ func _on_package_destroyed(package: Node) -> void:
 
 
 func _on_zone_complete(zone: Node) -> void:
-	for package in zone.packages_inside:
+	for package in zone.delivered_packages:
 		var index := _packages.find(package)
 		if index != -1 and _slot_states[index] == Slot.WAITING:
 			_slot_states[index] = Slot.DELIVERED
@@ -196,13 +198,17 @@ func _refresh_goals() -> void:
 	var waiting := _slot_states.count(Slot.WAITING)
 
 	var main_goal := Goal.PENDING
-	if _required > 0 and delivered >= _required:
+	if _all_zones_complete():
 		main_goal = Goal.DONE
-	elif delivered + waiting < _required:
+	elif waiting < _packages_still_needed():
 		main_goal = Goal.FAILED
 	_won = main_goal == Goal.DONE
-	if main_goal != Goal.PENDING:
+
+	# Stop the clock and report the result only once.
+	var level_just_ended := _running and main_goal != Goal.PENDING
+	if level_just_ended:
 		_running = false
+		level_finished.emit(_won)
 
 	_set_row(main_row, main_goal, COLOR_MAIN)
 	main_row.get_node("Count").text = "%d/%d" % [delivered, _required]
@@ -221,6 +227,23 @@ func _refresh_goals() -> void:
 	elif _won:
 		clean_goal = Goal.DONE
 	_set_row(clean_row, clean_goal, COLOR_OPTIONAL)
+
+
+func _all_zones_complete() -> bool:
+	if _zones.is_empty():
+		return false
+	for zone in _zones:
+		if not zone.is_complete:
+			return false
+	return true
+
+
+func _packages_still_needed() -> int:
+	var needed := 0
+	for zone in _zones:
+		if not zone.is_complete:
+			needed += zone.REQUIRED_PACKAGES
+	return needed
 
 
 func _refresh_time() -> void:

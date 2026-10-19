@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://chxwtj777tqov" path="res://scripts/level_manager.gd" id="1_5eglo"]
 [ext_resource type="PackedScene" uid="uid://3voc4krq6q61" path="res://scenes/level_01_tutorial.tscn" id="2_lbe5n"]
 [ext_resource type="PackedScene" uid="uid://bwttur5fpw6bj" path="res://scenes/User_Interface.tscn" id="3_2yrkd"]
-[ext_resource type="Script" uid="uid://duwyn6ry6ihnr" path="res://scripts/current_level.gd" id="3_kfnik"]
 [ext_resource type="Script" uid="uid://c5526lmqhsl8p" path="res://scripts/camera_2d.gd" id="3_lbe5n"]
 
 [node name="Level_Manager" type="Node" unique_id=1278203149]
@@ -11,14 +10,11 @@ script = ExtResource("1_5eglo")
 first_level = ExtResource("2_lbe5n")
 
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1954569347]
-script = ExtResource("3_kfnik")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1562498216]
 zoom = Vector2(2.5, 2.5)
 script = ExtResource("3_lbe5n")
 
 [node name="User_Interface" parent="." unique_id=1313764124 instance=ExtResource("3_2yrkd")]
-
-[connection signal="level_loaded" from="." to="CurrentLevel" method="_on_level_manager_level_loaded"]
 
 [editable path="User_Interface"]

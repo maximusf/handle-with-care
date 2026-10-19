@@ -11,7 +11,6 @@ func _ready() -> void:
 	user_interface.start_game_requested.connect(_on_start_game_requested)
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
 	level_loaded.connect(user_interface.hud.bind_level)
-	$CurrentLevel.level_completed.connect(user_interface.result_menu.show_result.bind(true))
 	
 func _on_start_game_requested() -> void:
 	load_level(first_level)

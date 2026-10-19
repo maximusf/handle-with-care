@@ -4,8 +4,9 @@ extends Area2D
 @onready var label: Label = $Label
 @onready var countdown_timer: Timer = $CountdownTimer
 
-var num_packages = 0
-var packages_inside: Array[Node2D] = [] # Read by the HUD to know which packages a completed delivery contains
+var packages_inside: Array[Node2D] = []
+var delivered_packages: Array[Node2D] = [] # Read by the HUD to know which packages this zone accepted
+var is_complete = false # Once complete, the zone is locked and ignores packages coming in or out
 const REQUIRED_PACKAGES = 2
 
 signal complete(completed_delivery)
@@ -20,23 +21,32 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("packages"):
-		num_packages += 1
 		packages_inside.append(body)
-		check_delivery_status() 
-		label.text = str(num_packages) + " / " + str(REQUIRED_PACKAGES)
+		check_delivery_status()
 		print("Package Has entered zone")
-	
+
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("packages"):
-		num_packages -= 1
 		packages_inside.erase(body)
-		check_delivery_status() 
-		label.text = str(num_packages)  + " / " + str(REQUIRED_PACKAGES)
+		check_delivery_status()
 		print("Package Has left zone")
-	pass # Replace with function bod
-	
+
+# Destroyed packages and packages already delivered to another zone don't count.
+func get_deliverable_packages() -> Array[Node2D]:
+	var deliverable: Array[Node2D] = []
+	for package in packages_inside:
+		if not package.is_destroyed and not package.is_delivered:
+			deliverable.append(package)
+	return deliverable
+
 func check_delivery_status() -> void:
-	if num_packages >= REQUIRED_PACKAGES:
+	if is_complete:
+		return
+
+	var deliverable_count = get_deliverable_packages().size()
+	label.text = str(deliverable_count) + " / " + str(REQUIRED_PACKAGES)
+
+	if deliverable_count >= REQUIRED_PACKAGES:
 		if countdown_timer.is_stopped():
 			completion.show()
 			completion.play("Timer")
@@ -48,9 +58,14 @@ func check_delivery_status() -> void:
 		completion.hide()
 
 func _on_countdown_timer_timeout() -> void:
-	if num_packages >= REQUIRED_PACKAGES:
+	# Check again, a package may have been destroyed during the countdown.
+	var deliverable = get_deliverable_packages()
+	if deliverable.size() >= REQUIRED_PACKAGES:
+		is_complete = true
+		for package in deliverable:
+			package.is_delivered = true
+			delivered_packages.append(package)
 		completion.play("Completion")
 		complete.emit(self)
 	else:
 		completion.play("Failed")
-	pass # Replace with function body.
