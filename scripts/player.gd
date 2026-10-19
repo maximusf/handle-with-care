@@ -27,6 +27,7 @@ var kick_animation_playing: bool = false
 var arrow_sfx_counter: int = 0
 const MAX_KICK_POWER: float = 2200.0
 const CHARGE_SPEED = 300.0
+const AIM_RADIUS = 40.0 # The arrow's tail sits on a ring this far from the player, pointing at the cursor
 const AIM_PREVIEW_ALPHA = 0.35 # How see-through the arrow is when a package is in range but not being kicked
 
 const SPEED = 300.0
@@ -37,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	var kick_direction = (get_global_mouse_position() - global_position).normalized()
 	var kick_percentage = (kick_power / MAX_KICK_POWER) * 100
 	power_arrow.rotation = kick_direction.angle()
-	power_arrow.position = get_local_mouse_position()
+	power_arrow.position = kick_direction * AIM_RADIUS
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
