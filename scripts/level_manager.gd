@@ -9,6 +9,10 @@ var current_level_scene: PackedScene
 signal level_loaded(level: Node2D)
 
 func _ready() -> void:
+	# Don't let the window shrink below the size the game is designed for, text gets unreadable.
+	var base_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var base_height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
+	get_window().min_size = Vector2i(base_width, base_height)
 	user_interface.start_game_requested.connect(_on_start_game_requested)
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
 	level_loaded.connect(user_interface.hud.bind_level)
