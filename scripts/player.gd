@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		power_arrow.visible = false
 		is_kicking = false
 		kick_power = 100
-	elif Input.is_action_pressed("kick"):
+	elif is_kicking and Input.is_action_pressed("kick"): # Only charge if the kick wasn't cancelled
 		kick_power += CHARGE_SPEED * delta
 		kick_power = min(kick_power, MAX_KICK_POWER)
 		
