@@ -88,12 +88,14 @@ func _physics_process(delta: float) -> void:
 	#-----------------------------------------------------------------------
 	
 	# Player Animations
-	if not is_on_floor():
+	# Let the kick animation finish first. If walking or jumping replaced it,
+	# "animation_finished" would never fire and the kick would get stuck.
+	if kick_animation_playing:
+		return
+	elif not is_on_floor():
 		set_animation_state(animation_states.JUMP)
 	elif velocity.x != 0:
 		set_animation_state(animation_states.MOVE)
-	elif kick_animation_playing:
-		return
 	else:
 		set_animation_state(animation_states.IDLE)
 		
