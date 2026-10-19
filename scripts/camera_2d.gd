@@ -23,6 +23,9 @@ func _ready() -> void:
 	
 
 func _on_level_loaded(level: Node2D) -> void:
+	# Every level starts on the regular camera, even if free cam was on before.
+	is_free_cam = false
+	zoom = REGULAR_ZOOM
 	player = level.get_node_or_null("Player")
 	
 	main_tilemap = level.get_node_or_null("MainTileMap") as TileMapLayer
