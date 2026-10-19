@@ -17,6 +17,8 @@ func _ready() -> void:
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
 	level_loaded.connect(user_interface.hud.bind_level)
 	user_interface.settings_menu.zoom_changed.connect(camera.set_regular_zoom)
+	# The saved zoom was loaded before this connection existed, so apply it once now.
+	camera.set_regular_zoom(user_interface.settings_menu.zoom_slider.value)
 	
 func _on_start_game_requested() -> void:
 	load_level(first_level)

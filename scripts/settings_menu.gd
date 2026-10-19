@@ -13,9 +13,13 @@ extends Control
 signal back_pressed
 signal zoom_changed(zoom_level: float) # Higher zoom_level means the camera is closer
 
+# Saved in the player's user data folder, so settings are remembered between launches.
+const SETTINGS_PATH := "user://settings.cfg"
+
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
-	# Fill in the value labels with the sliders' starting values.
+	load_settings()
+	# Fill in the value labels with the sliders' values.
 	_on_music_slider_value_changed(music_slider.value)
 	_on_sfx_slider_value_changed(sfx_slider.value)
 	zoom_value_label.text = "%.1fx" % zoom_slider.value
@@ -24,6 +28,26 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		back_button.grab_focus()
+	else:
+		# Closing the menu (Back button or Esc) saves whatever was changed.
+		save_settings()
+
+func load_settings() -> void:
+	var config := ConfigFile.new()
+	if config.load(SETTINGS_PATH) != OK:
+		return # First launch, keep the defaults
+	music_slider.value = config.get_value("audio", "music", music_slider.value)
+	sfx_slider.value = config.get_value("audio", "sfx", sfx_slider.value)
+	zoom_slider.value = config.get_value("camera", "zoom", zoom_slider.value)
+	set_fullscreen(config.get_value("display", "fullscreen", false))
+
+func save_settings() -> void:
+	var config := ConfigFile.new()
+	config.set_value("audio", "music", music_slider.value)
+	config.set_value("audio", "sfx", sfx_slider.value)
+	config.set_value("camera", "zoom", zoom_slider.value)
+	config.set_value("display", "fullscreen", is_fullscreen())
+	config.save(SETTINGS_PATH)
 
 func _process(delta: float) -> void:
 	pass
@@ -53,6 +77,7 @@ func set_bus_volume(bus_name: String, percent: float) -> void:
 
 func _on_fullscreen_checkbox_toggled(enabled: bool) -> void:
 	set_fullscreen(enabled)
+	save_settings()
 
 func is_fullscreen() -> bool:
 	return DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
@@ -67,3 +92,4 @@ func set_fullscreen(enabled: bool) -> void:
 
 func toggle_fullscreen() -> void:
 	set_fullscreen(not is_fullscreen())
+	save_settings()
