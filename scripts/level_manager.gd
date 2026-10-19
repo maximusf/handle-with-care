@@ -20,7 +20,8 @@ func _on_start_game_requested() -> void:
 	get_tree().paused = false
 	
 func _quit_to_menu_requested() -> void:
-	print("your mo")
+	unload_level()
+	user_interface.show_main_menu()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("main_menu") and current_level_scene != null:
@@ -31,10 +32,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		reload_level()
 
 func load_level(level_scene: PackedScene) -> void:
+	unload_level()
 	current_level_scene = level_scene
-	# Remove the old level.
-	for child in current_level_holder.get_children():
-		child.queue_free()
 	# Add the new level.
 	var new_level := level_scene.instantiate()
 	current_level_holder.add_child(new_level)
@@ -42,3 +41,9 @@ func load_level(level_scene: PackedScene) -> void:
 
 func reload_level() -> void:
 	load_level(current_level_scene)
+
+# Removes the current level so nothing is left running behind the menus.
+func unload_level() -> void:
+	current_level_scene = null
+	for child in current_level_holder.get_children():
+		child.queue_free()
