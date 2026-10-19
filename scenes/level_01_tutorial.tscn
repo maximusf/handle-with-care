@@ -1136,7 +1136,7 @@ offset_bottom = -112.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9529412)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "Welcome new \"Yeet\" Employee"
 
 [node name="Movement Labels" type="Label" parent="TutorialLabels" unique_id=1238201036]
@@ -1147,7 +1147,7 @@ offset_bottom = -16.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9529412)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "CONTROLS: 
 Hold \"d\" to move right
 
@@ -1164,7 +1164,7 @@ offset_bottom = 17.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9529412)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Hold \"LMB\" to increase kick power
 
 Release \"LMB\" To kick
@@ -1182,7 +1182,7 @@ offset_bottom = 111.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9529412)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Press \"T\" to enter/exit free cam
 
 In free cam you can zoom in and out with mouse scroll wheel
@@ -1203,7 +1203,7 @@ offset_bottom = -17.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9529412)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 8
 text = "your job as our new hire is to deliver
 packages in the most laziest way possible.
 yes, you must kick the packages! 
@@ -1232,7 +1232,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Press \"t\" to enter freecam
 and look for the delivery zone"
 
@@ -1245,7 +1245,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "\"It's another yeet employee...
 hurry up and kick the things\" - Concierge"
 
@@ -1258,7 +1258,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "\"After 5 kicks, a package will break!
 so be careful\" - kind hotel guest"
 
@@ -1270,7 +1270,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "\"PSST... this is the
 delivery zone"
 
@@ -1283,7 +1283,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "if there's a checkmark
 it's a succesful
 delivery!\" - dinosuit guest"
@@ -1297,7 +1297,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "Kick that package up
 the stairs.
 The next delivery zone might
@@ -1313,7 +1313,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "\"Please be gentle, I
 don't want to clean up
 your mess\" - Concierge"
@@ -1327,7 +1327,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "\"don't break
  my package again\" 
 - rich lady w/ dog"
@@ -1341,7 +1341,7 @@ theme_override_colors/font_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("23_vw144")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "\"i hid an extra one in the back
 just in case you break one!\" 
 - extremely nice lady"
