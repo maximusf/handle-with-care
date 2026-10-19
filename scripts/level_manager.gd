@@ -6,13 +6,13 @@ extends Node
 @onready var camera: Camera2D = $Camera2D
 var current_level_scene: PackedScene
 
+# Smallest window allowed. Below this, text gets hard to read. Small enough to fit laptop screens with display scaling.
+const MIN_WINDOW_SIZE := Vector2i(960, 540)
+
 signal level_loaded(level: Node2D)
 
 func _ready() -> void:
-	# Don't let the window shrink below the size the game is designed for, text gets unreadable.
-	var base_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
-	var base_height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
-	get_window().min_size = Vector2i(base_width, base_height)
+	get_window().min_size = MIN_WINDOW_SIZE
 	user_interface.start_game_requested.connect(_on_start_game_requested)
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
 	level_loaded.connect(user_interface.hud.bind_level)
