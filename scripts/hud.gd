@@ -50,6 +50,7 @@ var _package_destroyed := false
 var _won := false
 var _shown_seconds := -1
 var _kicks := 0
+var _destroyed := 0 # Every destroyed package, including ones destroyed after being delivered
 
 
 func _ready() -> void:
@@ -123,6 +124,7 @@ func _reset() -> void:
 	_refresh_goals()
 	_refresh_time()
 	_kicks = 0
+	_destroyed = 0
 
 
 # Layout -------------------------------------------------------------------
@@ -163,8 +165,10 @@ func _on_package_kicked(package: Node) -> void:
 func _on_package_destroyed(package: Node) -> void:
 	# The kick that destroys a package sends "destroy" instead of "kicked", so count it here.
 	_kicks += 1
+	_destroyed += 1
+	# A package that was already delivered stays delivered, it only costs the "no package destroyed" goal.
 	var index := _packages.find(package)
-	if index != -1:
+	if index != -1 and _slot_states[index] != Slot.DELIVERED:
 		_slot_states[index] = Slot.LOST
 	_package_destroyed = true
 	_refresh_slots()
@@ -265,7 +269,7 @@ func _set_row(row: Control, goal: Goal, color: Color) -> void:
 func get_stats() -> Dictionary:
 	return {
 		"delivered" : _slot_states.count(Slot.DELIVERED),
-		"destroyed" : _slot_states.count(Slot.LOST),
+		"destroyed" : _destroyed,
 		"kicks" : _kicks,
 		"required" : _required,
 		"time_taken" : _elapsed,
