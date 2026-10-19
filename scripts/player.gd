@@ -21,7 +21,6 @@ enum animation_states {
 
 var animation_state: animation_states = animation_states.IDLE
 
-var kickable_package: RigidBody2D = null
 var kick_power: float = 100.0
 var is_kicking: bool = false
 var kick_animation_playing: bool = false
@@ -77,6 +76,7 @@ func _physics_process(delta: float) -> void:
 		power_arrow.visible = false
 		set_animation_state(animation_states.KICK)
 		await body.animation_finished
+		var kickable_package := get_kickable_package()
 		if kickable_package != null:
 			kickable_package.get_kicked(kick_direction, kick_power)
 		kick_animation_playing = false
@@ -160,13 +160,15 @@ func set_animation_state(new_state: animation_states) -> void:
 			head.play("Head_Idle")
 
 
-func _on_kickrange_body_entered(body: Node2D) -> void:
-	if body.is_in_group("packages"):
-		kickable_package = body
-		print("Package can be kicked")
-		
-func _on_kickrange_body_exited(body: Node2D) -> void:
-	if body.is_in_group("packages"):
-		kickable_package = null
-		print("Package out of range")
-	pass # Replace with function body.
+# Returns the closest package in kick range (in front of the player or under their feet), or null.
+func get_kickable_package() -> RigidBody2D:
+	var closest_package: RigidBody2D = null
+	var closest_distance := INF
+	for body in kickrange.get_overlapping_bodies():
+		if not body.is_in_group("packages") or body.is_destroyed:
+			continue
+		var distance := global_position.distance_to(body.global_position)
+		if distance < closest_distance:
+			closest_package = body
+			closest_distance = distance
+	return closest_package

@@ -342,6 +342,9 @@ size = Vector2(32, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feet"]
+size = Vector2(28, 8)
+
 [node name="Player" type="CharacterBody2D" unique_id=106568176]
 z_index = 1
 script = ExtResource("1_qhqgy")
@@ -377,11 +380,15 @@ position = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Kickrange" type="Area2D" parent="." unique_id=1841115984]
-position = Vector2(5, -1)
+position = Vector2(0, -1)
 
 [node name="KickCollider" type="CollisionShape2D" parent="Kickrange" unique_id=1440492440]
-position = Vector2(19, 26)
+position = Vector2(24, 26)
 shape = SubResource("CircleShape2D_tuyoq")
+
+[node name="FeetKickCollider" type="CollisionShape2D" parent="Kickrange" unique_id=1874512093]
+position = Vector2(0, 37)
+shape = SubResource("RectangleShape2D_feet")
 
 [node name="SFX" type="Node2D" parent="." unique_id=2030220188]
 
@@ -402,5 +409,3 @@ stream = ExtResource("7_y4r1p")
 bus = &"SFX"
 stream = ExtResource("8_d2wvv")
 
-[connection signal="body_entered" from="Kickrange" to="." method="_on_kickrange_body_entered"]
-[connection signal="body_exited" from="Kickrange" to="." method="_on_kickrange_body_exited"]
