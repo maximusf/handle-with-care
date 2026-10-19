@@ -347,6 +347,7 @@ size = Vector2(28, 8)
 
 [node name="Player" type="CharacterBody2D" unique_id=106568176]
 z_index = 1
+collision_layer = 2
 script = ExtResource("1_qhqgy")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1658725949]
@@ -382,6 +383,8 @@ shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="Kickrange" type="Area2D" parent="." unique_id=1841115984]
 position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 4
 
 [node name="KickCollider" type="CollisionShape2D" parent="Kickrange" unique_id=1440492440]
 position = Vector2(24, 26)
