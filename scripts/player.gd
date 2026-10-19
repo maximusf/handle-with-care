@@ -28,7 +28,9 @@ var arrow_sfx_counter: int = 0
 const MAX_KICK_POWER: float = 2200.0
 const CHARGE_SPEED = 300.0
 const AIM_RADIUS = 40.0 # The arrow's tail sits on a ring this far from the player, pointing at the cursor
-const AIM_PREVIEW_ALPHA = 0.35 # How see-through the arrow is when a package is in range but not being kicked
+# How see-through the aim arrow is when not charging a kick (stronger when a kick would hit a package)
+const AIM_OUT_OF_RANGE_ALPHA = 0.2
+const AIM_IN_RANGE_ALPHA = 0.35
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -166,7 +168,7 @@ func set_animation_state(new_state: animation_states) -> void:
 			head.play("Head_Idle")
 
 
-# Solid arrow while charging a kick, faint arrow when a package is in range, hidden otherwise.
+# Solid arrow while charging a kick, see-through arrow while just aiming, hidden during the kick itself.
 func update_power_arrow_visibility() -> void:
 	if is_kicking:
 		power_arrow.visible = true
@@ -175,9 +177,10 @@ func update_power_arrow_visibility() -> void:
 		power_arrow.visible = false
 	elif get_kickable_package() != null:
 		power_arrow.visible = true
-		power_arrow.modulate.a = AIM_PREVIEW_ALPHA
+		power_arrow.modulate.a = AIM_IN_RANGE_ALPHA
 	else:
-		power_arrow.visible = false
+		power_arrow.visible = true
+		power_arrow.modulate.a = AIM_OUT_OF_RANGE_ALPHA
 
 # Returns the closest package in kick range (in front of the player or under their feet), or null.
 func get_kickable_package() -> RigidBody2D:
