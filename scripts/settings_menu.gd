@@ -1,5 +1,9 @@
 extends Control
+## Settings screen. Designed in a 400x225 logical view and scaled to fit the window, like the HUD.
 
+const BASE_SIZE := Vector2(400, 225)
+
+@onready var screen: Control = $Screen
 # These use % (unique names) so moving them around in the layout doesn't break the script.
 @onready var music_slider = %music_slider
 @onready var sfx_slider = %sfx_slider
@@ -19,12 +23,20 @@ const SETTINGS_PATH := "user://settings.cfg"
 var has_been_opened := false # The menu is hidden once at startup; only save after the player has actually opened it
 
 func _ready() -> void:
+	resized.connect(_layout)
+	_layout()
 	visibility_changed.connect(_on_visibility_changed)
 	load_settings()
 	# Fill in the value labels with the sliders' values.
 	_on_music_slider_value_changed(music_slider.value)
 	_on_sfx_slider_value_changed(sfx_slider.value)
 	zoom_value_label.text = "%.1fx" % zoom_slider.value
+
+# Scales the 400x225 design to fit the window and centres it.
+func _layout() -> void:
+	var fit := minf(size.x / BASE_SIZE.x, size.y / BASE_SIZE.y)
+	screen.scale = Vector2.ONE * fit
+	screen.position = (size - BASE_SIZE * fit) / 2.0
 
 func _on_visibility_changed() -> void:
 	if visible:
