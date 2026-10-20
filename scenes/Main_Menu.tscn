@@ -2,83 +2,89 @@
 
 [ext_resource type="Script" uid="uid://dmmc32j7f68et" path="res://scripts/main_menu.gd" id="1_0bfng"]
 [ext_resource type="Texture2D" uid="uid://dll82vdka6ovt" path="res://assets/ui/title_logo.png" id="2_yb5uv"]
-[ext_resource type="SpriteFrames" uid="uid://sgupshe0e4tq" path="res://assets/ui/button.tres" id="3_h8c6n"]
+[ext_resource type="Theme" path="res://assets/ui/menu_theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" uid="uid://dtwm3a6wcgsm7" path="res://assets/ui/screens/title_background.png" id="4_background"]
 
 [node name="Main_Menu" type="Control" unique_id=1645713669]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_theme")
 script = ExtResource("1_0bfng")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1345702899]
+[node name="Background" type="TextureRect" parent="." unique_id=1345702899]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.20511743, 0.20511743, 0.20511743, 1)
+texture = ExtResource("4_background")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="title" type="TextureRect" parent="." unique_id=1736020671]
-texture_filter = 1
+[node name="Dim" type="ColorRect" parent="." unique_id=1520394876]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -284.0
-offset_top = 26.0
-offset_right = 307.0
-offset_bottom = 277.0
-grow_horizontal = 2
-texture = ExtResource("2_yb5uv")
-stretch_mode = 4
-
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1372734991]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -400.0
-offset_right = 250.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.22745098, 0.15686275, 0.11764706, 0.45)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=313630729]
-custom_minimum_size = Vector2(500, 400)
-layout_mode = 2
-theme_override_constants/separation = 50
-alignment = 1
+[node name="Screen" type="Control" parent="." unique_id=1372734991]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 135.0
+mouse_filter = 2
 
-[node name="start_button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=923882619]
+[node name="title" type="TextureRect" parent="Screen" unique_id=1736020671]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 2.0
+offset_right = 187.0
+offset_bottom = 61.0
+texture = ExtResource("2_yb5uv")
+
+[node name="Buttons" type="VBoxContainer" parent="Screen" unique_id=313630729]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 63.0
+offset_right = 162.0
+offset_bottom = 133.0
+theme_override_constants/separation = 2
+
+[node name="start_button" type="Button" parent="Screen/Buttons" unique_id=923882619]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 text = "START"
-icon_alignment = 1
-expand_icon = true
 
-[node name="start_button_animation" type="AnimatedSprite2D" parent="CenterContainer/VBoxContainer/start_button" unique_id=446585698]
-visible = false
-position = Vector2(37.00003, 10)
-scale = Vector2(2.0833344, 1.75)
-sprite_frames = ExtResource("3_h8c6n")
-animation = &"disabled"
-
-[node name="settings_button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1373508595]
+[node name="settings_button" type="Button" parent="Screen/Buttons" unique_id=1373508595]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 text = "SETTINGS"
 
-[node name="exit_button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1892081902]
+[node name="main_menu_button" type="Button" parent="Screen/Buttons" unique_id=1209384756]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="exit_button" type="Button" parent="Screen/Buttons" unique_id=1892081902]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 text = "EXIT"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=726333987]
-bus = &"Music"
-
-[connection signal="pressed" from="CenterContainer/VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/settings_button" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Screen/Buttons/start_button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Screen/Buttons/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Screen/Buttons/main_menu_button" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Screen/Buttons/exit_button" to="." method="_on_exit_button_pressed"]
