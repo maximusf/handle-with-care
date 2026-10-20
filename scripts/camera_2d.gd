@@ -14,7 +14,7 @@ var camera_target: Node2D = null
 const ZOOM_STEP := 0.1
 const MIN_ZOOM := 1.5
 const MAX_ZOOM := 4.0
-var regular_zoom := Vector2(2.5, 2.5) # Zoom while following the player, set from the settings menu
+var regular_zoom := Vector2(2.0, 2.0) # Zoom while following the player, set from the settings menu
 
 var is_free_cam := false
 var target: Node2D
