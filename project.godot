@@ -10,13 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Parcel Runner"
+config/name="Handle With Care"
 run/main_scene="uid://7ibdfxwpixtj"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/ui/icon_256.png"
+config/windows_native_icon="res://assets/ui/icon.ico"
 
 [display]
 
+mouse_cursor/custom_image="res://assets/ui/cursor_2x.png"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
