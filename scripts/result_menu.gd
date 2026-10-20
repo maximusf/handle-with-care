@@ -18,6 +18,9 @@ const COLOR_DELIVERED_LOSE := Color("787b7e")
 const COLOR_DESTROYED := Color("bc292c")
 const COLOR_TEXT := Color("080808")
 
+const WIN_JINGLE := preload("res://assets/sfx/UISFX/win_jingle.ogg")
+const LOSE_JINGLE := preload("res://assets/sfx/UISFX/lose_jingle.ogg")
+
 @export var success_texture: Texture2D
 @export var fail_texture: Texture2D
 
@@ -34,6 +37,7 @@ const COLOR_TEXT := Color("080808")
 @onready var kicks_row: Control = %kicks_row
 @onready var time_row: Control = %time_row
 @onready var back_button: Button = %back_button
+@onready var jingle: AudioStreamPlayer = $Jingle
 
 # User_Interface gets HUD for us
 var hud : Node
@@ -65,6 +69,7 @@ func show_result(success: bool) -> void:
 		_set_backdrop(COLOR_BACKDROP_WIN, 0.0)
 		confetti.show()
 		confetti.play(&"fall")
+		jingle.stream = WIN_JINGLE
 		caption_label.text = "CUSTOMER SATISFACTION"
 		caption_label.add_theme_color_override("font_color", COLOR_CAPTION_WIN)
 	else:
@@ -72,6 +77,7 @@ func show_result(success: bool) -> void:
 		_set_backdrop(COLOR_BACKDROP_LOSE, LOSE_DESATURATION)
 		confetti.stop()
 		confetti.hide()
+		jingle.stream = LOSE_JINGLE
 		caption_label.text = "CUSTOMER NOT SATISFIED"
 		caption_label.add_theme_color_override("font_color", COLOR_CAPTION_LOSE)
 
@@ -92,6 +98,7 @@ func show_result(success: bool) -> void:
 	_set_row(time_row, "%d:%02d" % [floori(seconds / 60.0), seconds % 60], COLOR_TEXT)
 
 	show()
+	jingle.play()
 	back_button.grab_focus()
 
 func _set_backdrop(tint: Color, desaturation: float) -> void:

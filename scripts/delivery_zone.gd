@@ -3,6 +3,7 @@ extends Area2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var label: Label = $Label
 @onready var countdown_timer: Timer = $CountdownTimer
+@onready var complete_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var packages_inside: Array[Node2D] = []
 var delivered_packages: Array[Node2D] = [] # Read by the HUD to know which packages this zone accepted
@@ -66,6 +67,7 @@ func _on_countdown_timer_timeout() -> void:
 			package.is_delivered = true
 			delivered_packages.append(package)
 		completion.play("Completion")
+		complete_sound.play()
 		complete.emit(self)
 	else:
 		completion.play("Failed")

@@ -7,10 +7,12 @@ signal closed
 
 const BASE_SIZE := Vector2(480, 270)
 const CHARACTERS_PER_SECOND := 60.0 # How fast the text types out
+const CHARACTERS_PER_BLIP := 3 # Play the typing sound every few letters, not every one
 
 @onready var screen: Control = $Screen
 @onready var text_label: Label = %text_label
 @onready var next_prompt: TextureRect = %next_prompt
+@onready var type_sound: AudioStreamPlayer = $TypeSound
 
 var _typed_characters := 0.0 # Counts up while typing, kept as a float so slow frame rates still type smoothly
 
@@ -42,7 +44,11 @@ func _process(delta: float) -> void:
 	if not visible or is_done_typing():
 		return
 	_typed_characters += CHARACTERS_PER_SECOND * delta
+	var shown_before: int = text_label.visible_characters
 	text_label.visible_characters = int(_typed_characters)
+	var crossed_blip := int(shown_before / CHARACTERS_PER_BLIP) != int(text_label.visible_characters / CHARACTERS_PER_BLIP)
+	if crossed_blip:
+		type_sound.play()
 	if is_done_typing():
 		next_prompt.show()
 

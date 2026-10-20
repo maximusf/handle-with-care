@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c528g5ed4bsj4" path="res://scripts/delivery_zone.gd" id="1_ngybl"]
 [ext_resource type="Texture2D" uid="uid://cj6cacpvyoc4g" path="res://assets/sprites/fx/photo_timer.png" id="2_8qf2g"]
 [ext_resource type="Texture2D" uid="uid://53rwosfhdh7v" path="res://assets/sprites/ui/xmark_16.png" id="3_4w5o7"]
+[ext_resource type="AudioStream" uid="uid://6ncyfdebanx8" path="res://assets/sfx/UISFX/delivery_complete.ogg" id="4_chime"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5rh"]
 size = Vector2(86, 24)
@@ -160,6 +161,7 @@ animation = &"Completion"
 autoplay = "Empty"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=212767333]
+stream = ExtResource("4_chime")
 bus = &"SFX"
 scale = Vector2(2, 2)
 

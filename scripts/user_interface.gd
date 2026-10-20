@@ -7,6 +7,7 @@ signal quit_to_menu_requested
 @onready var settings_menu = $Settings_Menu
 @onready var result_menu = $Result_Menu
 @onready var hud = $HUD
+@onready var click_sound: AudioStreamPlayer = $ClickSound
 
 func _ready() -> void:
 	main_menu.settings_pressed.connect(show_settings)
@@ -19,6 +20,9 @@ func _ready() -> void:
 	result_menu.hud = hud
 	hud.level_finished.connect(show_result)
 	close_settings()
+	# Every button and checkbox in the menus clicks when pressed.
+	for button in find_children("*", "BaseButton", true, false):
+		button.pressed.connect(click_sound.play)
 
 func _hide_all() -> void:
 	main_menu.hide()

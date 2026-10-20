@@ -324,4 +324,8 @@ theme_override_styles/pressed = SubResource("StyleBox_button_pressed")
 theme_override_styles/focus = SubResource("StyleBox_button_hover")
 text = "BACK"
 
+[node name="Jingle" type="AudioStreamPlayer" parent="." unique_id=1847201936]
+volume_db = -4.0
+bus = &"SFX"
+
 [connection signal="pressed" from="Screen/back_button" to="." method="_on_back_button_pressed"]
