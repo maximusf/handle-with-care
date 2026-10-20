@@ -36,6 +36,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 # Tallest step the player walks up on their own. Lower than a package (27px) so they can't walk onto one.
 const STEP_HEIGHT = 17.0
+# How fast the sprites glide to catch up with the body after a stair step. Matches walking speed,
+# so on 45 degree stairs the climb looks like one smooth diagonal.
+const STAIR_GLIDE_SPEED = 300.0
 # Only show the jump animation when clearly moving up or down, so small drops (like settling onto a step) don't flash it.
 const AIR_ANIMATION_MIN_SPEED = 50.0
 
@@ -49,7 +52,8 @@ func _physics_process(delta: float) -> void:
 	var kick_direction = (get_global_mouse_position() - global_position).normalized()
 	var kick_percentage = (kick_power / MAX_KICK_POWER) * 100
 	power_arrow.rotation = kick_direction.angle()
-	power_arrow.position = kick_direction * AIM_RADIUS
+	# Undo any stair glide offset so the arrow stays centred on the body, not the gliding sprites.
+	power_arrow.position = kick_direction * AIM_RADIUS - visuals.position
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -66,8 +70,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	step_up_if_blocked(delta)
+	var was_on_floor := is_on_floor()
+	var height_before := global_position.y
+	var stepped_up := step_up_if_blocked(delta)
 	move_and_slide()
+	smooth_stair_steps(was_on_floor, stepped_up, height_before, delta)
 	
 	# Handle Kicking ------------------------------------------------------
 	# Ignore new kicks until the current kick animation is done, otherwise both kicks land at once.
@@ -178,10 +185,21 @@ func set_animation_state(new_state: animation_states) -> void:
 			head.play("Head_Idle")
 
 
+# Stairs move the body in 16px pops (up by step-up, down by floor snap). Shift the sprites back
+# by the pop and let them glide to catch up, so climbing looks smooth instead of jumpy.
+func smooth_stair_steps(was_on_floor: bool, stepped_up: bool, height_before: float, delta: float) -> void:
+	# A step-up can leave the body a pixel above the step for a frame, so count it even when not on the floor yet.
+	var walked_over_a_step := stepped_up or (was_on_floor and is_on_floor())
+	if walked_over_a_step:
+		var height_change := global_position.y - height_before
+		visuals.position.y -= height_change
+	visuals.position.y = move_toward(visuals.position.y, 0.0, STAIR_GLIDE_SPEED * delta)
+
 # Walking into a step: if the way is clear one step higher, lift the player onto it.
-func step_up_if_blocked(delta: float) -> void:
+# Returns true if the player was lifted.
+func step_up_if_blocked(delta: float) -> bool:
 	if not is_on_floor() or velocity.x == 0:
-		return
+		return false
 
 	var move_forward := Vector2(velocity.x * delta, 0)
 	var move_up := Vector2(0, -STEP_HEIGHT)
@@ -193,6 +211,8 @@ func step_up_if_blocked(delta: float) -> void:
 
 	if blocked_ahead and room_above and clear_when_raised:
 		global_position += move_up
+		return true
+	return false
 
 # Solid arrow while charging a kick, see-through arrow while just aiming, hidden during the kick itself.
 func update_power_arrow_visibility() -> void:
