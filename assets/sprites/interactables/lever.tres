@@ -1,10 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://c50p0xjj4l4jh"]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/interactables/lever.png" id="1"]
-
-[sub_resource type="AtlasTexture" id="f0"]
-atlas = ExtResource("1")
-region = Rect2(0, 0, 32, 32)
+[ext_resource type="Texture2D" uid="uid://ciipldjtbedrl" path="res://assets/sprites/interactables/lever.png" id="1"]
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1")
@@ -14,41 +10,48 @@ region = Rect2(32, 0, 32, 32)
 atlas = ExtResource("1")
 region = Rect2(64, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="f0"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 32, 32)
+
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("f1")
-},
-{
+}, {
 "duration": 1.25,
 "texture": SubResource("f2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"mid",
 "speed": 12.5
 }, {
 "frames": [{
 "duration": 1.25,
-"texture": SubResource("f0")
-},
-{
+"texture": SubResource("f2")
+}, {
 "duration": 1.0,
 "texture": SubResource("f1")
-},
-{
+}, {
 "duration": 1.25,
-"texture": SubResource("f2")
+"texture": SubResource("f0")
 }],
-"loop": true,
+"loop": 0,
 "name": &"off",
 "speed": 12.5
 }, {
 "frames": [{
+"duration": 1.25,
+"texture": SubResource("f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("f1")
+}, {
 "duration": 1.0,
 "texture": SubResource("f2")
 }],
-"loop": false,
+"loop": 0,
 "name": &"on",
 "speed": 10.0
 }]

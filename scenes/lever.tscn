@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dg8oc62l6sbkr"]
+
+[ext_resource type="Script" uid="uid://ci7f5q0yyc367" path="res://scripts/lever.gd" id="1_ncfea"]
+[ext_resource type="SpriteFrames" uid="uid://c50p0xjj4l4jh" path="res://assets/sprites/interactables/lever.tres" id="2_qxmkn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqme0"]
+size = Vector2(31, 30)
+
+[node name="lever" type="Area2D" unique_id=1688962025]
+script = ExtResource("1_ncfea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1233102839]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_fqme0")
+
+[node name="lever_animation" type="AnimatedSprite2D" parent="." unique_id=403695816]
+texture_filter = 1
+sprite_frames = ExtResource("2_qxmkn")
+animation = &"on"
+frame = 2
+frame_progress = 1.0
+
+[node name="lever_sound" type="AudioStreamPlayer2D" parent="." unique_id=1298227035]

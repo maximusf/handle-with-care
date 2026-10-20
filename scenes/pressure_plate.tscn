@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://biayp1rv84fne"]
+
+[ext_resource type="Script" uid="uid://fckbg551hraq" path="res://scripts/pressure_plate.gd" id="1_xtofl"]
+[ext_resource type="SpriteFrames" uid="uid://cf3ougvg1i7ni" path="res://assets/sprites/interactables/pressure_plate.tres" id="2_r34r6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fqme0"]
+size = Vector2(30, 11)
+
+[node name="pressure_plate" type="Area2D" unique_id=1168397147]
+script = ExtResource("1_xtofl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=786353989]
+position = Vector2(1, 4.5)
+shape = SubResource("RectangleShape2D_fqme0")
+
+[node name="plate_animation" type="AnimatedSprite2D" parent="." unique_id=25338675]
+texture_filter = 1
+position = Vector2(1, 2)
+sprite_frames = ExtResource("2_r34r6")
+animation = &"up"
+
+[node name="pressed_sound" type="AudioStreamPlayer2D" parent="." unique_id=1244042017]
+
+[node name="unpressed_sound" type="AudioStreamPlayer2D" parent="." unique_id=30079476]

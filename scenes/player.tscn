@@ -345,7 +345,7 @@ size = Vector2(32, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feet"]
 size = Vector2(28, 8)
 
-[node name="Player" type="CharacterBody2D" unique_id=106568176]
+[node name="Player" type="CharacterBody2D" unique_id=106568176 groups=["player"]]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_qhqgy")
@@ -397,19 +397,18 @@ shape = SubResource("RectangleShape2D_feet")
 [node name="SFX" type="Node2D" parent="." unique_id=2030220188]
 
 [node name="WalkingSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=949605887]
-bus = &"SFX"
 stream = ExtResource("5_smehm")
 volume_db = 2.916
+bus = &"SFX"
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1331507237]
-bus = &"SFX"
 stream = ExtResource("6_ur7pv")
+bus = &"SFX"
 
 [node name="KickSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=937269465]
-bus = &"SFX"
 stream = ExtResource("7_y4r1p")
+bus = &"SFX"
 
 [node name="ArrowSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1333498656]
-bus = &"SFX"
 stream = ExtResource("8_d2wvv")
-
+bus = &"SFX"

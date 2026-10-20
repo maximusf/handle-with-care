@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://boxaaj2axcrf3"]
 
-[ext_resource type="Texture2D" path="res://assets/ui/screens/stat_icons.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c3vlqi2jfy2vk" path="res://assets/ui/screens/stat_icons.png" id="1"]
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1")
@@ -24,7 +24,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("f0")
 }],
-"loop": false,
+"loop": 0,
 "name": &"delivered",
 "speed": 10.0
 }, {
@@ -32,7 +32,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("f1")
 }],
-"loop": false,
+"loop": 0,
 "name": &"destroyed",
 "speed": 10.0
 }, {
@@ -40,7 +40,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("f2")
 }],
-"loop": false,
+"loop": 0,
 "name": &"kicks",
 "speed": 10.0
 }, {
@@ -48,7 +48,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("f3")
 }],
-"loop": false,
+"loop": 0,
 "name": &"time",
 "speed": 10.0
 }]

@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://cw6gxlx3vqkbg"]
 
-[ext_resource type="Texture2D" path="res://assets/ui/confetti.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://b1ufubpewgq5m" path="res://assets/ui/confetti.png" id="1"]
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1")
@@ -39,36 +39,29 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("f0")
-},
-{
+}, {
 "duration": 1.0,
 "texture": SubResource("f1")
-},
-{
+}, {
 "duration": 1.0,
 "texture": SubResource("f2")
-},
-{
+}, {
 "duration": 1.0,
 "texture": SubResource("f3")
-},
-{
+}, {
 "duration": 1.0,
 "texture": SubResource("f4")
-},
-{
+}, {
 "duration": 1.0,
 "texture": SubResource("f5")
-},
-{
+}, {
 "duration": 1.0,
 "texture": SubResource("f6")
-},
-{
+}, {
 "duration": 1.0,
 "texture": SubResource("f7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fall",
 "speed": 10.0
 }]
