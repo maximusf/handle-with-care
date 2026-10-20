@@ -99,7 +99,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-value = 100.0
+value = 50.0
 
 [node name="music_value_label" type="Label" parent="Screen/VBoxContainer/columns/vbox_left/audio_section/hbox_music" unique_id=1192837465]
 unique_name_in_owner = true
@@ -123,7 +123,7 @@ custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-value = 100.0
+value = 50.0
 
 [node name="sfx_value_label" type="Label" parent="Screen/VBoxContainer/columns/vbox_left/audio_section/hbox_sfx" unique_id=1739204816]
 unique_name_in_owner = true
