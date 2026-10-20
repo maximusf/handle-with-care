@@ -12,7 +12,7 @@ first_level = ExtResource("2_lbe5n")
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1954569347]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1562498216]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 script = ExtResource("3_lbe5n")
 
 [node name="User_Interface" parent="." unique_id=1313764124 instance=ExtResource("3_2yrkd")]

@@ -16,6 +16,8 @@ signal zoom_changed(zoom_level: float) # Higher zoom_level means the camera is c
 # Saved in the player's user data folder, so settings are remembered between launches.
 const SETTINGS_PATH := "user://settings.cfg"
 
+var has_been_opened := false # The menu is hidden once at startup; only save after the player has actually opened it
+
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 	load_settings()
@@ -23,12 +25,12 @@ func _ready() -> void:
 	_on_music_slider_value_changed(music_slider.value)
 	_on_sfx_slider_value_changed(sfx_slider.value)
 	zoom_value_label.text = "%.1fx" % zoom_slider.value
-	fullscreen_checkbox.set_pressed_no_signal(is_fullscreen())
 
 func _on_visibility_changed() -> void:
 	if visible:
+		has_been_opened = true
 		back_button.grab_focus()
-	else:
+	elif has_been_opened:
 		# Closing the menu (Back button or Esc) saves whatever was changed.
 		save_settings()
 
@@ -46,7 +48,8 @@ func save_settings() -> void:
 	config.set_value("audio", "music", music_slider.value)
 	config.set_value("audio", "sfx", sfx_slider.value)
 	config.set_value("camera", "zoom", zoom_slider.value)
-	config.set_value("display", "fullscreen", is_fullscreen())
+	# Save the player's choice, not the window's current mode (an editor-embedded game can't go fullscreen).
+	config.set_value("display", "fullscreen", fullscreen_checkbox.button_pressed)
 	config.save(SETTINGS_PATH)
 
 func _process(delta: float) -> void:
