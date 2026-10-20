@@ -18,7 +18,6 @@ config/windows_native_icon="res://assets/ui/icon.ico"
 
 [display]
 
-mouse_cursor/custom_image="res://assets/ui/cursor_2x.png"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

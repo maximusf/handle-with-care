@@ -4,6 +4,8 @@ signal start_game_requested
 signal quit_to_menu_requested
 signal retry_requested
 
+const CURSOR := preload("res://assets/ui/cursor_2x.png")
+
 @onready var main_menu = $Main_Menu
 @onready var settings_menu = $Settings_Menu
 @onready var result_menu = $Result_Menu
@@ -11,6 +13,7 @@ signal retry_requested
 @onready var click_sound: AudioStreamPlayer = $ClickSound
 
 func _ready() -> void:
+	Input.set_custom_mouse_cursor(CURSOR)
 	main_menu.settings_pressed.connect(show_settings)
 	settings_menu.back_pressed.connect(close_settings)
 	
@@ -25,6 +28,12 @@ func _ready() -> void:
 	# Every button and checkbox in the menus clicks when pressed.
 	for button in find_children("*", "BaseButton", true, false):
 		button.pressed.connect(click_sound.play)
+
+func _exit_tree() -> void:
+	# Release the cursor and stop the music before shutdown, otherwise Godot reports them as leaked.
+	Input.set_custom_mouse_cursor(null)
+	$Music.stop()
+	$Music.stream = null
 
 func _hide_all() -> void:
 	main_menu.hide()
