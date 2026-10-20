@@ -6,14 +6,20 @@ signal retry_requested
 
 const CURSOR := preload("res://assets/ui/cursor_2x.png")
 
+# Drag a different track onto these in the Inspector to change the music.
+@export var title_music: AudioStream # Plays on the title screen
+@export var level_music: AudioStream # Plays in levels, including the pause menu and result screen
+
 @onready var main_menu = $Main_Menu
 @onready var settings_menu = $Settings_Menu
 @onready var result_menu = $Result_Menu
 @onready var hud = $HUD
 @onready var click_sound: AudioStreamPlayer = $ClickSound
+@onready var music: AudioStreamPlayer = $Music
 
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(CURSOR)
+	play_music(title_music)
 	main_menu.settings_pressed.connect(show_settings)
 	settings_menu.back_pressed.connect(close_settings)
 	
@@ -32,8 +38,10 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	# Release the cursor and stop the music before shutdown, otherwise Godot reports them as leaked.
 	Input.set_custom_mouse_cursor(null)
-	$Music.stop()
-	$Music.stream = null
+	music.stop()
+	music.stream = null
+	title_music = null
+	level_music = null
 
 func _hide_all() -> void:
 	main_menu.hide()
@@ -62,7 +70,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	get_viewport().set_input_as_handled()
 
+# Starts a track, unless it's already the one playing (so menus don't restart the music).
+func play_music(stream: AudioStream) -> void:
+	if music.stream == stream and music.playing:
+		return
+	music.stream = stream
+	music.play()
+
 func show_main_menu() -> void:
+	play_music(title_music)
 	_hide_all()
 	main_menu.set_can_resume(false)
 	main_menu.show()
@@ -87,6 +103,7 @@ func close_settings() -> void:
 		main_menu.start_button.grab_focus()
 
 func show_hud() -> void:
+	play_music(level_music)
 	_hide_all()
 	hud.show()
 

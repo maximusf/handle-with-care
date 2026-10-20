@@ -8,10 +8,13 @@
 [ext_resource type="PackedScene" path="res://scenes/Dialogue_Box.tscn" id="6_dialogue"]
 [ext_resource type="AudioStream" uid="uid://p8e1yhv3frap" path="res://assets/music/hotel_lobby_loop.ogg" id="7_music"]
 [ext_resource type="AudioStream" uid="uid://4v111amcrm5w" path="res://assets/sfx/UISFX/ui_click.ogg" id="8_click"]
+[ext_resource type="AudioStream" uid="uid://bgvsq6a7tr1gu" path="res://assets/music/title_theme_loop.ogg" id="9_title_music"]
 
 [node name="User_Interface" type="CanvasLayer" unique_id=1313764124]
 process_mode = 3
 script = ExtResource("1_2rp2v")
+title_music = ExtResource("9_title_music")
+level_music = ExtResource("7_music")
 
 [node name="Main_Menu" parent="." unique_id=1645713669 instance=ExtResource("2_cua1d")]
 texture_filter = 1
@@ -27,9 +30,7 @@ visible = false
 [node name="Dialogue_Box" parent="." unique_id=1847362915 instance=ExtResource("6_dialogue")]
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1690283745]
-stream = ExtResource("7_music")
 volume_db = -6.0
-autoplay = true
 bus = &"Music"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1203948573]
