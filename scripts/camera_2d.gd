@@ -10,6 +10,7 @@ var camera_target: Node2D = null
 
 @export var lean_distance := 60.0 # How far (in world pixels) the camera leans toward the cursor
 @export var lean_speed := 5.0 # How quickly the lean catches up to the cursor
+@export var vertical_follow_speed := 12.0 # How quickly the camera catches up up/down, so stairs don't jolt the view
 
 const ZOOM_STEP := 0.1
 const MIN_ZOOM := 1.5
@@ -39,6 +40,8 @@ func _on_level_loaded(level: Node2D) -> void:
 		register_package(package)
 	if player != null:
 		set_camera_target(player)
+		# Start on the player instead of easing in from wherever the camera was.
+		global_position = player.global_position
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,7 +50,11 @@ func _process(delta: float) -> void:
 		move_free_camera(delta)
 	else:
 		if is_instance_valid(camera_target):
-			camera_2d.global_position = camera_target.global_position
+			# Follow sideways exactly, but ease up and down so each stair step doesn't jolt the view.
+			var target_position := camera_target.global_position
+			var follow_amount := clampf(vertical_follow_speed * delta, 0.0, 1.0)
+			camera_2d.global_position.x = target_position.x
+			camera_2d.global_position.y = lerpf(camera_2d.global_position.y, target_position.y, follow_amount)
 		else:
 			pass # Means we're in the menu
 		# Ease toward the lean instead of snapping, so it feels smooth.
