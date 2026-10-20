@@ -369,7 +369,8 @@ autoplay = "Body_Idle"
 
 [node name="PowerArrow" type="AnimatedSprite2D" parent="Visuals" unique_id=1596827502]
 visible = false
-z_index = -1
+z_index = 20
+z_as_relative = false
 position = Vector2(67, -21)
 scale = Vector2(0.09, 0.073)
 sprite_frames = SubResource("SpriteFrames_1gbwc")
