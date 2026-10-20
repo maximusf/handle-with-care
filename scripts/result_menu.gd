@@ -3,6 +3,7 @@ extends Control
 ## Designed in a 480x270 logical view and scaled to fit the viewport, like the HUD.
 
 signal back_pressed
+signal retry_pressed
 
 const BASE_SIZE := Vector2(480, 270)
 const CONFETTI_SIZE := Vector2(240, 135) # One frame of assets/ui/confetti.png
@@ -37,6 +38,7 @@ const LOSE_JINGLE := preload("res://assets/sfx/UISFX/lose_jingle.ogg")
 @onready var kicks_row: Control = %kicks_row
 @onready var time_row: Control = %time_row
 @onready var back_button: Button = %back_button
+@onready var retry_button: Button = %retry_button
 @onready var jingle: AudioStreamPlayer = $Jingle
 
 # User_Interface gets HUD for us
@@ -60,6 +62,9 @@ func _layout() -> void:
 
 func _on_back_button_pressed() -> void:
 	back_pressed.emit()
+
+func _on_retry_button_pressed() -> void:
+	retry_pressed.emit()
 
 func show_result(success: bool) -> void:
 	var stats : Dictionary = hud.get_stats() if hud else {}
@@ -99,7 +104,7 @@ func show_result(success: bool) -> void:
 
 	show()
 	jingle.play()
-	back_button.grab_focus()
+	retry_button.grab_focus()
 
 func _set_backdrop(tint: Color, desaturation: float) -> void:
 	var backdrop_material := backdrop.material as ShaderMaterial

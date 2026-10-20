@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal start_game_requested
 signal quit_to_menu_requested
+signal retry_requested
 
 @onready var main_menu = $Main_Menu
 @onready var settings_menu = $Settings_Menu
@@ -17,6 +18,7 @@ func _ready() -> void:
 	main_menu.resume_pressed.connect(resume_game)
 	main_menu.quit_to_menu_pressed.connect(quit_to_menu_requested.emit)
 	result_menu.back_pressed.connect(quit_to_menu_requested.emit)
+	result_menu.retry_pressed.connect(retry_requested.emit)
 	result_menu.hud = hud
 	hud.level_finished.connect(show_result)
 	close_settings()

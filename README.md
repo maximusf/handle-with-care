@@ -16,7 +16,7 @@ Made with Godot 4.7 by **The Muckslinger Gang**: Raven Jaime, Carlos Mendoza and
 
 - Every kick damages a package. **After 5 kicks it breaks.**
 - You **lose** if too many packages break to fill the remaining zones.
-- The result screen shows your stars, deliveries, packages lost, kicks and time.
+- The result screen shows your stars, deliveries, packages lost, kicks and time. **Retry** replays the level; **Back** returns to the title screen.
 - Tutorial signs (press **E**) and the hotel guests explain the basics as you go.
 
 ### Controls

@@ -15,6 +15,7 @@ func _ready() -> void:
 	get_window().min_size = MIN_WINDOW_SIZE
 	user_interface.start_game_requested.connect(_on_start_game_requested)
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
+	user_interface.retry_requested.connect(_on_retry_requested)
 	level_loaded.connect(user_interface.hud.bind_level)
 	user_interface.settings_menu.zoom_changed.connect(camera.set_regular_zoom)
 	# The saved zoom was loaded before this connection existed, so apply it once now.
@@ -25,6 +26,11 @@ func _on_start_game_requested() -> void:
 	user_interface.show_hud()
 	get_tree().paused = false
 	
+func _on_retry_requested() -> void:
+	reload_level()
+	user_interface.show_hud()
+	get_tree().paused = false
+
 func _quit_to_menu_requested() -> void:
 	unload_level()
 	user_interface.show_main_menu()
