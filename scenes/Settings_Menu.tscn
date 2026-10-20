@@ -202,6 +202,7 @@ SPACE
 HOLD LMB
 RELEASE LMB
 RMB
+E
 R
 ESC
 F11"
@@ -213,6 +214,7 @@ Jump
 Aim + Charge
 Kick
 Cancel Kick
+Read sign
 Restart
 Pause
 Fullscreen"
