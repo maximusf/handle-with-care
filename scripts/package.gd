@@ -19,9 +19,36 @@ var is_destroyed = false
 var is_delivered = false # Set by the delivery zone that accepted this package, so it can't count twice
 var is_in_air = false # To know when to put the camera on the package
 
+# a package this far outside the level goes back to where it started
+const OUT_OF_BOUNDS_MARGIN := 256.0
+var _level_bounds := Rect2() # empty if the level has no main tilemap to measure
+var _start_transform := Transform2D.IDENTITY
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_start_transform = global_transform
+	_level_bounds = _find_level_bounds()
+
+# area covered by the main tilemap in world coordinates, plus a margin
+func _find_level_bounds() -> Rect2:
+	var tilemap := get_parent().get_node_or_null("MainTileMap") as TileMapLayer
+	if tilemap == null or tilemap.get_used_rect().size == Vector2i.ZERO:
+		return Rect2()
+	var used_rect := tilemap.get_used_rect()
+	var tile_size := Vector2(tilemap.tile_set.tile_size)
+	var top_left := tilemap.to_global(tilemap.map_to_local(used_rect.position) - tile_size / 2.0)
+	var bottom_right := tilemap.to_global(tilemap.map_to_local(used_rect.end - Vector2i.ONE) + tile_size / 2.0)
+	return Rect2(top_left, bottom_right - top_left).grow(OUT_OF_BOUNDS_MARGIN)
+
+# Safety net: if a hard kick still gets a package out of the level, put it back instead of letting it fall forever
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	if _level_bounds.has_area() and not _level_bounds.has_point(state.transform.origin):
+		state.transform = _start_transform
+		state.linear_velocity = Vector2.ZERO
+		state.angular_velocity = 0.0
+		is_in_air = false
+		whoosh_sfx.stop()
+		landed.emit(self) # lets the camera go back to the player
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -27,7 +27,7 @@ color = Color(0.03137255, 0.03137255, 0.03137255, 0.6)
 [node name="Screen" type="Control" parent="." unique_id=1119852849]
 layout_mode = 0
 offset_right = 400.0
-offset_bottom = 225.0
+offset_bottom = 205.0
 mouse_filter = 2
 
 [node name="Panel" type="NinePatchRect" parent="Screen" unique_id=1243171636]
@@ -35,7 +35,7 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 4.0
 offset_right = 392.0
-offset_bottom = 221.0
+offset_bottom = 201.0
 texture = ExtResource("3_panel")
 patch_margin_left = 3
 patch_margin_top = 3
@@ -47,7 +47,7 @@ layout_mode = 0
 offset_left = 20.0
 offset_top = 10.0
 offset_right = 380.0
-offset_bottom = 213.0
+offset_bottom = 193.0
 theme_override_constants/separation = 4
 
 [node name="title_label" type="Label" parent="Screen/VBoxContainer" unique_id=566977835]
@@ -57,7 +57,7 @@ theme_override_colors/font_shadow_color = Color(0.6627451, 0.41960785, 0.1960784
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 16
-text = "SETTINGS"
+text = "OPTIONS"
 horizontal_alignment = 1
 
 [node name="title_rule" type="ColorRect" parent="Screen/VBoxContainer" unique_id=1928374650]
@@ -229,7 +229,7 @@ JUMP
 AIM + CHARGE
 KICK
 CANCEL KICK
-READ SIGN
+INTERACT
 RESTART
 PAUSE
 FULLSCREEN"
@@ -238,30 +238,6 @@ FULLSCREEN"
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 color = Color(0.2901961, 0.27058825, 0.3764706, 1)
-
-[node name="credits_section" type="VBoxContainer" parent="Screen/VBoxContainer" unique_id=1394820571]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="credits_heading" type="HBoxContainer" parent="Screen/VBoxContainer/credits_section" unique_id=1846203957]
-layout_mode = 2
-alignment = 1
-theme_override_constants/separation = 6
-
-[node name="credits_title_label" type="Label" parent="Screen/VBoxContainer/credits_section/credits_heading" unique_id=1078245519]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9254902, 0.6862745, 0.3372549, 1)
-text = "CREDITS"
-
-[node name="team_label" type="Label" parent="Screen/VBoxContainer/credits_section/credits_heading" unique_id=1102938476]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9411765, 0.5411765, 0.14117648, 1)
-text = "THE MUCKSLINGER GANG"
-
-[node name="credits_label" type="Label" parent="Screen/VBoxContainer/credits_section" unique_id=1678672603]
-layout_mode = 2
-text = "RAVEN JAIME   CARLOS MENDOZA   MAXIMUS FERNANDEZ"
-horizontal_alignment = 1
 
 [node name="back_button" type="Button" parent="Screen/VBoxContainer" unique_id=920015444]
 unique_name_in_owner = true

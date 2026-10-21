@@ -1,0 +1,83 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/level_select.gd" id="1_select"]
+[ext_resource type="Theme" path="res://assets/ui/menu_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" uid="uid://dtwm3a6wcgsm7" path="res://assets/ui/screens/title_background.png" id="3_background"]
+
+[node name="Level_Select" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_select")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.22745098, 0.15686275, 0.11764706, 0.6)
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 135.0
+mouse_filter = 2
+
+[node name="title_label" type="Label" parent="Screen"]
+layout_mode = 0
+offset_top = 18.0
+offset_right = 240.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(1, 0.94509804, 0.84705883, 1)
+theme_override_colors/font_shadow_color = Color(0.6627451, 0.41960785, 0.19607843, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 16
+text = "SELECT LEVEL"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="Screen"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 56.0
+offset_right = 168.0
+offset_bottom = 110.0
+pivot_offset = Vector2(48, 0)
+scale = Vector2(0.75, 0.75)
+theme_override_constants/separation = 8
+
+[node name="level_grid" type="GridContainer" parent="Screen/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 3
+
+[node name="back_button" type="Button" parent="Screen/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 12)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "BACK"
+
+[connection signal="pressed" from="Screen/Buttons/back_button" to="." method="_on_back_button_pressed"]

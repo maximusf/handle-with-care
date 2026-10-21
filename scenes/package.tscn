@@ -10,8 +10,10 @@
 size = Vector2(27, 27)
 
 [node name="Package" type="RigidBody2D" unique_id=1601116120 groups=["packages"]]
+z_index = 2
 collision_layer = 4
 collision_mask = 5
+continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_bfkic")

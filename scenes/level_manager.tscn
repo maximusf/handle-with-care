@@ -7,7 +7,8 @@
 
 [node name="Level_Manager" type="Node" unique_id=1278203149]
 script = ExtResource("1_5eglo")
-first_level = ExtResource("2_lbe5n")
+levels = Array[PackedScene]([ExtResource("2_lbe5n")])
+total_levels = 3
 
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1954569347]
 

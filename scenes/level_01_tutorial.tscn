@@ -9,6 +9,7 @@
 [ext_resource type="TileSet" path="res://assets/tilesets/hallway_props_tileset.tres" id="tileset_2"]
 [ext_resource type="PackedScene" path="res://scenes/tutorial_sign.tscn" id="sign_scene"]
 [ext_resource type="PackedScene" path="res://scenes/npc_speech.tscn" id="speech_scene"]
+[ext_resource type="PackedScene" path="res://scenes/kickable_sign.tscn" id="kickable_sign_scene"]
 
 [node name="Level01_Tutorial" type="Node2D" unique_id=1967683342]
 
@@ -21,7 +22,7 @@ tile_set = ExtResource("tileset_0")
 [node name="Guests" type="TileMapLayer" parent="." unique_id=1526317278]
 z_index = -1
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAOAPv/AAABAAAAAAAOAPz/AAABAAEAAAAOAP3/AAABAAIAAAAOAP7/AAABAAMAAAAPAPv/AAACAAAAAAAPAPz/AAACAAEAAAAPAP3/AAACAAIAAAAPAP7/AAACAAMAAAANAPv/AAAAAAAAAAANAPz/AAAAAAEAAAANAP3/AAAAAAIAAAANAP7/AAAAAAMAAABAAPz/AQAGAAAAAABAAP3/AQAGAAEAAABAAP7/AQAGAAIAAABAAP//AQAGAAMAAABBAPz/AQAHAAAAAABBAP3/AQAHAAEAAABBAP7/AQAHAAIAAABBAP//AQAHAAMAAABCAPz/AQAIAAAAAABCAP3/AQAIAAEAAABCAP7/AQAIAAIAAABCAP//AQAIAAMAAACuAOr/AwAPAAAAAACuAOv/AwAPAAEAAACuAOz/AwAPAAIAAACuAO3/AwAPAAMAAACvAOr/AwAQAAAAAACvAOv/AwAQAAEAAACvAOz/AwAQAAIAAACvAO3/AwAQAAMAAACwAOr/AwARAAAAAACwAOv/AwARAAEAAACwAOz/AwARAAIAAACwAO3/AwARAAMAAADYAOr/BAADAAAAAADYAOv/BAADAAEAAADYAOz/BAADAAIAAADYAO3/BAADAAMAAADZAOr/BAAEAAAAAADZAOv/BAAEAAEAAADZAOz/BAAEAAIAAADZAO3/BAAEAAMAAADaAOr/BAAFAAAAAADaAOv/BAAFAAEAAADaAOz/BAAFAAIAAADaAO3/BAAFAAMAAACZAOn/AAADAAAAAACZAOr/AAADAAEAAACZAOv/AAADAAIAAACZAOz/AAADAAMAAACaAOn/AAAEAAAAAACaAOr/AAAEAAEAAACaAOv/AAAEAAIAAACaAOz/AAAEAAMAAACbAOn/AAAFAAAAAACbAOr/AAAFAAEAAACbAOv/AAAFAAIAAACbAOz/AAAFAAMAAABqAP//AgAJAAMAAABrAP7/AgAKAAIAAABrAP//AgAKAAMAAABsAP//AgALAAMAAABqAP3/AgAJAAEAAABqAP7/AgAJAAIAAABrAPz/AgAKAAAAAABrAP3/AgAKAAEAAABsAP3/AgALAAEAAABsAP7/AgALAAIAAAA=")
+tile_map_data = PackedByteArray("AAAOAPv/AAABAAAAAAAOAPz/AAABAAEAAAAOAP3/AAABAAIAAAAOAP7/AAABAAMAAAAPAPv/AAACAAAAAAAPAPz/AAACAAEAAAAPAP3/AAACAAIAAAAPAP7/AAACAAMAAAANAPv/AAAAAAAAAAANAPz/AAAAAAEAAAANAP3/AAAAAAIAAAANAP7/AAAAAAMAAABAAPz/AQAGAAAAAABAAP3/AQAGAAEAAABAAP7/AQAGAAIAAABAAP//AQAGAAMAAABBAPz/AQAHAAAAAABBAP3/AQAHAAEAAABBAP7/AQAHAAIAAABBAP//AQAHAAMAAABCAPz/AQAIAAAAAABCAP3/AQAIAAEAAABCAP7/AQAIAAIAAABCAP//AQAIAAMAAACuAOr/AwAPAAAAAACuAOv/AwAPAAEAAACuAOz/AwAPAAIAAACuAO3/AwAPAAMAAACvAOr/AwAQAAAAAACvAOv/AwAQAAEAAACvAOz/AwAQAAIAAACvAO3/AwAQAAMAAACwAOr/AwARAAAAAACwAOv/AwARAAEAAACwAOz/AwARAAIAAACwAO3/AwARAAMAAACZAOn/AAADAAAAAACZAOr/AAADAAEAAACZAOv/AAADAAIAAACZAOz/AAADAAMAAACaAOn/AAAEAAAAAACaAOr/AAAEAAEAAACaAOv/AAAEAAIAAACaAOz/AAAEAAMAAACbAOn/AAAFAAAAAACbAOr/AAAFAAEAAACbAOv/AAAFAAIAAACbAOz/AAAFAAMAAABqAP//AgAJAAMAAABrAP7/AgAKAAIAAABrAP//AgAKAAMAAABsAP//AgALAAMAAABqAP3/AgAJAAEAAABqAP7/AgAJAAIAAABrAPz/AgAKAAAAAABrAP3/AgAKAAEAAABsAP3/AgALAAEAAABsAP7/AgALAAIAAAA=")
 tile_set = ExtResource("tileset_1")
 
 [node name="InsideHallway" type="TileMapLayer" parent="." unique_id=636610390]
@@ -100,7 +101,7 @@ Press R to restart the level."
 position = Vector2(420, 0)
 text = "Press T to enter free cam and look for the delivery zone."
 
-[node name="StairsSign" parent="TutorialSigns" unique_id=579341423 instance=ExtResource("sign_scene")]
+[node name="StairsSign" parent="TutorialSigns" unique_id=579341423 instance=ExtResource("kickable_sign_scene")]
 position = Vector2(2000, -16)
 text = "Kick that package up the stairs.
 The next delivery zone might need it!"
@@ -115,12 +116,12 @@ speaker = "Concierge"
 [node name="KindGuestSpeech" parent="NpcSpeech" unique_id=320106707 instance=ExtResource("speech_scene")]
 position = Vector2(1048, -68)
 text = "After 5 kicks, a package will break! So be careful."
-speaker = "kind hotel guest"
+speaker = "Benny"
 
 [node name="DinosuitSpeech" parent="NpcSpeech" unique_id=1553201078 instance=ExtResource("speech_scene")]
 position = Vector2(1720, -68)
 text = "PSST... this is the delivery zone. If there's a checkmark, it's a successful delivery!"
-speaker = "dinosuit guest"
+speaker = "Timmy"
 
 [node name="Concierge2Speech" parent="NpcSpeech" unique_id=1690571865 instance=ExtResource("speech_scene")]
 position = Vector2(2472, -372)
@@ -130,9 +131,4 @@ speaker = "Concierge"
 [node name="RichLadySpeech" parent="NpcSpeech" unique_id=2015941032 instance=ExtResource("speech_scene")]
 position = Vector2(2808, -356)
 text = "Don't break my package again."
-speaker = "rich lady w/ dog"
-
-[node name="NiceLadySpeech" parent="NpcSpeech" unique_id=1271165722 instance=ExtResource("speech_scene")]
-position = Vector2(3480, -356)
-text = "I hid an extra one in the back, just in case you break one!"
-speaker = "extremely nice lady"
+speaker = "Beatrice"

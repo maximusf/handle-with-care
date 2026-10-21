@@ -19,8 +19,8 @@ const COLOR_DELIVERED_LOSE := Color("787b7e")
 const COLOR_DESTROYED := Color("bc292c")
 const COLOR_TEXT := Color("080808")
 
-const WIN_JINGLE := preload("res://assets/sfx/UISFX/win_jingle.ogg")
-const LOSE_JINGLE := preload("res://assets/sfx/UISFX/lose_jingle.ogg")
+const WIN_JINGLE := preload("res://assets/sfx/UISFX/win_screen.ogg")
+const LOSE_JINGLE := preload("res://assets/sfx/UISFX/lose_jingle.wav")
 
 @export var success_texture: Texture2D
 @export var fail_texture: Texture2D

@@ -1,7 +1,8 @@
 extends Control
-## Settings screen. Designed in a 400x225 logical view and scaled to fit the window, like the HUD.
+## settings screen, designed in a 400x205 view and scaled to fit the window like the HUD
 
-const BASE_SIZE := Vector2(400, 225)
+const BASE_SIZE := Vector2(400, 205)
+const PANEL_SCALE := 0.75 # how much of the window the options panel fills, so the dimmed game still shows around it
 
 @onready var screen: Control = $Screen
 # These use % (unique names) so moving them around in the layout doesn't break the script.
@@ -32,9 +33,9 @@ func _ready() -> void:
 	_on_sfx_slider_value_changed(sfx_slider.value)
 	zoom_value_label.text = "%.1fx" % zoom_slider.value
 
-# Scales the 400x225 design to fit the window and centres it.
+# scales the 400x205 design down by PANEL_SCALE and centres it
 func _layout() -> void:
-	var fit := minf(size.x / BASE_SIZE.x, size.y / BASE_SIZE.y)
+	var fit := minf(size.x / BASE_SIZE.x, size.y / BASE_SIZE.y) * PANEL_SCALE
 	screen.scale = Vector2.ONE * fit
 	screen.position = (size - BASE_SIZE * fit) / 2.0
 
