@@ -311,12 +311,25 @@ offset_bottom = 8.0
 text = "0:00"
 horizontal_alignment = 2
 
+[node name="retry_button" type="Button" parent="Screen" unique_id=1938201746]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 146.0
+offset_top = 202.0
+offset_right = 236.0
+offset_bottom = 222.0
+theme_override_styles/normal = SubResource("StyleBox_button_normal")
+theme_override_styles/hover = SubResource("StyleBox_button_hover")
+theme_override_styles/pressed = SubResource("StyleBox_button_pressed")
+theme_override_styles/focus = SubResource("StyleBox_button_hover")
+text = "RETRY"
+
 [node name="back_button" type="Button" parent="Screen" unique_id=63258474]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 192.0
+offset_left = 246.0
 offset_top = 202.0
-offset_right = 288.0
+offset_right = 336.0
 offset_bottom = 222.0
 theme_override_styles/normal = SubResource("StyleBox_button_normal")
 theme_override_styles/hover = SubResource("StyleBox_button_hover")
@@ -324,4 +337,9 @@ theme_override_styles/pressed = SubResource("StyleBox_button_pressed")
 theme_override_styles/focus = SubResource("StyleBox_button_hover")
 text = "BACK"
 
+[node name="Jingle" type="AudioStreamPlayer" parent="." unique_id=1847201936]
+volume_db = -4.0
+bus = &"SFX"
+
+[connection signal="pressed" from="Screen/retry_button" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="Screen/back_button" to="." method="_on_back_button_pressed"]

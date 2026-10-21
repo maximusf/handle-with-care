@@ -1,6 +1,7 @@
 extends Node
 
-@export var first_level: PackedScene
+@export var levels: Array[PackedScene] # shown on the level select screen in this order
+@export var total_levels := 3 # boxes on the level select screen, any past the end of levels are grayed out
 @onready var current_level_holder: Node2D = $CurrentLevel
 @onready var user_interface: CanvasLayer = $User_Interface
 @onready var camera: Camera2D = $Camera2D
@@ -14,17 +15,29 @@ signal level_loaded(level: Node2D)
 func _ready() -> void:
 	get_window().min_size = MIN_WINDOW_SIZE
 	user_interface.start_game_requested.connect(_on_start_game_requested)
+	user_interface.set_level_slots(levels.size(), total_levels)
 	user_interface.quit_to_menu_requested.connect(_quit_to_menu_requested)
+	user_interface.level_select_requested.connect(_on_level_select_requested)
+	user_interface.retry_requested.connect(_on_retry_requested)
 	level_loaded.connect(user_interface.hud.bind_level)
 	user_interface.settings_menu.zoom_changed.connect(camera.set_regular_zoom)
 	# The saved zoom was loaded before this connection existed, so apply it once now.
 	camera.set_regular_zoom(user_interface.settings_menu.zoom_slider.value)
 	
-func _on_start_game_requested() -> void:
-	load_level(first_level)
+func _on_start_game_requested(level_index: int) -> void:
+	load_level(levels[level_index])
 	user_interface.show_hud()
 	get_tree().paused = false
 	
+func _on_retry_requested() -> void:
+	reload_level()
+	user_interface.show_hud()
+	get_tree().paused = false
+
+func _on_level_select_requested() -> void:
+	unload_level()
+	user_interface.show_level_select()
+
 func _quit_to_menu_requested() -> void:
 	unload_level()
 	user_interface.show_main_menu()

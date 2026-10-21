@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://b3dn3fv7thla7" path="res://assets/sfx/PlayerSFX/KickPlaceholderSFX.mp3" id="7_y4r1p"]
 [ext_resource type="AudioStream" uid="uid://dffl8vk3ul36u" path="res://assets/sfx/PlayerSFX/ArrowPlaceholderSFX.mp3" id="8_d2wvv"]
 
+[ext_resource type="AudioStream" path="res://assets/sfx/PlayerSFX/kick_impact.wav" id="9_impact"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("1_g2els")
 region = Rect2(192, 0, 48, 32)
@@ -352,6 +354,13 @@ script = ExtResource("1_qhqgy")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1658725949]
 
+[node name="Body" type="AnimatedSprite2D" parent="Visuals" unique_id=1084622764]
+texture_filter = 1
+position = Vector2(2, 3)
+sprite_frames = SubResource("SpriteFrames_r71vu")
+animation = &"Body_Walking"
+autoplay = "Body_Idle"
+
 [node name="Head" type="AnimatedSprite2D" parent="Visuals" unique_id=2083738392]
 texture_filter = 1
 position = Vector2(1, -13)
@@ -359,17 +368,10 @@ sprite_frames = SubResource("SpriteFrames_e1os3")
 animation = &"Head_Idle"
 autoplay = "Head_Idle"
 
-[node name="Body" type="AnimatedSprite2D" parent="Visuals" unique_id=1084622764]
-z_index = -1
-texture_filter = 1
-position = Vector2(2, 3)
-sprite_frames = SubResource("SpriteFrames_r71vu")
-animation = &"Body_Walking"
-autoplay = "Body_Idle"
-
 [node name="PowerArrow" type="AnimatedSprite2D" parent="Visuals" unique_id=1596827502]
 visible = false
-z_index = -1
+z_index = 20
+z_as_relative = false
 position = Vector2(67, -21)
 scale = Vector2(0.09, 0.073)
 sprite_frames = SubResource("SpriteFrames_1gbwc")
@@ -408,6 +410,10 @@ bus = &"SFX"
 [node name="KickSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=937269465]
 stream = ExtResource("7_y4r1p")
 bus = &"SFX"
+
+[node name="ImpactSFX" type="AudioStreamPlayer2D" parent="SFX"]
+bus = &"SFX"
+stream = ExtResource("9_impact")
 
 [node name="ArrowSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1333498656]
 stream = ExtResource("8_d2wvv")

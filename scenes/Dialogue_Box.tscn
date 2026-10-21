@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/dialogue_box.gd" id="1_dialogue"]
 [ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="2_font"]
 [ext_resource type="Texture2D" uid="uid://bme3m7jjpcxgj" path="res://assets/ui/screens/hud_key_e.png" id="3_key_e"]
+[ext_resource type="AudioStream" uid="uid://d36ei0o4uu6hu" path="res://assets/sfx/UISFX/text_blip.ogg" id="4_blip"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_box"]
 bg_color = Color(0.03137255, 0.03137255, 0.03137255, 1)
@@ -59,3 +60,8 @@ offset_top = 240.0
 offset_right = 458.0
 offset_bottom = 252.0
 texture = ExtResource("3_key_e")
+
+[node name="TypeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_blip")
+volume_db = -14.0
+bus = &"SFX"

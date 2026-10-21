@@ -3,6 +3,7 @@ extends Control
 ## Designed in a 480x270 logical view and scaled to fit the viewport, like the HUD.
 
 signal back_pressed
+signal retry_pressed
 
 const BASE_SIZE := Vector2(480, 270)
 const CONFETTI_SIZE := Vector2(240, 135) # One frame of assets/ui/confetti.png
@@ -17,6 +18,9 @@ const COLOR_DELIVERED_WIN := Color("1a8a28")
 const COLOR_DELIVERED_LOSE := Color("787b7e")
 const COLOR_DESTROYED := Color("bc292c")
 const COLOR_TEXT := Color("080808")
+
+const WIN_JINGLE := preload("res://assets/sfx/UISFX/win_screen.ogg")
+const LOSE_JINGLE := preload("res://assets/sfx/UISFX/lose_jingle.wav")
 
 @export var success_texture: Texture2D
 @export var fail_texture: Texture2D
@@ -34,6 +38,8 @@ const COLOR_TEXT := Color("080808")
 @onready var kicks_row: Control = %kicks_row
 @onready var time_row: Control = %time_row
 @onready var back_button: Button = %back_button
+@onready var retry_button: Button = %retry_button
+@onready var jingle: AudioStreamPlayer = $Jingle
 
 # User_Interface gets HUD for us
 var hud : Node
@@ -57,6 +63,9 @@ func _layout() -> void:
 func _on_back_button_pressed() -> void:
 	back_pressed.emit()
 
+func _on_retry_button_pressed() -> void:
+	retry_pressed.emit()
+
 func show_result(success: bool) -> void:
 	var stats : Dictionary = hud.get_stats() if hud else {}
 
@@ -65,6 +74,7 @@ func show_result(success: bool) -> void:
 		_set_backdrop(COLOR_BACKDROP_WIN, 0.0)
 		confetti.show()
 		confetti.play(&"fall")
+		jingle.stream = WIN_JINGLE
 		caption_label.text = "CUSTOMER SATISFACTION"
 		caption_label.add_theme_color_override("font_color", COLOR_CAPTION_WIN)
 	else:
@@ -72,6 +82,7 @@ func show_result(success: bool) -> void:
 		_set_backdrop(COLOR_BACKDROP_LOSE, LOSE_DESATURATION)
 		confetti.stop()
 		confetti.hide()
+		jingle.stream = LOSE_JINGLE
 		caption_label.text = "CUSTOMER NOT SATISFIED"
 		caption_label.add_theme_color_override("font_color", COLOR_CAPTION_LOSE)
 
@@ -92,7 +103,8 @@ func show_result(success: bool) -> void:
 	_set_row(time_row, "%d:%02d" % [floori(seconds / 60.0), seconds % 60], COLOR_TEXT)
 
 	show()
-	back_button.grab_focus()
+	jingle.play()
+	retry_button.grab_focus()
 
 func _set_backdrop(tint: Color, desaturation: float) -> void:
 	var backdrop_material := backdrop.material as ShaderMaterial
