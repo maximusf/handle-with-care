@@ -1,9 +1,9 @@
-[gd_resource type="TileSet" format=3]
+[gd_resource type="TileSet" format=3 uid="uid://bh87nkcimol0b"]
 
-[ext_resource type="Texture2D" uid="uid://b7t8myd4wkm82" path="res://assets/sprites/guests/guest_b.png" id="15_5jbny"]
 [ext_resource type="Texture2D" uid="uid://bb0sp2uhs1elk" path="res://assets/sprites/guests/guest_c.png" id="3_youdj"]
 [ext_resource type="Texture2D" uid="uid://d4gykj6oo3e0m" path="res://assets/sprites/guests/guest_f.png" id="4_vw144"]
 [ext_resource type="Texture2D" uid="uid://c16jn3617nttt" path="res://assets/sprites/guests/guest_m.png" id="5_ufioq"]
+[ext_resource type="Texture2D" uid="uid://b7t8myd4wkm82" path="res://assets/sprites/guests/guest_b.png" id="15_5jbny"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bs65"]
 texture = ExtResource("15_5jbny")

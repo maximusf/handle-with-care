@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" format=3]
+[gd_resource type="TileSet" format=3 uid="uid://blsctq4map7sg"]
 
 [ext_resource type="Texture2D" uid="uid://cewp10ncn8t54" path="res://assets/tilesets/hotel_tileset.png" id="1_lpkr2"]
 
