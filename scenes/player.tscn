@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://7uvj4n5mjmox" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://vvbve7mjxwk4" path="res://assets/sprites/player/player_body.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://cphvxg6a308gi" path="res://assets/sprites/powerArrow/PowerArrow-Sheet.png" id="4_dqkch"]
-[ext_resource type="AudioStream" uid="uid://cfs0h7q48eile" path="res://assets/sfx/PlayerSFX/footstep.ogg" id="5_smehm"]
-[ext_resource type="AudioStream" uid="uid://bkyijanlb4afb" path="res://assets/sfx/PlayerSFX/jump.ogg" id="6_ur7pv"]
-[ext_resource type="AudioStream" uid="uid://es2hnw3v21bk" path="res://assets/sfx/PlayerSFX/kick.ogg" id="7_y4r1p"]
-[ext_resource type="AudioStream" uid="uid://cury7bwq3nmg" path="res://assets/sfx/PlayerSFX/charge_tick.ogg" id="8_d2wvv"]
+[ext_resource type="AudioStream" uid="uid://dvtgvy3cm4eon" path="res://assets/sfx/PlayerSFX/WalkPlaceHolderSFX.mp3" id="5_smehm"]
+[ext_resource type="AudioStream" uid="uid://bf7osogbwruqq" path="res://assets/sfx/PlayerSFX/JumpPlaceholderSFX.mp3" id="6_ur7pv"]
+[ext_resource type="AudioStream" uid="uid://b3dn3fv7thla7" path="res://assets/sfx/PlayerSFX/KickPlaceholderSFX.mp3" id="7_y4r1p"]
+[ext_resource type="AudioStream" uid="uid://dffl8vk3ul36u" path="res://assets/sfx/PlayerSFX/ArrowPlaceholderSFX.mp3" id="8_d2wvv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("1_g2els")
@@ -398,22 +398,19 @@ shape = SubResource("RectangleShape2D_feet")
 [node name="SFX" type="Node2D" parent="." unique_id=2030220188]
 
 [node name="WalkingSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=949605887]
-volume_db = -8.0
 bus = &"SFX"
 stream = ExtResource("5_smehm")
+volume_db = 2.916
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1331507237]
-volume_db = -8.0
 bus = &"SFX"
 stream = ExtResource("6_ur7pv")
 
 [node name="KickSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=937269465]
-volume_db = -3.0
 bus = &"SFX"
 stream = ExtResource("7_y4r1p")
 
 [node name="ArrowSFX" type="AudioStreamPlayer2D" parent="SFX" unique_id=1333498656]
-volume_db = -10.0
 bus = &"SFX"
 stream = ExtResource("8_d2wvv")
 

@@ -6,14 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://bbnigmbfxe02o" path="res://scenes/Result_Menu.tscn" id="4_81xfv"]
 [ext_resource type="PackedScene" uid="uid://d3kack6x0mogq" path="res://scenes/hud.tscn" id="5_vf7gk"]
 [ext_resource type="PackedScene" path="res://scenes/Dialogue_Box.tscn" id="6_dialogue"]
-[ext_resource type="AudioStream" uid="uid://p8e1yhv3frap" path="res://assets/music/hotel_lobby_loop.ogg" id="7_music"]
+[ext_resource type="AudioStream" path="res://assets/music/platformer_alt.ogg" id="7_music"]
 [ext_resource type="AudioStream" uid="uid://4v111amcrm5w" path="res://assets/sfx/UISFX/ui_click.ogg" id="8_click"]
-[ext_resource type="AudioStream" uid="uid://bgvsq6a7tr1gu" path="res://assets/music/title_theme_loop.ogg" id="9_title_music"]
 
 [node name="User_Interface" type="CanvasLayer" unique_id=1313764124]
 process_mode = 3
 script = ExtResource("1_2rp2v")
-title_music = ExtResource("9_title_music")
+title_music = ExtResource("7_music")
 level_music = ExtResource("7_music")
 
 [node name="Main_Menu" parent="." unique_id=1645713669 instance=ExtResource("2_cua1d")]

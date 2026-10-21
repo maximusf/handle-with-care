@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cw8onnms78b5s" path="res://scripts/package.gd" id="1_bfkic"]
 [ext_resource type="Texture2D" uid="uid://rpby3qrdo155" path="res://assets/sprites/package/package_intact.png" id="2_bitfr"]
-[ext_resource type="AudioStream" uid="uid://bme5elrcs58jj" path="res://assets/sfx/PackageSFX/whoosh_loop.ogg" id="3_pdb4y"]
-[ext_resource type="AudioStream" uid="uid://deuilygcdo3ut" path="res://assets/sfx/PackageSFX/land.ogg" id="4_pdb4y"]
-[ext_resource type="AudioStream" uid="uid://bouwxtptfyclq" path="res://assets/sfx/PackageSFX/package_break.ogg" id="5_ayykv"]
+[ext_resource type="AudioStream" uid="uid://b3s4tl3s6t44e" path="res://assets/sfx/PackageSFX/fallingPlaceholder.mp3" id="3_pdb4y"]
+[ext_resource type="AudioStream" uid="uid://b77rv7xk0l6np" path="res://assets/sfx/PackageSFX/PlopPlaceholderSFX.mp3" id="4_pdb4y"]
+[ext_resource type="AudioStream" uid="uid://bgifuimaqibx4" path="res://assets/sfx/PackageSFX/DestroyedPlaceholder.mp3" id="5_ayykv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1os3"]
 size = Vector2(27, 27)
@@ -25,17 +25,14 @@ position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_e1os3")
 
 [node name="WhooshSFX" type="AudioStreamPlayer2D" parent="." unique_id=853506024]
-volume_db = -14.0
 bus = &"SFX"
 stream = ExtResource("3_pdb4y")
 
 [node name="PlopSolidSFX" type="AudioStreamPlayer2D" parent="." unique_id=1842303857]
-volume_db = -4.0
 bus = &"SFX"
 stream = ExtResource("4_pdb4y")
 
 [node name="PackageDestroyedSFX" type="AudioStreamPlayer2D" parent="." unique_id=908485412]
-volume_db = -2.0
 bus = &"SFX"
 stream = ExtResource("5_ayykv")
 
