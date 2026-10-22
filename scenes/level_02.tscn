@@ -30,7 +30,7 @@ tile_set = ExtResource("1_830kt")
 [node name="door_controller" type="Node2D" parent="." unique_id=1893758810]
 script = ExtResource("2_n5em7")
 
-[node name="level_fg" type="TileMapLayer" parent="." unique_id=1371966213]
+[node name="level_fg" type="TileMapLayer" parent="." unique_id=1371966213 groups=["camera_bounds"]]
 z_index = -1
 z_as_relative = false
 texture_filter = 1

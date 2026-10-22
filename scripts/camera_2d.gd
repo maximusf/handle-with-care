@@ -15,6 +15,8 @@ var camera_target: Node2D = null
 const ZOOM_STEP := 0.1
 const MIN_ZOOM := 1.5
 const MAX_ZOOM := 4.0
+const BOUNDS_GROUP := "camera_bounds" # add a level's main TileMapLayer to this group to set the camera limits
+const DEFAULT_LIMIT := 10000000 # Godot's default camera limit
 var regular_zoom := Vector2(2.0, 2.0) # Zoom while following the player, set from the settings menu
 
 var is_free_cam := false
@@ -31,11 +33,15 @@ func _on_level_loaded(level: Node2D) -> void:
 	zoom = regular_zoom
 	offset = Vector2.ZERO
 	player = level.get_node_or_null("Player")
-	
-	main_tilemap = level.get_node_or_null("MainTileMap") as TileMapLayer
+
+	# the camera outlives levels, so clear the last level's bounds before applying this one's
+	reset_limits()
+	main_tilemap = find_bounds_layer(level)
 	if main_tilemap != null:
 		set_limits_from_tilemap(main_tilemap)
-		
+	else:
+		push_warning("%s has no TileMapLayer in the '%s' group, so the camera is unbounded." % [level.name, BOUNDS_GROUP])
+
 	for package in level.get_tree().get_nodes_in_group("packages"):
 		register_package(package)
 	if player != null:
@@ -100,6 +106,18 @@ func move_free_camera(delta: float) -> void:
 		clampf(global_position.x, limit_left, limit_right),
 		clampf(global_position.y, limit_top, limit_bottom)
 	)
+func reset_limits() -> void:
+	limit_left = -DEFAULT_LIMIT
+	limit_top = -DEFAULT_LIMIT
+	limit_right = DEFAULT_LIMIT
+	limit_bottom = DEFAULT_LIMIT
+
+func find_bounds_layer(level: Node) -> TileMapLayer:
+	for child in level.get_children():
+		if child is TileMapLayer and child.is_in_group(BOUNDS_GROUP):
+			return child
+	return null
+
 func set_limits_from_tilemap(tilemap: TileMapLayer) -> void:
 	var used_rect := tilemap.get_used_rect()
 	if used_rect.size == Vector2i.ZERO:
