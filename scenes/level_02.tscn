@@ -13,7 +13,7 @@
 
 [node name="level_02" type="Node2D" unique_id=1790093325]
 
-[node name="level_bg" type="TileMapLayer" parent="." unique_id=190895097]
+[node name="level_bg" type="TileMapLayer" parent="." unique_id=190895097 groups=["camera_bounds"]]
 z_index = -2
 texture_filter = 1
 position = Vector2(221, 626)
@@ -30,7 +30,7 @@ tile_set = ExtResource("1_830kt")
 [node name="door_controller" type="Node2D" parent="." unique_id=1893758810]
 script = ExtResource("2_n5em7")
 
-[node name="level_fg" type="TileMapLayer" parent="." unique_id=1371966213 groups=["camera_bounds"]]
+[node name="level_fg" type="TileMapLayer" parent="." unique_id=1371966213]
 z_index = -1
 z_as_relative = false
 texture_filter = 1
