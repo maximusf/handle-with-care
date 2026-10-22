@@ -7,6 +7,8 @@
 size = Vector2(31, 30)
 
 [node name="lever" type="Area2D" unique_id=1688962025]
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("1_ncfea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1233102839]

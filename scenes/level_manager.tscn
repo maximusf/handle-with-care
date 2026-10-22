@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://chxwtj777tqov" path="res://scripts/level_manager.gd" id="1_5eglo"]
 [ext_resource type="PackedScene" uid="uid://3voc4krq6q61" path="res://scenes/level_01_tutorial.tscn" id="2_lbe5n"]
 [ext_resource type="PackedScene" uid="uid://bwttur5fpw6bj" path="res://scenes/User_Interface.tscn" id="3_2yrkd"]
+[ext_resource type="PackedScene" uid="uid://bngwppw7j2kei" path="res://scenes/level_02.tscn" id="3_kfnik"]
 [ext_resource type="Script" uid="uid://c5526lmqhsl8p" path="res://scripts/camera_2d.gd" id="3_lbe5n"]
 
 [node name="Level_Manager" type="Node" unique_id=1278203149]
 script = ExtResource("1_5eglo")
-levels = Array[PackedScene]([ExtResource("2_lbe5n")])
-total_levels = 3
+levels = Array[PackedScene]([ExtResource("2_lbe5n"), ExtResource("3_kfnik")])
 
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1954569347]
 
