@@ -71,6 +71,7 @@ Volume, camera zoom and fullscreen can be changed in **Options** and are remembe
 - **Delivery and lose sounds** (`assets/sfx/UISFX/win_jingle.wav` and `lose_jingle.wav`): from "Level up, power up, Coin get (13 Sounds)" by wobbleboxx (WobbleBoxx Workshop), released under CC0 (public domain). Source: https://opengameart.org/content/level-up-power-up-coin-get-13-sounds
 - **Win screen sound** (`assets/sfx/UISFX/win_screen.ogg`): "New thing get!" by congusbongus, released under CC0 (public domain). Source: https://opengameart.org/content/new-thing-get
 - **Kick impact sound** (`assets/sfx/PlayerSFX/kick_impact.wav`): `Punch__001` from "SFX: The Ultimate 2017 16 bit Mini pack" by phoenix1291 (SwissArcadeGameEntertainment), released under CC0 (public domain). Source: https://opengameart.org/content/sfx-the-ultimate-2017-16-bit-mini-pack
+- **Lever and Pressure Plate click** (`assets/sfx/InteractableSFX/click.wav`): "Click" by frosty ham, released under CC0 (public domain). Source: https://opengameart.org/content/click-0
 
 **Made for this project**
 

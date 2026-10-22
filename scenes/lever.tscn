@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ci7f5q0yyc367" path="res://scripts/lever.gd" id="1_ncfea"]
 [ext_resource type="SpriteFrames" uid="uid://c50p0xjj4l4jh" path="res://assets/sprites/interactables/lever.tres" id="2_qxmkn"]
+[ext_resource type="AudioStream" uid="uid://ds8dbahh1qx1n" path="res://assets/sfx/InteractableSFX/click.wav" id="3_qxmkn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fqme0"]
 size = Vector2(31, 30)
@@ -23,3 +24,5 @@ frame = 2
 frame_progress = 1.0
 
 [node name="lever_sound" type="AudioStreamPlayer2D" parent="." unique_id=1298227035]
+stream = ExtResource("3_qxmkn")
+bus = &"SFX"

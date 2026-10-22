@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fckbg551hraq" path="res://scripts/pressure_plate.gd" id="1_xtofl"]
 [ext_resource type="SpriteFrames" uid="uid://cf3ougvg1i7ni" path="res://assets/sprites/interactables/pressure_plate.tres" id="2_r34r6"]
+[ext_resource type="AudioStream" uid="uid://ds8dbahh1qx1n" path="res://assets/sfx/InteractableSFX/click.wav" id="3_r34r6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fqme0"]
 size = Vector2(30, 11)
@@ -23,5 +24,9 @@ sprite_frames = ExtResource("2_r34r6")
 animation = &"up"
 
 [node name="pressed_sound" type="AudioStreamPlayer2D" parent="." unique_id=1244042017]
+stream = ExtResource("3_r34r6")
+bus = &"SFX"
 
 [node name="unpressed_sound" type="AudioStreamPlayer2D" parent="." unique_id=30079476]
+stream = ExtResource("3_r34r6")
+bus = &"SFX"
