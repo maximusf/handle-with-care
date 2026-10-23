@@ -5,10 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bwttur5fpw6bj" path="res://scenes/User_Interface.tscn" id="3_2yrkd"]
 [ext_resource type="PackedScene" uid="uid://bngwppw7j2kei" path="res://scenes/level_02.tscn" id="3_kfnik"]
 [ext_resource type="Script" uid="uid://c5526lmqhsl8p" path="res://scripts/camera_2d.gd" id="3_lbe5n"]
+[ext_resource type="PackedScene" uid="uid://chpjy1cbtp76n" path="res://scenes/level_03.tscn" id="4_level3"]
 
 [node name="Level_Manager" type="Node" unique_id=1278203149]
 script = ExtResource("1_5eglo")
-levels = Array[PackedScene]([ExtResource("2_lbe5n"), ExtResource("3_kfnik")])
+levels = Array[PackedScene]([ExtResource("2_lbe5n"), ExtResource("3_kfnik"), ExtResource("4_level3")])
 
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1954569347]
 
