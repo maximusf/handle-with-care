@@ -17,7 +17,7 @@ Made with Godot 4.7 by **The Muckslinger Gang**: Raven Jaime, Carlos Mendoza and
 - Every kick damages a package. **After 5 kicks it breaks.**
 - You **lose** if too many packages break to fill the remaining zones.
 - The result screen shows your stars, deliveries, packages lost, kicks and time. **Retry** replays the level; **Back** returns to the level select.
-- **Start** opens the level select. Level 1 is playable and Levels 2 and 3 are locked for now. **Credits** on the title screen shows the team.
+- **Start** opens the level select, where you can pick Level 1, 2 or 3. **Credits** on the title screen shows the team.
 - **Esc** pauses the game and shows Resume, Options and Main Menu over the frozen level.
 - Tutorial signs (press **E**) and the hotel guests explain the basics as you go.
 
@@ -37,8 +37,6 @@ Made with Godot 4.7 by **The Muckslinger Gang**: Raven Jaime, Carlos Mendoza and
 | F11 | Fullscreen |
 
 Volume, camera zoom and fullscreen can be changed in **Options** and are remembered between launches.
-
-**Changing the music:** open `scenes/User_Interface.tscn`, select the **User_Interface** node, and drag a track onto **Title Music** and **Level Music** in the Inspector. Both currently use `platformer_alt.ogg`, so one song plays everywhere. For seamless looping, select the file, tick **Loop** in the **Import** tab and click **Reimport**. Remember to credit any track you didn't make.
 
 ## Running and building
 
@@ -76,7 +74,7 @@ Volume, camera zoom and fullscreen can be changed in **Options** and are remembe
 
 - **Pixel art** (player, packages, hotel tileset, props, guests, UI kit, title logo and backgrounds): created for this project in Aseprite.
 - **Player and package sound effects** (`assets/sfx/PlayerSFX/` and `assets/sfx/PackageSFX/`): handmade by the development team.
-- **Other UI sound effects** (the menu click and the dialogue typing blip in `assets/sfx/UISFX/`): original, synthesized from scratch. No samples or outside recordings, so nothing needs licensing.
+- **Other UI sound effects** (the menu click and the dialogue typing blip in `assets/sfx/UISFX/`): original, synthesized from scratch.
 
 ## Use of generative AI
 
@@ -86,5 +84,6 @@ An AI coding assistant (Claude, by Anthropic, used through Claude Code) helped w
 
 - **Code:** win/lose logic, confetti animation after winning, desaturated screen when losing, pause menu, settings menu, tutorial signs and dialogue box, NPC speech bubbles, camera smoothing when moving up/down the stairs, and other minor bug fixes found during testing.
 - **Writing:** used to write this README and for creating PR descriptions.
+- **Art:** an Aseprite MCP server, which lets an AI assistant draw in Aseprite, was used to create the NPC sprites.
 - **Art scripts:** the Lua script that generated the tutorial sign sprite and the E key prompt art.
 - **Testing:** automated Godot test scripts used to check these features.
