@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cu0k6ye3u76c6" path="res://scenes/package.tscn" id="6_u2tna"]
 [ext_resource type="PackedScene" path="res://scenes/kickable_sign.tscn" id="7_u2tna"]
 [ext_resource type="PackedScene" path="res://scenes/tutorial_sign.tscn" id="8_jm0yl"]
-[ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="9_ccayl"]
+[ext_resource type="FontFile" uid="uid://dfi3m4fec5ai" path="res://assets/fonts/press_start_2p/PressStart2P-Regular.ttf" id="9_ccayl"]
 [ext_resource type="PackedScene" path="res://scenes/npc_speech.tscn" id="10_jm0yl"]
 
 [node name="level_02" type="Node2D" unique_id=1790093325]

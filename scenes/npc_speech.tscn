@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/npc_speech.gd" id="1_speech"]
-[ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="2_font"]
+[ext_resource type="FontFile" uid="uid://dfi3m4fec5ai" path="res://assets/fonts/press_start_2p/PressStart2P-Regular.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bubble"]
 bg_color = Color(0.98039216, 0.98039216, 0.98039216, 1)

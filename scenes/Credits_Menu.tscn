@@ -61,7 +61,7 @@ offset_left = 10.0
 offset_top = 40.0
 offset_right = 230.0
 offset_bottom = 105.0
-theme_override_constants/separation = 1
+theme_override_constants/separation = 5
 
 [node name="line_0" type="Label" parent="Screen/Lines"]
 layout_mode = 2
@@ -87,7 +87,7 @@ horizontal_alignment = 1
 
 [node name="back_button" type="Button" parent="Screen"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 12)
+custom_minimum_size = Vector2(64, 15)
 layout_mode = 0
 offset_left = 88.0
 offset_top = 117.0

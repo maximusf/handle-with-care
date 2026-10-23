@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://biayp1rv84fne" path="res://scenes/pressure_plate.tscn" id="5_si4cl"]
 [ext_resource type="PackedScene" uid="uid://cu0k6ye3u76c6" path="res://scenes/package.tscn" id="6_fpl26"]
 [ext_resource type="PackedScene" path="res://scenes/kickable_sign.tscn" id="7_fevqv"]
-[ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="9_f8yok"]
+[ext_resource type="FontFile" uid="uid://dfi3m4fec5ai" path="res://assets/fonts/press_start_2p/PressStart2P-Regular.ttf" id="9_f8yok"]
 [ext_resource type="Script" uid="uid://cpnf0pkdoskgn" path="res://scripts/door_controller.gd" id="10_door"]
 
 [node name="level_03" type="Node2D" unique_id=1790093325]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://fm6sfu2josjb" path="res://scenes/player.tscn" id="2_2n7al"]
 [ext_resource type="PackedScene" uid="uid://cb02mcjpf3kmf" path="res://scenes/delivery_zone.tscn" id="3_2n7al"]
 [ext_resource type="PackedScene" uid="uid://cu0k6ye3u76c6" path="res://scenes/package.tscn" id="4_hxl72"]
-[ext_resource type="FontFile" uid="uid://biph1iknue11" path="res://assets/fonts/silkscreen/Silkscreen-Regular.ttf" id="23_vw144"]
+[ext_resource type="FontFile" uid="uid://dfi3m4fec5ai" path="res://assets/fonts/press_start_2p/PressStart2P-Regular.ttf" id="23_vw144"]
 [ext_resource type="TileSet" path="res://assets/tilesets/hotel_tileset.tres" id="tileset_0"]
 [ext_resource type="TileSet" path="res://assets/tilesets/guests_tileset.tres" id="tileset_1"]
 [ext_resource type="TileSet" path="res://assets/tilesets/hallway_props_tileset.tres" id="tileset_2"]

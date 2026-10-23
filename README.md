@@ -63,7 +63,7 @@ Volume, camera zoom and fullscreen can be changed in **Options** and are remembe
 
 **Third-party assets**
 
-- **Silkscreen** font by The Silkscreen Project Authors (Jason Kottke), used under the SIL Open Font License 1.1. License: `assets/fonts/silkscreen/OFL.txt`. Source: https://github.com/googlefonts/silkscreen
+- **Press Start 2P** font by The Press Start 2P Project Authors, used under the SIL Open Font License 1.1. License: `assets/fonts/press_start_2p/OFL.txt`. Source: https://fonts.google.com/specimen/Press+Start+2P
 - **Music** (`assets/music/platformer_alt.ogg`): "Overworld Theme" by Louswan, released under CC0 (public domain). Source: https://opengameart.org/content/overworld-theme-0
 - **Delivery and lose sounds** (`assets/sfx/UISFX/win_jingle.wav` and `lose_jingle.wav`): from "Level up, power up, Coin get (13 Sounds)" by wobbleboxx (WobbleBoxx Workshop), released under CC0 (public domain). Source: https://opengameart.org/content/level-up-power-up-coin-get-13-sounds
 - **Win screen sound** (`assets/sfx/UISFX/win_screen.ogg`): "New thing get!" by congusbongus, released under CC0 (public domain). Source: https://opengameart.org/content/new-thing-get

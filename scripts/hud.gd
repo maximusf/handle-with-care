@@ -5,7 +5,7 @@ extends Control
 
 const BASE_SIZE := Vector2(480, 270)
 const TRAY_HEIGHT := 26.0
-const HINT_SIZE := Vector2(78, 16)
+const HINT_SIZE := Vector2(96, 16)
 const SCREEN_MARGIN := Vector2(6, 4) # Gap to the screen edge: x for left/right, y for bottom
 
 const SLOT_FRAMES := preload("res://assets/ui/screens/hud_package_slot.tres")

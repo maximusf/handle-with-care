@@ -4,8 +4,10 @@ extends Control
 ## designed in a 240x135 view and scaled to fit the window, like the HUD
 
 const BASE_SIZE := Vector2(240, 135)
-const BUTTONS_TOP := 70.0 # below the logo
+const BUTTONS_TOP := 67.0 # below the logo
 const PAUSE_BUTTONS_TOP := 49.0 # roughly centred since there's no logo
+const BUTTONS_WIDTH := 88.0 # fits OPTIONS and CREDITS
+const PAUSE_BUTTONS_WIDTH := 108.0 # MAIN MENU is longer
 const PAUSE_DIM_ALPHA := 0.7 # how dark the frozen game gets, same as the credits screen
 
 @onready var screen: Control = $Screen
@@ -62,10 +64,18 @@ func set_can_resume(value: bool) -> void:
 		start_button.text = "RESUME"
 		dim.color.a = PAUSE_DIM_ALPHA
 		buttons.position.y = PAUSE_BUTTONS_TOP
+		_set_buttons_width(PAUSE_BUTTONS_WIDTH)
 	else:
 		start_button.text = "START"
 		dim.color.a = _title_dim_alpha
 		buttons.position.y = BUTTONS_TOP
+		_set_buttons_width(BUTTONS_WIDTH)
+
+# keeps the buttons centred on the 240 wide view, the pivot is in the middle so the scale doesn't shift them
+func _set_buttons_width(width: float) -> void:
+	buttons.offset_left = (BASE_SIZE.x - width) / 2.0
+	buttons.offset_right = buttons.offset_left + width
+	buttons.pivot_offset.x = width / 2.0
 
 func _on_settings_button_pressed() -> void:
 	settings_pressed.emit()

@@ -51,7 +51,7 @@ theme_override_colors/font_color = Color(1, 0.94509804, 0.84705883, 1)
 theme_override_colors/font_shadow_color = Color(0.6627451, 0.41960785, 0.19607843, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 12
 text = "SELECT LEVEL"
 horizontal_alignment = 1
 
@@ -75,7 +75,7 @@ columns = 3
 
 [node name="back_button" type="Button" parent="Screen/Buttons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 12)
+custom_minimum_size = Vector2(64, 15)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "BACK"
