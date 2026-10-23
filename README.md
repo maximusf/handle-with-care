@@ -84,6 +84,6 @@ An AI coding assistant (Claude, by Anthropic, used through Claude Code) helped w
 
 - **Code:** win/lose logic, confetti animation after winning, desaturated screen when losing, pause menu, settings menu, tutorial signs and dialogue box, NPC speech bubbles, camera smoothing when moving up/down the stairs, and other minor bug fixes found during testing.
 - **Writing:** used to write this README and for creating PR descriptions.
-- **Art:** an Aseprite MCP server, which lets an AI assistant draw in Aseprite, was used to create the NPC sprites.
+- **Art:** an Aseprite MCP server, which lets an AI assistant draw in Aseprite, was used to create some of the sprites used in the game like NPCs and their variations.
 - **Art scripts:** the Lua script that generated the tutorial sign sprite and the E key prompt art.
 - **Testing:** automated Godot test scripts used to check these features.
