@@ -85,6 +85,7 @@ The assignment requires crediting any generative AI assistance. **Team: review a
 
 An AI coding assistant (Claude, by Anthropic, used through Claude Code) helped with parts of this project under the team's direction and review:
 
-- **Code:** result screen (win/lose logic, star rating, confetti, desaturated lose screen), pause menu, settings menu (audio buses, zoom, fullscreen, saved settings), title screen layout, tutorial signs and dialogue box, NPC speech bubbles, camera smoothing and cursor lean, stair stepping, kick and aim-arrow fixes, the kickable sign, collision layers, and bug fixes found during testing.
+- **Code:** win/lose logic, confetti animation after winning, desaturated screen when losing, pause menu, settings menu, tutorial signs and dialogue box, NPC speech bubbles, camera smoothing when moving up/down the stairs, and other minor bug fixes found during testing.
+- **Writing:** used to write this README and for creating PR descriptions.
 - **Art scripts:** `docs/wiki-images/src/gen_sign.lua` (tutorial sign, E key prompt).
 - **Testing:** automated Godot test scripts used to check these features.
