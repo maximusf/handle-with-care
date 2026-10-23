@@ -44,9 +44,18 @@ const STAIR_GLIDE_SPEED = 300.0
 const AIR_ANIMATION_MIN_SPEED = 50.0
 
 
+# when on, the player stands on and bumps into signs marked solid for the player
+# packages stay walk through
+@export var collides_with_signs := false
+
+# extra physics layer a solid sign sits on, see kickable_sign.gd
+const SOLID_SIGN_LAYER_BIT := 8
+
 func _ready() -> void:
 	# Stick to the ground when walking down steps, instead of falling off each one.
 	floor_snap_length = STEP_HEIGHT
+	if collides_with_signs:
+		collision_mask |= SOLID_SIGN_LAYER_BIT
 
 
 func _physics_process(delta: float) -> void:
