@@ -80,7 +80,7 @@ Volume, camera zoom and fullscreen can be changed in **Options** and are remembe
 
 ## Use of generative AI
 
-The assignment requires crediting any generative AI assistance. **Team: review and complete this section before submitting**, including any AI use by other team members that isn't listed here.
+The assignment requires crediting any generative AI assistance.
 
 An AI coding assistant (Claude, by Anthropic, used through Claude Code) helped with parts of this project under the team's direction and review:
 
