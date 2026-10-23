@@ -70,6 +70,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		jump_sfx.play()
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -199,7 +200,6 @@ func set_animation_state(new_state: animation_states) -> void:
 			head.play("Head_Idle")
 		animation_states.JUMP:
 			body.play("Body_Jumping")
-			jump_sfx.play()
 			head.play("Head_Idle")
 		animation_states.KICK:
 			body.play("Body_Kicking")
