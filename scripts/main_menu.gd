@@ -55,7 +55,7 @@ func set_can_resume(value: bool) -> void:
 	# the pause menu is just the buttons over the frozen game, and the only place you can leave the level from
 	main_menu_button.visible = can_resume
 	credits_button.visible = on_title_screen
-	exit_button.visible = on_title_screen
+	# exit_button.visible = on_title_screen
 	background.visible = on_title_screen
 	title.visible = on_title_screen
 	if can_resume:
