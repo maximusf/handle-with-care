@@ -59,7 +59,13 @@ position = Vector2(430, 218)
 position = Vector2(1703, 192)
 
 [node name="Package4" parent="." unique_id=1441415555 instance=ExtResource("6_u2tna")]
-position = Vector2(1793, 215)
+position = Vector2(1839, 214)
+
+[node name="Package5" parent="." unique_id=1464985178 instance=ExtResource("6_u2tna")]
+position = Vector2(796, 155)
+
+[node name="Package6" parent="." unique_id=1766366744 instance=ExtResource("6_u2tna")]
+position = Vector2(1627, 210)
 
 [node name="KickableSign" parent="." unique_id=1298992473 instance=ExtResource("7_u2tna")]
 position = Vector2(274, 242)

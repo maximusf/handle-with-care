@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var kick_collider: CollisionShape2D = $Kickrange/KickCollider
 @onready var visuals: Node2D = $Visuals
 
+@onready var step_timer: Timer = $SFX/Step_Timer
 @onready var walking_sfx: AudioStreamPlayer2D = $SFX/WalkingSFX
 @onready var jump_sfx: AudioStreamPlayer2D = $SFX/JumpSFX
 @onready var kick_sfx: AudioStreamPlayer2D = $SFX/KickSFX
@@ -84,6 +85,8 @@ func _physics_process(delta: float) -> void:
 	var height_before := global_position.y
 	var stepped_up := step_up_if_blocked(delta)
 	move_and_slide()
+	update_footsteps() # Used to start and stop footstep timer
+	
 	smooth_stair_steps(was_on_floor, stepped_up, height_before, delta)
 	
 	# Handle Kicking ------------------------------------------------------
@@ -173,6 +176,15 @@ func _physics_process(delta: float) -> void:
 			arrow_sfx.pitch_scale = 1.5
 			arrow_sfx.play()
 	
+func update_footsteps() -> void:
+	var is_walking := is_on_floor() and absf(velocity.x) > 1.0
+
+	if is_walking and step_timer.is_stopped():
+		walking_sfx.play()
+		step_timer.start()
+	elif not is_walking:
+		step_timer.stop()
+	
 func set_animation_state(new_state: animation_states) -> void:
 	if animation_state == new_state:
 		return
@@ -184,7 +196,6 @@ func set_animation_state(new_state: animation_states) -> void:
 			head.play("Head_Idle")
 		animation_states.MOVE:
 			body.play("Body_Walking")
-			walking_sfx.play()
 			head.play("Head_Idle")
 		animation_states.JUMP:
 			body.play("Body_Jumping")
@@ -263,3 +274,9 @@ func _notification(what: int) -> void:
 		is_kicking = false
 		kick_power = 100
 		power_arrow.visible = false
+
+
+func _on_step_timer_timeout() -> void:
+	walking_sfx.pitch_scale = randf_range(0.95, 1.05)
+	walking_sfx.play()
+	pass # Replace with function body.
