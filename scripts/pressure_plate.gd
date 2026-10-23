@@ -10,7 +10,6 @@ signal released
 var bodies_on_plate := 0
 
 func _ready() -> void:
-	print("plate ready | mask: ", collision_mask, " | monitoring: ", monitoring)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	plate_animation.play("up")
@@ -22,7 +21,6 @@ func _is_valid(body) -> bool:
 	return body.is_in_group("player") or body.is_in_group("packages")
 
 func _on_body_entered(body) -> void:
-	print("entered: ", body.name, " groups: ", body.get_groups())
 	if not _is_valid(body):
 		return
 	
